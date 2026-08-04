@@ -1,6 +1,6 @@
 # Agent Infra 全景图说明
 
-数据快照：GitHub 2026-07-28；图中 OpenRank 使用 2026-06。
+数据截至：2026-08-01；图中 OpenRank 使用 2026-07。
 
 ## 这张图回答什么
 
@@ -13,7 +13,7 @@ Agent Infra 沿着一次任务的执行路径组织项目：用户从哪里进�
 - 59 个从上一版保留；
 - 15 个新增；
 - 12 个 section；
-- 图中展示的 OpenRank 为 2026-06 Repo OpenRank。
+- 图中展示的 OpenRank 为 2026-07 Repo OpenRank。
 
 原始项目表：[agent_infra_landscape_projects.csv](../landscape-refresh/data/agent_infra_landscape_projects.csv)
 
@@ -28,14 +28,14 @@ Agent Infra 沿着一次任务的执行路径组织项目：用户从哪里进�
 1. **近期关注度**
    - 数据表：OpenDigger `opensource.events`
    - 事件：GitHub WatchEvent
-   - 窗口：2026-05-01 至 2026-07-28
+   - 窗口：2026-05-01 至 2026-08-01
    - 取前 2,500 个仓库
    - 用途：发现近期受到关注的新项目
 
 2. **近期协作活动**
    - 数据表：OpenDigger `opensource.global_openrank`
    - 对象：GitHub Repo
-   - 窗口：2026-04、05、06 三个已结束月份
+   - 首轮窗口：当时最近三个完整月；8 月 1 日补漏窗口为 2026-05、06、07
    - 三个月 OpenRank 相加后取前 4,000
    - 用途：避免候选池完全被累计 stars 支配
 
@@ -89,7 +89,7 @@ Agent 关键词数量 × 4
 
 失效仓库、fork、归档项目、旧图已有项目以及 README 语义不匹配的项目被移除，最后留下 222 个机器候选。
 
-这一步有一个已经确认的盲区：`diegosouzapw/OmniRoute` 在 222 个机器候选中，但 WatchEvent 排名 247、OpenRank 排名 594，没有进入前三组绝对 Top-N，所以也没有进入最初的 A/B 人工短名单。它截至 7 月 28 日已有 32,706 stars，2—6 月 OpenRank 从 4.07 升到 39.04，候选池还记录了 417 个可见 WatchEvent。漏项不是相关性模型没识别出来，而是人工复核入口只看绝对排名。
+这一步有一个已经确认的盲区：`diegosouzapw/OmniRoute` 在 222 个机器候选中，但 WatchEvent 排名 247、OpenRank 排名 594，没有进入前三组绝对 Top-N，所以也没有进入最初的 A/B 人工短名单。8 月 1 日口径下它有 38,536 stars，2—7 月 OpenRank 从 4.48 升到 31.92。漏项不是相关性模型没识别出来，而是人工复核入口只看绝对排名。
 
 复盘后增加一条独立的高增速通道：最近三个月新出现，或 stars、WatchEvent、OpenRank 有明显增长的项目，即使绝对排名没有进入 Top-N，也会进入人工复核。GitHub Trending 没有官方历史接口；后续需要每日保存快照，不能在事后把“连续上榜数周”写成可复核的精确数据。
 
@@ -113,11 +113,11 @@ Agent 关键词数量 × 4
 
 第一步看结构：74 个项目里，Agentic coding 有 12 个，Code-first frameworks 有 10 个。代码仍是最密集的 Agent 入口。
 
-第二步看上下文：OpenViking 把 memory、RAG 和 skills 收进 context database。它在 2026 年 3—6 月的 OpenRank 从 35.96 升至 140.23。上下文开始从 framework 内部功能变成可以单独演进的数据层。
+第二步看上下文：OpenViking 把 memory、RAG 和 skills 收进 context database。它在 2026 年 3—7 月的 OpenRank 从 112.46 升至 177.61。上下文开始从 framework 内部功能变成可以单独演进的数据层。
 
 第三步看接口：Protocols & interoperability 从 3 个项目增到 5 个。MCP、A2A 之外，AG-UI 与 A2UI 把事件流和界面也放进公共接口层。
 
-第四步看改进方式：SkillOpt 把 skill 文档当作可训练状态，通过 rollout、评估和验证门更新。它 5 月 8 日创建，截至 7 月 28 日有 15,238 stars，7 月 1—28 日有 45 名可见参与者。这里看到的是 Agent 改进开始走出模型权重空间。
+第四步看新项目的冷热差：SkillOpt 把 skill 文档当作可训练状态，通过 rollout、评估和验证门更新。它 5 月 8 日创建，8 月 1 日口径下已有 15,539 stars，但 7 月可见参与者只有 2 名。注意力很强，持续协作还需要时间验证。
 
 图上的 `NEW` 只给最近 90 天出现且证据足够的项目，`RISING` 只给有时间窗口增长证据的项目。`landscape_action=add` 只是编辑动作，不再自动显示成趋势标签。
 
@@ -125,7 +125,7 @@ Agent 关键词数量 × 4
 
 - WatchEvent 是 OpenDigger 当前可见的发现信号，不是完整 GitHub star 增量。
 - GitHub 在 2026 年 7 月收紧公开 stargazer 明细接口，因此没有把精确 star 增长作为必要字段。
-- 2026 年 5、6 月 OpenRank 仍可能继续回填，不能把全体仓库的近期总量变化解释成生态升降。
+- 2026 年 7 月 OpenRank 分区仍可能继续回填，不能把全体仓库的近期总量变化解释成生态升降。
 - OpenRank 只描述协作活跃度，stars 只描述关注度；两者都不能自动回答项目是否具有结构代表性。
 
 ## 给演讲者的讲法
@@ -136,11 +136,11 @@ Agent 关键词数量 × 4
 
 第二次翻页聚焦 `Memory, knowledge & context`：
 
-> OpenViking 把 memory、RAG 和 skills 放进 context database。3 月到 6 月 OpenRank 从 35.96 升到 140.23。上下文开始成为独立的数据层。
+> OpenViking 把 memory、RAG 和 skills 放进 context database。3 月到 7 月 OpenRank 从 112.46 升到 177.61。上下文开始成为独立的数据层。
 
-第三次翻页看协议，第四次翻页看 SkillOpt：
+第三次翻页看协议：
 
-> 公共接口从工具调用延伸到 Agent 协作、事件流和界面；另一边，skill 文档开始通过评估和验证持续更新。Agent 的开放协作对象已经不只代码和模型权重。
+> 公共接口从工具调用延伸到 Agent 协作、事件流和界面。协议还很年轻，图上只记录接口层正在补齐，不把它讲成标准已经稳定。
 
 如果观众问为什么有些本版新增项目没有 `NEW`，直接说明：
 

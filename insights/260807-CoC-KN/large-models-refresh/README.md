@@ -92,10 +92,14 @@ Generate the capability-first Large Models landscape:
 
 ```bash
 .venv/bin/python presentations/260807-CoC-KN/large-models-refresh/analysis/render_large_models_landscape.py
-playwright screenshot --viewport-size=3840,2160 --wait-for-timeout=1000 \
-  "file://$PWD/presentations/260807-CoC-KN/large-models-refresh/large_models_landscape_prototype.html" \
+playwright screenshot --channel chrome --viewport-size=1920,1080 --wait-for-timeout=1000 \
+  "file://$PWD/presentations/260807-CoC-KN/large-models-refresh/large_models_landscape_prototype.html?poster=1" \
   presentations/260807-CoC-KN/large-models-refresh/large_models_landscape_prototype.png
 ```
+
+`poster=1` scales the fixed 3840×2160 research canvas into a 1920×1080
+export viewport. Keep that flag for keynote posters; capturing the fixed canvas
+directly at 1920×1080 cuts off its right half.
 
 The prototype uses six editorial domains, monthly usage rank, weight access,
 license, parameter count, capability tags, and public Artificial Analysis

@@ -1,0 +1,121 @@
+{
+  "generated_at": "2026-08-03T16:34:56.136935+00:00",
+  "source": "data/agentic-ai-projects.csv",
+  "selection_rule": "landscape_action in {keep, add}",
+  "snapshot_date": "2026-08-01",
+  "projects": 132,
+  "unique_repositories": 132,
+  "identified_spdx": {
+    "projects": 107,
+    "share": 81.1
+  },
+  "noassertion": {
+    "projects": 25,
+    "share": 18.9,
+    "meaning": "GitHub/SPDX did not provide a concluded SPDX identifier. This does not mean that the repository has no license."
+  },
+  "apache_or_mit": {
+    "projects": 98,
+    "share_of_all_projects": 74.2,
+    "share_of_identified_spdx": 91.6
+  },
+  "all_projects": [
+    {
+      "license": "Apache-2.0",
+      "projects": 61,
+      "share": 46.2
+    },
+    {
+      "license": "MIT",
+      "projects": 37,
+      "share": 28.0
+    },
+    {
+      "license": "NOASSERTION",
+      "projects": 25,
+      "share": 18.9
+    },
+    {
+      "license": "AGPL-3.0",
+      "projects": 7,
+      "share": 5.3
+    },
+    {
+      "license": "BSD-2-Clause",
+      "projects": 1,
+      "share": 0.8
+    },
+    {
+      "license": "BSD-3-Clause",
+      "projects": 1,
+      "share": 0.8
+    }
+  ],
+  "layers": {
+    "Agent Infra": {
+      "projects": 74,
+      "distribution": [
+        {
+          "license": "MIT",
+          "projects": 27,
+          "share": 36.5
+        },
+        {
+          "license": "Apache-2.0",
+          "projects": 22,
+          "share": 29.7
+        },
+        {
+          "license": "NOASSERTION",
+          "projects": 18,
+          "share": 24.3
+        },
+        {
+          "license": "AGPL-3.0",
+          "projects": 6,
+          "share": 8.1
+        },
+        {
+          "license": "BSD-2-Clause",
+          "projects": 1,
+          "share": 1.4
+        }
+      ]
+    },
+    "Model Infra": {
+      "projects": 58,
+      "distribution": [
+        {
+          "license": "Apache-2.0",
+          "projects": 39,
+          "share": 67.2
+        },
+        {
+          "license": "MIT",
+          "projects": 10,
+          "share": 17.2
+        },
+        {
+          "license": "NOASSERTION",
+          "projects": 7,
+          "share": 12.1
+        },
+        {
+          "license": "AGPL-3.0",
+          "projects": 1,
+          "share": 1.7
+        },
+        {
+          "license": "BSD-3-Clause",
+          "projects": 1,
+          "share": 1.7
+        }
+      ]
+    }
+  },
+  "data_quality": [
+    "The value is GitHub repository metadata (license.spdx_id), not a legal review.",
+    "NOASSERTION is retained as an unknown state and is not treated as unlicensed.",
+    "A repository-level software license does not describe the license or availability of model weights, data, or other separately distributed artifacts."
+  ]
+}

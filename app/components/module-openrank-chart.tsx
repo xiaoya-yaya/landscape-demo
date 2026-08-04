@@ -26,6 +26,7 @@ const OPENRANK_MONTHS = [
   { short: "Apr", label: "Apr 2026" },
   { short: "May", label: "May 2026" },
   { short: "Jun", label: "Jun 2026" },
+  { short: "Jul", label: "Jul 2026" },
 ] as const;
 
 const TOP_PROJECTS = 12;

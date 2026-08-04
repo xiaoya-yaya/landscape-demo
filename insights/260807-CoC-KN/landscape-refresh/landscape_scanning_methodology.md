@@ -1,6 +1,6 @@
 # Agentic AI 全景图的项目扫描方法
 
-> CommunityOverCode China 2026 keynote 工作方法。当前数字对应 2026-07-28 快照；扫描框架可以在后续全景图更新中复用。
+> CommunityOverCode China 2026 keynote 工作方法。当前入图结论与项目指标统一到 2026-08-01；首轮扫描窗口作为方法过程保留，8 月 1 日另做一次近三个月补漏。
 
 ## 一句话版本
 
@@ -21,7 +21,7 @@
 
 首轮留下 12 个 A 档项目和 12 个 B 档项目。这里的 6,118 是高召回候选池，不是 6,118 个 Agentic AI 项目。
 
-OmniRoute 暴露了首轮绝对 Top-N 的盲区。补上 90 天增速通道后，第二轮又加入 Spec Kit、Symphony、Lark CLI、SkillOpt 和 Firecrawl。当前主表共 257 个项目。A/B 档只属于扫描阶段的编辑过程；主表用 `landscape_action` 记录编辑决定，用 `trend_signal` 单独记录 NEW 或 RISING。
+OmniRoute 暴露了首轮绝对 Top-N 的盲区。补上 90 天增速通道后，第二轮又加入 Spec Kit、Symphony、Lark CLI、SkillOpt 和 Firecrawl。8 月 1 日补漏再把 OmniGent、Kimi Code、Grok Build 和 Eve 放进观察池。当前主表共 261 个项目，其中 132 个入图；A/B 档只属于扫描阶段的编辑过程，主表用 `landscape_action` 记录编辑决定，用 `trend_signal` 单独记录 NEW 或 RISING。
 
 ## 第一步先保证召回
 
@@ -29,13 +29,13 @@ OmniRoute 暴露了首轮绝对 Top-N 的盲区。补上 90 天增速通道后�
 
 ### 近期关注度
 
-从 OpenDigger `opensource.events` 中查询 2026-05-01 至 2026-07-28 可见的 GitHub WatchEvent，取仓库前 2,500。
+首轮从 OpenDigger `opensource.events` 中查询当时可见的近期 GitHub WatchEvent，取仓库前 2,500。8 月 1 日补漏窗口为 2026-05-01 至 2026-08-01。
 
 这一组容易发现刚刚获得大量关注的新项目。它只承担候选发现，不解释成精确 star 增长。近期 GitHub 事件数据存在覆盖缺口，GitHub 公开 stargazer 明细接口也已经收紧。
 
 ### 近期社区活动
 
-从 `opensource.global_openrank` 查询 2026-04、05、06 三个已结束月份的 Repo OpenRank，三个月相加后取前 4,000。
+首轮从 `opensource.global_openrank` 查询当时最近三个完整月的 Repo OpenRank，三个月相加后取前 4,000。8 月 1 日补漏改用 2026-05、06、07。
 
 这一组可以找到传播声量一般、开发协作却很活跃的项目。它也能避免扫描结果完全被历史累计 stars 支配。
 
@@ -88,14 +88,14 @@ Agent 关键词数量 × 4
 
 首轮从 878 个项目里取 WatchEvent 前 100、OpenRank 前 100 和 GitHub 搜索前 80。这个入口擅长找绝对信号强的项目，却会漏掉历史很短、刚开始加速的仓库。OmniRoute 已经在 222 个机器候选里，但因为绝对排名没有进前三组，没进入人工短名单。
 
-补漏通道不再和绝对 Top-N 混成一个分数。它单独检查：
+补漏通道不再和绝对 Top-N 混成一个分数。8 月 1 日这一轮单独检查：
 
-- 2026-04-28 至 07-28 新建的仓库；
-- 2026-04 至 06 月 OpenRank 的增量和倍数变化；
-- 2026-05-01 至 07-28 可见 WatchEvent；
+- 2026-05-01 至 08-01 新建的仓库；
+- 2026-05 至 07 月 OpenRank 的增量和倍数变化；
+- 2026-05-01 至 08-01 可见 WatchEvent；
 - 官方 README 是否表明它是通用 infra、harness、runtime、gateway 或可复用工具层。
 
-这次重新读取原来的 222 条候选，再执行 12 组近期创建搜索。五个已补入项目从候选中排除后，GitHub 搜索产生 306 条跨 query 命中；按 repo ID 去重并与旧候选合并为 448 条，再按新生或加速条件保留 346 条高召回记录。346 仍不是入图名单，应用、教程、skill 合集和同质项目还要逐项排除。
+这次重新读取原来的 222 条候选，再执行 12 组近期创建搜索。GitHub 搜索产生 295 条跨 query 命中；按 repo ID 去重并与旧候选合并为 444 条，再按新生或加速条件保留 341 条高召回记录。341 仍不是入图名单，应用、教程、skill 合集和同质项目还要逐项排除。
 
 GitHub Trending 没有官方历史查询接口。这一轮把演讲者观察到的持续上榜项目当作人工发现线索，但不把“上榜几周”写成精确统计。后续更新应每日保存 Trending 快照，才能把持续时间变成可复核指标。
 
@@ -133,9 +133,9 @@ Koog 的 stars 不是最高，但它补上了 JVM/Kotlin Agent Framework。vLLM-
 
 ## 数据口径必须一起讲
 
-- GitHub stars 使用 2026-07-28 当前快照，只描述关注度。
+- GitHub stars、forks 与 open issues 使用 GitHub REST API 当前值，按演讲约定统一标作 2026-08-01 快照，只描述累计关注度和仓库状态。
 - WatchEvent 存在近期覆盖缺口，只用于发现候选。
-- OpenRank 使用 2026-04 至 06 月，但 05、06 月仍可能继续回填。
+- 当前趋势复核使用 2026-05 至 07 月 OpenRank；7 月分区仍可能继续回填。
 - OpenRank 的近期下降不能直接解释为项目或生态活跃度下降。
 - Large Models 层需要额外查看模型发布、权重、许可证、评测和真实使用，GitHub repo 扫描只能提供部分线索。
 
@@ -147,11 +147,13 @@ Koog 的 stars 不是最高，但它补上了 JVM/Kotlin Agent Framework。vLLM-
 
 > 每次更新全景图，最麻烦的其实不是画图，而是怎么知道自己漏了谁。
 >
-> 这次我们先把网撒得很宽。我们从最近的 GitHub WatchEvent 里拿了 2,500 个仓库，从 4 到 6 月的 OpenRank 里拿了 4,000 个，再加上十几组针对 agent、MCP、inference 和 post-training 的 GitHub 搜索。去重并排除旧图以后，一共有 6,118 个候选。
+> 这次我们先把网撒得很宽。首轮从近期 GitHub WatchEvent 里拿了 2,500 个仓库，从当时最近三个完整月的 OpenRank 里拿了 4,000 个，再加上十几组针对 agent、MCP、inference 和 post-training 的 GitHub 搜索。去重并排除旧图以后，一共有 6,118 个候选。
 >
 > 接下来机器帮我们读仓库名称、description、topics 和 README，把教程、合集和明显无关的项目先拿掉。6,118 变成 878，再通过 GitHub API 更新项目状态，最后留下 222 个值得人工看一眼的仓库。
 >
 > 最后的判断没有交给一个综合分。绝对信号之外，我们会再扫最近 90 天的新项目和加速项目，然后看它有没有补上结构缺口、是不是通用基础设施、和现有项目有没有重复。
+
+> 到 8 月 1 日，我们又用 5 到 7 月 OpenRank 和近三个月 GitHub 信号复查了一轮。新增四个观察项目，但 74 个 Agent Infra 和 58 个 Model Infra 的主图名单没有为了追热点而变。
 >
 > 所以这张图不是按 stars 排出来的。数据帮我们尽量别漏，最后还是要回答：这个项目有没有帮助我们看懂生态。
 

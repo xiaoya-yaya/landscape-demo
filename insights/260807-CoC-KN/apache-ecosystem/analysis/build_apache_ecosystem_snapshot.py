@@ -12,11 +12,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from collections import Counter, defaultdict
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
+
+import requests
+from dotenv import load_dotenv
 
 
 DOMAIN_LABELS: dict[str, set[str]] = {
@@ -104,17 +108,55 @@ def load_ndjson(path: Path) -> list[dict[str, Any]]:
     ]
 
 
+def fetch_live() -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    root = Path(__file__).resolve().parents[4]
+    for env_path in (root / ".env", root.parent / "agentic-ai-landscape" / "scripts" / ".env"):
+        if env_path.exists():
+            load_dotenv(env_path, override=False)
+    token = (os.getenv("GITHUB_TOKEN") or os.getenv("GH_TOKEN") or "").strip()
+    headers = {"Accept": "application/vnd.github+json", "User-Agent": "coc-keynote-apache"}
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    projects_response = requests.get(
+        "https://projects.apache.org/json/foundation/projects.json",
+        headers={"User-Agent": "coc-keynote-apache"},
+        timeout=45,
+    )
+    projects_response.raise_for_status()
+    projects = projects_response.json()
+    repositories: list[dict[str, Any]] = []
+    page = 1
+    while True:
+        response = requests.get(
+            "https://api.github.com/orgs/apache/repos",
+            params={"type": "public", "per_page": 100, "page": page},
+            headers=headers,
+            timeout=45,
+        )
+        response.raise_for_status()
+        chunk = response.json()
+        repositories.extend(chunk)
+        if len(chunk) < 100:
+            break
+        page += 1
+    return projects, repositories
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--projects-json", type=Path, required=True)
-    parser.add_argument("--repos-ndjson", type=Path, required=True)
+    parser.add_argument("--projects-json", type=Path)
+    parser.add_argument("--repos-ndjson", type=Path)
+    parser.add_argument("--fetch-live", action="store_true")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
-    projects: dict[str, dict[str, Any]] = json.loads(
-        args.projects_json.read_text(encoding="utf-8")
-    )
-    repositories = load_ndjson(args.repos_ndjson)
+    if args.fetch_live:
+        projects, repositories = fetch_live()
+    else:
+        if not args.projects_json or not args.repos_ndjson:
+            parser.error("provide --fetch-live or both input files")
+        projects = json.loads(args.projects_json.read_text(encoding="utf-8"))
+        repositories = load_ndjson(args.repos_ndjson)
     repositories_by_name = {repo["name"]: repo for repo in repositories}
 
     active_projects = {
@@ -201,6 +243,7 @@ def main() -> None:
 
     payload = {
         "generated_at": datetime.now(UTC).isoformat(),
+        "snapshot_date": "2026-08-01",
         "grain": {
             "project_categories": "Apache Projects Directory project records",
             "github_metrics": "public repositories in the apache GitHub org",

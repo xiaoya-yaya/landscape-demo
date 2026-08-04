@@ -451,10 +451,10 @@ export default function KeynoteExperience({
         </section>
 
         <div className={styles.dataWindow} aria-label="数据时间口径">
-          <div><span>GitHub snapshot</span><strong>2026-07-28</strong></div>
-          <div><span>OpenRank window</span><strong>2025-07—2026-06</strong></div>
-          <div><span>OpenRouter / ZenMux</span><strong>2026-06-01—30</strong></div>
-          <div><span>ASF homepage</span><strong>2026-07-29</strong></div>
+          <div><span>数据截至</span><strong>2026-08-01</strong></div>
+          <div><span>OpenRank</span><strong>2025-08—2026-07</strong></div>
+          <div><span>OpenRouter / ZenMux</span><strong>2026-07-01—31</strong></div>
+          <div><span>GitHub</span><strong>REST API 快照</strong></div>
         </div>
 
         <nav className={styles.chapterNav} aria-label="Keynote 章节">
@@ -499,10 +499,10 @@ export default function KeynoteExperience({
 
           <div className={styles.statStrip}>
             {[
-              ["105", "保留", "生态角色仍然清晰"],
-              ["21", "新增", "补足协议、推理与上下文"],
+              ["106", "保留", "生态角色仍然清晰"],
+              ["26", "新增", "补足协议、推理与上下文"],
               ["17", "移出", "去重、弱相关或版面取舍"],
-              ["251", "reference source", "CSV 保留完整判断"],
+              ["261", "reference source", "CSV 保留完整判断"],
             ].map(([value, label, note]) => (
               <div key={label}>
                 <strong>{value}</strong>
@@ -759,15 +759,15 @@ export default function KeynoteExperience({
           <div className={styles.apacheScale}>
             {[
               ["305", "非 retired 项目记录"],
-              ["259", "有 DOAP 技术分类"],
-              ["2,473", "非 fork、非归档仓库"],
+              ["260", "有项目分类信息"],
+              ["2,469", "非 fork、非归档仓库"],
               ["6 / 57", "入选 Model Infra"],
             ].map(([value, label]) => (
               <div key={label}><strong>{value}</strong><span>{label}</span></div>
             ))}
           </div>
           <p className={styles.dataNote}>
-            Projects Directory 2026-07-27 · GitHub apache org 2026-07-30。ASF
+            数据截至 2026-08-01。Projects Directory 与 GitHub apache org；ASF
             官网另展示 290+ projects、1,300+ releases、10,000+ committers 与
             1,190+ members；这些对象不能互相替代。
           </p>
@@ -919,11 +919,11 @@ export default function KeynoteExperience({
                 <span>GitHub · 3 orgs</span>
                 <ArrowUpRightIcon aria-hidden="true" />
               </header>
-              <strong>92</strong>
+              <strong>93</strong>
               <p>公开仓库</p>
               <div>
-                <span><b>41,045</b> Stars</span>
-                <span><b>3,820</b> Forks</span>
+                <span><b>41,542</b> Stars</span>
+                <span><b>3,933</b> Forks</span>
               </div>
             </a>
             <a href="https://huggingface.co/inclusionAI" target="_blank" rel="noreferrer">
@@ -931,11 +931,11 @@ export default function KeynoteExperience({
                 <span>Hugging Face · 3 orgs</span>
                 <ArrowUpRightIcon aria-hidden="true" />
               </header>
-              <strong>197</strong>
+              <strong>198</strong>
               <p>公开模型</p>
               <div>
-                <span><b>531,025</b> 近 30 天下载</span>
-                <span><b>8,757</b> Likes</span>
+                <span><b>534,356</b> 近 30 天下载</span>
+                <span><b>8,790</b> Likes</span>
               </div>
             </a>
             <a href="https://modelscope.cn/organization/inclusionAI" target="_blank" rel="noreferrer">
@@ -946,8 +946,8 @@ export default function KeynoteExperience({
               <strong>188</strong>
               <p>公开模型</p>
               <div>
-                <span><b>204,942</b> Downloads</span>
-                <span><b>634</b> Likes</span>
+                <span><b>205,569</b> Downloads</span>
+                <span><b>638</b> Likes</span>
               </div>
             </a>
           </div>
@@ -1027,7 +1027,7 @@ export default function KeynoteExperience({
                   <a href="https://github.com/inclusionAI" target="_blank" rel="noreferrer">GitHub ↗</a>
                   <a href="https://huggingface.co/inclusionAI" target="_blank" rel="noreferrer">Hugging Face ↗</a>
                   <a href="https://modelscope.cn/organization/inclusionAI" target="_blank" rel="noreferrer">ModelScope ↗</a>
-                  <a href="/keynote/inclusionai/snapshot-2026-07-30.md" target="_blank" rel="noreferrer">完整快照 ↗</a>
+                  <a href="/keynote/inclusionai/snapshot-2026-08-01.md" target="_blank" rel="noreferrer">完整快照 ↗</a>
                 </div>
               </div>
             </details>
@@ -1052,10 +1052,9 @@ export default function KeynoteExperience({
                 说的是参与方式。有人训练模型，有人做环境、工具和评测，也有人把技术带进机器人、医疗和日常服务。公平、透明和协作落到工程上，就是材料能拿到、边界能看懂、实验能复现，后来者还能接着做。
               </p>
               <p>
-                然后快速扫三张平台卡。GitHub 看软件与协作，Hugging Face 和 ModelScope 看模型发布与分发。只念三个 headline：92 个公开仓库、HF
-                197 个公开模型、ModelScope 188 个公开模型。不要把三个平台的模型数相加，也不要把 HF downloads 说成累计下载；它是近 30 天窗口。Stars 和
-                Likes 也不要合成一个“认可度”，因为用户动作和平台分母不同。若需要讲变化，只讲可比部分：相较 7 月 11 日快照，GitHub
-                多了 6 个公开仓库、7,999 Stars 和 803 Forks；HF downloads 是滚动窗口，不把差值说成“新增下载”。
+                然后快速扫三张平台卡。GitHub 看软件与协作，Hugging Face 和 ModelScope 看模型发布与分发。只念三个 headline：93 个公开仓库、HF
+                198 个公开模型、ModelScope 188 个公开模型。不要把三个平台的模型数相加，也不要把 HF downloads 说成累计下载；它是近 30 天窗口。Stars 和
+                Likes 也不要合成一个“认可度”，因为用户动作和平台分母不同。
               </p>
               <p>
                 接着从 AI Service 往下讲。LingGuang、金融、医疗和生活服务已经进入真实使用。用户碰到的问题会再传回技术栈，变成数据、环境、奖励、评测和可靠性要求。这里不用展开产品功能，一句话把“开放研究”接到“日常生活”就够了。
@@ -1086,7 +1085,7 @@ export default function KeynoteExperience({
                 <span>LANDSCAPE REPOSITORY LICENSES</span>
                 <strong>{visibleLicenseProjects.length} 个项目</strong>
               </div>
-              <p>GitHub 仓库的 SPDX 标识 · 数据快照 2026-07-28</p>
+              <p>GitHub 仓库的 SPDX 标识 · 数据截至 2026-08-01</p>
             </div>
             <div className={styles.inlineTabs}>
               {licenseLayerLabels.map(([key, label]) => {

@@ -1,13 +1,12 @@
 # Apache 在 Agentic AI 生态里的位置
 
-数据截止要求：2026-07-28
-研究校验时间：2026-07-29 02:33 CST
+数据截至：2026-08-01
 
 ## 先给结论
 
 Apache 很少出现在 Agent 产品和交互层。到了 Model Infra，密度马上变高。
 
-当前全景图的 57 个 Model Infra 项目里，有 6 个 ASF 项目，占 10.5%。它们集中在三个位置：
+当前全景图的 58 个 Model Infra 项目里，有 6 个 ASF 项目，占 10.3%。它们集中在三个位置：
 
 - Data · Governance：Iceberg、Hudi、Paimon、Gravitino，占这一格 7 个项目中的 4 个。
 - Data · Integration：Airflow，占这一格 3 个项目中的 1 个。
@@ -32,7 +31,7 @@ Agent 开始修改数据、跨系统调用工具、并行执行任务以后，�
 | Committers | 10000+ | 获得项目提交权限并承担社区责任的人 |
 | Members | 1190+ | ASF 法人组织成员，可参与 Member 和董事选举 |
 
-截图里的四个数字与 2026-07-29 直接读取的官网 HTML 一致。搜索引擎缓存仍可能显示 `9700+ Committers / 1140+ Members`，演讲材料应使用官网实时值和用户提供的截图。
+截图里的四个数字按 2026-08-01 口径使用。搜索引擎缓存可能显示旧值，演讲材料以官网与用户提供的截图为准。
 
 ### FY2025 冻结口径
 
@@ -53,23 +52,16 @@ ASF FY2025 截止 2025-04-30：
 
 ## 2. GitHub `apache` org 是另一套口径
 
-GitHub API 在 2026-07-29 02:33 CST 观察到：
+GitHub API 按 2026-08-01 口径观察到：
 
 | 指标 | 数值 | 口径提醒 |
 |---|---:|---|
-| Public repositories | 3,148 | 包含代码、网站、文档、子项目、基础设施和历史仓库 |
-| Non-fork repositories | 3,119 | 排除 fork |
-| Archived repositories | 648 | GitHub archived 状态 |
-| Non-fork, non-archived repositories | 2,474 | 仍不能直接等同于“活跃 Apache 项目” |
-| 近 30 天有 push 的 active source repos | 947 | 38.3%；含自动化和网站更新 |
-| 近 90 天有 push 的 active source repos | 1,986 | 80.3%；只代表仓库发生 push |
-| 近 365 天有 push 的 active source repos | 2,337 | 94.5% |
-| Non-fork repo stars 合计 | 1,390,334 | 注意力信号，不能相加后解释成社区健康 |
-| Non-fork repo forks 合计 | 556,251 | 同一 ASF 项目可能对应多个 repo |
+| Public repositories | 3,150 | 包含代码、网站、文档、子项目、基础设施和历史仓库 |
+| Non-fork, non-archived repositories | 2,469 | 仍不能直接等同于“活跃 Apache 项目” |
 
-这批组织级指标比演讲数据截止晚约 2.5 小时，只作为研究校验。正式 PPT 的项目级数字继续使用 2026-07-28 已冻结快照。
+组织级数字与项目级数字统一按 2026-08-01 口径展示，但仍要区分项目记录与仓库记录。
 
-为什么 290+ projects 对应 3,148 repos：
+为什么 290+ projects 对应 3,150 repos：
 
 - 一个项目可能拆成主代码、语言 SDK、网站、文档和插件等多个仓库。
 - Incubator、基础设施和 Foundation 自身也有仓库。
@@ -78,7 +70,7 @@ GitHub API 在 2026-07-29 02:33 CST 观察到：
 
 ### GitHub 主语言分布
 
-对 2,474 个 non-fork、non-archived repo，按 GitHub `language` 字段统计：
+主语言表保留为结构性参考；精确仓库数以 8 月 1 日快照中的 2,469 个 non-fork、non-archived repo 为准。
 
 | 主语言 | repo 数 | 占比 |
 |---|---:|---:|
@@ -98,7 +90,7 @@ GitHub API 在 2026-07-29 02:33 CST 观察到：
 
 ## 3. Apache 项目生态分布
 
-Apache Projects Directory 每天从 PMC RDF 和项目维护的 DOAP 文件生成结构化数据。2026-07-29 读取到 375 条 project records，其中 70 条带 retired 标签；排除 retired 后有 305 条记录，另有 46 条 `no-tlp-doap` 虚拟记录。
+Apache Projects Directory 每天从 PMC RDF 和项目维护的 DOAP 文件生成结构化数据。2026-08-01 口径下有 375 条 project records；排除 retired 后有 305 条记录，260 条有可用 DOAP 分类，另有 45 条 `no-tlp-doap` 虚拟记录。
 
 非 retired 记录中最常见的技术标签如下。标签可以多选，所以不能相加成项目总数。
 
@@ -127,16 +119,16 @@ Apache Projects Directory 每天从 PMC RDF 和项目维护的 DOAP 文件生成
 
 ## 4. 当前全景图里的 Apache
 
-项目级 GitHub 信息和 stars 使用 2026-07-28 冻结快照；OpenRank 使用最近可用完整月份 2026-06。
+项目级 GitHub 信息按 2026-08-01 口径展示；OpenRank 使用 2026-07 完整月。
 
-| 项目 | Landscape 位置 | Stars | OpenRank 2026-06 | 对 Agentic AI 的作用 |
+| 项目 | Landscape 位置 | Stars | OpenRank 2026-07 | 对 Agentic AI 的作用 |
 |---|---|---:|---:|---|
-| Apache Airflow | Model Infra / Data · Integration | 46,289 | 144.80 | 数据准备和可追踪工作流编排 |
-| Apache Spark | Model Infra / Compute & scheduling | 43,716 | 87.87 | 大规模数据处理和分布式计算 |
-| Apache Iceberg | Model Infra / Data · Governance | 9,085 | 57.16 | 开放表格式、版本化数据和多引擎互操作 |
-| Apache Hudi | Model Infra / Data · Governance | 6,197 | 38.83 | 增量数据处理、更新与删除 |
-| Apache Paimon | Model Infra / Data · Governance | 3,353 | 18.40 | 流批一体的实时 lakehouse 表格式 |
-| Apache Gravitino | Model Infra / Data · Governance | 3,136 | 40.68 | 跨系统元数据、数据和模型目录 |
+| Apache Airflow | Model Infra / Data · Integration | 46,361 | 98.32 | 数据准备和可追踪工作流编排 |
+| Apache Spark | Model Infra / Compute & scheduling | 43,776 | 68.18 | 大规模数据处理和分布式计算 |
+| Apache Iceberg | Model Infra / Data · Governance | 9,106 | 34.89 | 开放表格式、版本化数据和多引擎互操作 |
+| Apache Hudi | Model Infra / Data · Governance | 6,205 | 24.44 | 增量数据处理、更新与删除 |
+| Apache Paimon | Model Infra / Data · Governance | 3,360 | 16.38 | 流批一体的实时 lakehouse 表格式 |
+| Apache Gravitino | Model Infra / Data · Governance | 3,141 | 22.03 | 跨系统元数据、数据和模型目录 |
 
 这 6 个项目里，4 个都在 Data · Governance。这里可以形成一个有数据支撑的判断：
 
@@ -161,14 +153,14 @@ Landscape 为了保持可读性，不会把所有相关 Apache 项目都放进�
 
 ## 6. 蚂蚁深度参与的四个项目
 
-2026-07-28 冻结快照：
+项目状态截至 2026-08-01；GitHub stars 只作关注度信号，此处不再拿它们横向比较：
 
-| 项目 | 社区状态 | Stars | 原本解决的问题 | 放进 Agent 生产系统后的连接点 |
-|---|---|---:|---|---|
-| Apache Fory | TLP，2025-07-17 毕业 | 4,424 | 多语言序列化与数据交换 | runtime、工具和服务之间传递结构化状态 |
-| Apache GeaFlow | Incubating | 788 | 流批一体的图计算 | 持续更新关系上下文，支持图检索和复杂状态分析 |
-| Apache Seata | Incubating | 25,976 | 分布式事务一致性 | 跨系统动作的提交、补偿和失败恢复 |
-| Apache Celeborn | TLP，2024-03-21 毕业 | 1,059 | shuffle 和 spilled data 服务 | AI/数据计算负载的性能、弹性和稳定性 |
+| 项目 | 社区状态 | 原本解决的问题 | 放进 Agent 生产系统后的连接点 |
+|---|---|---|---|
+| Apache Fory | TLP，2025-07-17 毕业 | 多语言序列化与数据交换 | runtime、工具和服务之间传递结构化状态 |
+| Apache GeaFlow | Incubating | 流批一体的图计算 | 持续更新关系上下文，支持图检索和复杂状态分析 |
+| Apache Seata | Incubating | 分布式事务一致性 | 跨系统动作的提交、补偿和失败恢复 |
+| Apache Celeborn | TLP，2024-03-21 毕业 | shuffle 和 spilled data 服务 | AI/数据计算负载的性能、弹性和稳定性 |
 
 四个项目刚好把 Agent 进入生产后的四类老问题串起来：
 
@@ -229,4 +221,4 @@ Apache 在这个生态里并不控制最上层的 Agent 入口，也没有占据
 - Projects Directory 的 category 是多标签；目录数据由各 PMC 维护，完整度并不完全一致。
 - GitHub `pushed_at` 包含自动化、网站和依赖更新，不等于有多少人类开发者活跃。
 - Stars 只描述关注度。判断社区健康还需要 release、PR review、活跃贡献者、组织集中度和公开社区报告。
-- 2026-07-28 的 OpenRank 最新完整月份仍是 2026-06；不要把它标成 7 月数据。
+- 2026-07 OpenRank 全库分区仍在回填，只作为协作方向信号，不做完整排行榜。

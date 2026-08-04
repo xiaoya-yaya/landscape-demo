@@ -42,7 +42,7 @@ def main() -> None:
         type=Path,
         default=Path(
             "insights/260807-CoC-KN/license-and-openness/data/"
-            "license_distribution_2026-07-28.json"
+            "license_distribution_2026-08-01.json"
         ),
     )
     args = parser.parse_args()
@@ -83,7 +83,7 @@ def main() -> None:
         "generated_at": datetime.now(UTC).isoformat(),
         "source": str(args.source),
         "selection_rule": "landscape_action in {keep, add}",
-        "snapshot_date": "2026-07-28",
+        "snapshot_date": "2026-08-01",
         "projects": len(selected),
         "unique_repositories": len(set(repositories)),
         "identified_spdx": {

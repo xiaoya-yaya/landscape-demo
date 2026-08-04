@@ -16,6 +16,15 @@ export type ApacheProject = {
   signal: string;
 };
 
+export const apacheLandscapeProjects = [
+  { name: "Airflow", logo: "/keynote/apache/assets/project-logos/airflow.png" },
+  { name: "Spark", logo: "/keynote/apache/assets/project-logos/spark.png" },
+  { name: "Iceberg", logo: "/keynote/apache/assets/project-logos/iceberg.png" },
+  { name: "Hudi", logo: "/keynote/apache/assets/project-logos/hudi.png" },
+  { name: "Paimon", logo: "/keynote/apache/assets/project-logos/paimon.png" },
+  { name: "Gravitino", logo: "/keynote/apache/assets/project-logos/gravitino.png" },
+] as const;
+
 export const apacheDomains: Record<
   ApacheDomainKey,
   {
@@ -31,7 +40,7 @@ export const apacheDomains: Record<
     label: "Data, analytics & AI",
     count: 80,
     definition:
-      "覆盖数据处理、数据库、搜索、分析与 AI 计算。Agentic AI 全景图中的六个 Apache 项目主要落在这一领域。",
+      "覆盖数据处理、数据库、搜索、分析与 AI 计算。下方单列 Landscape 中的六个项目，不受目录分类缺失影响。",
     officialLabels: [
       "big-data",
       "database",
@@ -67,7 +76,7 @@ export const apacheDomains: Record<
   },
   network: {
     label: "Network, messaging & integration",
-    count: 41,
+    count: 42,
     definition:
       "覆盖服务连接、消息传递、协议与系统集成，支撑跨工具执行中的状态流转。",
     officialLabels: [
@@ -88,7 +97,7 @@ export const apacheDomains: Record<
   },
   web: {
     label: "Web & application platforms",
-    count: 37,
+    count: 38,
     definition:
       "覆盖 Web 框架、内容处理与应用平台。当前 Agentic landscape 中的 Apache 项目较少落在这一领域。",
     officialLabels: ["web-framework", "content", "javaee", "mobile"],

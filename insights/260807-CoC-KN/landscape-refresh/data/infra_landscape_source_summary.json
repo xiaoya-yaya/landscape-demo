@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T14:44:30.607395+00:00",
+  "generated_at": "2026-08-03T16:34:56.041085+00:00",
   "source": "data/agentic-ai-projects.csv",
   "selection_rule": "landscape_action in {keep, add}",
   "total_projects": 132,
@@ -44,5 +44,5 @@
   "avatar_status_counts": {
     "cached": 116
   },
-  "openrank_window": "2026-06"
+  "openrank_window": "2026-07"
 }

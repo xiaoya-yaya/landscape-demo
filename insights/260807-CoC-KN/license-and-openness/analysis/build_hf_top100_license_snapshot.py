@@ -12,7 +12,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 
-SNAPSHOT_DATE = "2026-07-31"
+SNAPSHOT_DATE = "2026-08-01"
 API_ENDPOINT = "https://huggingface.co/api/models"
 API_PARAMS = {
     "pipeline_tag": "text-generation",

@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-08-03T16:32:28.132229+00:00",
+  "snapshot_date": "2026-08-01",
+  "github_metric_rule": "Current GitHub REST API values are presented as the agreed 2026-08-01 keynote snapshot.",
+  "openrank_month": "2026-07",
+  "trend_months": [
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07"
+  ],
+  "participants_month": "2026-07",
+  "validation": {
+    "passed": true,
+    "rows": 261,
+    "duplicate_ids": 0,
+    "duplicate_names": 0,
+    "github_status": {
+      "ok": 261
+    },
+    "selected_projects": 132,
+    "selected_by_layer": {
+      "Agent Infra": 74,
+      "Model Infra": 58
+    },
+    "selected_with_july_openrank": 125
+  },
+  "renames": [],
+  "openrank_global_coverage": [
+    {
+      "month": "202605",
+      "rows": 482533,
+      "repos": 482533,
+      "total_openrank": 691705.73
+    },
+    {
+      "month": "202606",
+      "rows": 246612,
+      "repos": 246612,
+      "total_openrank": 410364.84
+    },
+    {
+      "month": "202607",
+      "rows": 114077,
+      "repos": 114077,
+      "total_openrank": 214519.84
+    }
+  ],
+  "known_limitations": [
+    "OpenRank July coverage is still backfill-sensitive; use it as a directional collaboration signal, not a complete league table.",
+    "Stars measure accumulated attention rather than community health.",
+    "Landscape placement remains an editorial decision informed by multiple signals."
+  ]
+}

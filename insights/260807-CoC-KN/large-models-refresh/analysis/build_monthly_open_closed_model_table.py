@@ -44,6 +44,11 @@ def load_keys() -> tuple[str, str, str]:
     repo_root = Path(__file__).resolve().parents[4]
     load_dotenv(repo_root / ".env")
     load_dotenv(repo_root / "scripts" / ".env", override=False)
+    load_dotenv(repo_root.parent / "agentic-ai-landscape" / ".env", override=False)
+    load_dotenv(
+        repo_root.parent / "agentic-ai-landscape" / "scripts" / ".env",
+        override=False,
+    )
     openrouter_key = (
         os.getenv("OPENROUTER_API_KEY")
         or os.getenv("OPENROUTER_MANAGEMENT_API_KEY")

@@ -1686,13 +1686,16 @@
 
 .apacheAtlas[data-stage="true"] .apacheLandscapeMatch > div {
   margin-top: 0.8cqh;
-  gap: 0.5cqw;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55cqw;
 }
 
 .apacheAtlas[data-stage="true"] .apacheLandscapeMatch > div > span {
   padding: 0.5cqh 0.6cqw 0.5cqh 0.45cqw;
   gap: 0.42cqw;
   font-size: 0.66cqw;
+  border-radius: 0.45cqw;
 }
 
 .apacheAtlas[data-stage="true"] .apacheLandscapeMatch img {
@@ -1706,10 +1709,7 @@
 }
 
 .apacheAtlas[data-stage="true"] .apacheMetadataGap {
-  min-height: 10.5cqh;
-  padding: 1.35cqh 1.55cqw;
-  grid-template-columns: 5.2cqw minmax(0, 1fr) auto;
-  gap: 1.3cqw;
+  display: none;
 }
 
 .apacheAtlas[data-stage="true"] .apacheMetadataGap > strong {
@@ -1985,6 +1985,128 @@
   border-color: #d7b85b;
   background: #fff8df;
   color: #84640a;
+}
+
+.apacheBridgeLead[data-stage="true"] {
+  padding: 1.1cqh 0;
+  grid-template-columns: minmax(14cqw, 0.75fr) minmax(28cqw, 1.5fr) minmax(14cqw, 0.75fr);
+  gap: 1.4cqw;
+}
+
+.apacheBridgeLead[data-stage="true"] .apacheBridgeSource {
+  grid-template-columns: 2.2cqw minmax(0, 1fr);
+  column-gap: 0.75cqw;
+}
+
+.apacheBridgeLead[data-stage="true"] .apacheBridgeSource img {
+  width: 2.2cqw;
+  height: 2.2cqw;
+  border-radius: 0.55cqw;
+}
+
+.apacheBridgeLead[data-stage="true"] .apacheBridgeSource span,
+.apacheBridgeLead[data-stage="true"] .apacheBridgeAxis > span {
+  font-size: 0.5cqw;
+}
+
+.apacheBridgeLead[data-stage="true"] .apacheBridgeSource strong {
+  font-size: 0.9cqw;
+}
+
+.apacheBridgeLead[data-stage="true"] .apacheBridgeAxis {
+  padding: 0 1.4cqw;
+}
+
+.apacheBridgeLead[data-stage="true"] .apacheBridgeAxis > div {
+  margin-top: 0.65cqh;
+  gap: 0.38cqw;
+}
+
+.apacheBridgeLead[data-stage="true"] .apacheBridgeAxis b {
+  padding: 0.5cqh 0.55cqw;
+  font-size: 0.62cqw;
+}
+
+.apacheBackbone[data-stage="true"] > article {
+  padding: 1.35cqh 1.05cqw 1.5cqh;
+}
+
+.apacheBackbone[data-stage="true"] > article > header {
+  min-height: 8.8cqh;
+  padding: 0 0.3cqw 1cqh;
+}
+
+.apacheBackbone[data-stage="true"] > article > header p {
+  font-size: 0.5cqw;
+}
+
+.apacheBackbone[data-stage="true"] > article > header h3 {
+  margin-top: 0.85cqh;
+  font-size: 1.3cqw;
+}
+
+.apacheBackbone[data-stage="true"] .apacheBackboneProjects {
+  margin-top: 0.9cqh;
+  gap: 0.7cqh 0.5cqw;
+}
+
+.apacheBackbone[data-stage="true"] .apacheBackboneProjects > a {
+  min-height: 17cqh;
+  padding: 0.85cqh 0.7cqw;
+}
+
+.apacheBackbone[data-stage="true"] .apacheProjectLogo {
+  height: 3.7cqh;
+}
+
+.apacheBackbone[data-stage="true"] .apacheProjectLogo img {
+  max-width: 7.8cqw;
+  max-height: 3.4cqh;
+}
+
+.apacheBackbone[data-stage="true"] .apacheProjectIdentity {
+  margin-top: 0.7cqh;
+  padding-top: 0.6cqh;
+  gap: 0.55cqw;
+}
+
+.apacheBackbone[data-stage="true"] .apacheProjectIdentity > strong {
+  font-size: 0.72cqw;
+}
+
+.apacheBackbone[data-stage="true"] .apacheProjectMarks {
+  gap: 0.3cqw;
+}
+
+.apacheBackbone[data-stage="true"] .apacheProjectMarks > span {
+  min-height: 2.15cqh;
+  padding: 0.25cqh 0.38cqw 0.25cqh 0.25cqw;
+  gap: 0.28cqw;
+  font-size: 0.42cqw;
+}
+
+.apacheBackbone[data-stage="true"] .apacheProjectMarks img {
+  width: 0.8cqw;
+  height: 0.8cqw;
+}
+
+.apacheBackbone[data-stage="true"] .apacheProjectFacts {
+  margin-top: 0.65cqh;
+}
+
+.apacheBackbone[data-stage="true"] .apacheProjectFacts > div {
+  padding: 0.4cqh 0;
+  grid-template-columns: 3.3cqw minmax(0, 1fr);
+  gap: 0.45cqw;
+}
+
+.apacheBackbone[data-stage="true"] .apacheProjectFacts dt {
+  font-size: 0.4cqw;
+}
+
+.apacheBackbone[data-stage="true"] .apacheProjectFacts dd {
+  font-size: 0.53cqw;
+  line-height: 1.25;
 }
 
 .barChart {

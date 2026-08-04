@@ -55,7 +55,7 @@ InclusionAI 可以作为这条主线中的现实案例：一个覆盖模型、�
 - Protocols & interoperability：3 → 5。
 - Serving · Inference：6 → 8。
 
-### 2. 截至 2026-07-28，我们看到哪些变化（4 分钟）
+### 2. 截至 2026-08-01，我们看到哪些变化（4 分钟）
 
 方法论已经在上一段讲完，这里不再重复漏斗。保留三个有证据的发现，不做排行榜瀑布：
 
@@ -65,9 +65,9 @@ InclusionAI 可以作为这条主线中的现实案例：一个覆盖模型、�
 
 这里应使用严格匹配的时间窗口：
 
-- GitHub 事件：2025-01-01 至 2025-07-28，对比 2026-01-01 至 2026-07-28。
-- GitHub 仓库元数据：2026-07-28 快照。
-- OpenRank：只使用已完成且质量检查通过的月度数据；若最新可靠月份为 2026-06，则图上明确写 `through 2026-06`，不写成 `through 2026-07-28`。
+- GitHub 事件：按可比完整窗口取数，最新窗口截至 2026-08-01。
+- GitHub 仓库元数据：采用当前 REST API 返回值，按演讲约定归入 2026-08-01 快照。
+- OpenRank：使用 2026-07 完整月；7 月全库分区仍在回填，只作为方向信号。
 
 ### 3. Apache 在这张图里处于什么位置（7 分钟）
 
@@ -101,7 +101,7 @@ Apache 项目分析建议使用三类指标：
 - Agent 如何运行和协作：AWorld、AEnvironment、Avernet、sandbox/runtime 类项目。
 - 开放如何形成真实参与：仓库活跃度、外部贡献者、许可证分布、release 和社区机制。
 
-2026-07-28 20:13 CST 的 GitHub 初步快照：
+2026-08-01 口径的 GitHub 快照：
 
 - inclusionAI 组织下有 58 个公开仓库，合计 10,753 stars。
 - 22 个仓库在 2026-07-01 之后有 push 活动。
@@ -148,12 +148,12 @@ Apache 项目分析建议使用三类指标：
 
 | 图或表 | 数据源 | 截止口径 | 风险控制 |
 |---|---|---|---|
-| 三层生态项目快照 | 仓库 CSV + GitHub API | 2026-07-28 快照 | 检查 repo rename、archive、duplicate、missing license |
+| 三层生态项目快照 | 仓库 CSV + GitHub API | 2026-08-01 快照 | 检查 repo rename、archive、duplicate、missing license |
 | 2025/2026 活动对比 | OpenDigger `opensource.events` | 两个匹配的 1/1–7/28 窗口 | 时区、事件回填、平台覆盖一致 |
 | OpenRank 趋势 | `global_openrank` / `community_openrank` | 最新可靠完整月份 | 不把不完整 2026 月份解释成下降 |
-| Apache 四项目对比 | GitHub/OpenDigger + ASF 项目页与 board/incubator report | 2026-07-28 快照与季度趋势 | star 与社区健康分开；孵化/毕业状态以 ASF 为准 |
-| InclusionAI 开放栈 | GitHub/Hugging Face/ModelScope + 项目文档 | 2026-07-28 快照 | 排除镜像、归档和非核心仓库；许可证逐项复核 |
-| 开放模型许可证分布 | Hugging Face API/数据集 + 官方许可证文本 | 2026-07-28 快照 | `license` tag 不等于法律审查；多许可证单独处理 |
+| Apache 四项目对比 | GitHub/OpenDigger + ASF 项目页与 board/incubator report | 2026-08-01 快照与季度趋势 | star 与社区健康分开；孵化/毕业状态以 ASF 为准 |
+| InclusionAI 开放栈 | GitHub/Hugging Face/ModelScope + 项目文档 | 2026-08-01 快照 | 三个平台不跨平台相加 |
+| 开放模型许可证分布 | Hugging Face API/数据集 + 官方许可证文本 | 2026-08-01 快照 | `license` tag 不等于法律审查；多许可证单独处理 |
 | 许可证/开放度二维图 | Apache/OpenMDW/ModelGo/MOF/OSI 官方材料 | 版本号和访问日期同时标注 | 区分许可证、定义、分类框架；不提供法律意见 |
 
 ## 已确认的可复用资产
@@ -162,7 +162,7 @@ Apache 项目分析建议使用三类指标：
 - 2026 年 5 月中英文趋势报告：`insights/260527-agentic_landscape/260527_agentic_ai_cn.md`
 - Q1 趋势材料：`insights/260401_agentic_landscape/`
 - FINOS 分享里的三层架构和 InclusionAI 视觉资产：`presentations/260721-FINOS-sharing/html-helper/`
-- 当前项目表：`data/agentic-ai-projects.csv`，已更新为 251 个项目。GitHub 仓库信息和 star 截至 2026-07-28；最近可用 OpenRank 为 `openrank_2606`，12 个月趋势字段为 `openrank_trend_2508_2607`，参与者字段为 `participants_2607`。OpenRank 的 2026-07 月尚未产出，因此趋势最后一个点保留为 `null`；5–6 月仍可能继续回填，分享中应明确标注。
+- 当前项目表：`data/agentic-ai-projects.csv`，共 261 个项目。主图选入 132 个，其中 Agent Infra 74 个、Model Infra 58 个；本轮补入 CSV 观察池的四个项目不直接加到主图。最新 OpenRank 字段为 `openrank_2607`，12 个月趋势字段为 `openrank_trend_2508_2607`，参与者字段为 `participants_2607`。
 
 ## 当前已确认、仍需最终冻结的事实
 
@@ -170,7 +170,7 @@ Apache 项目分析建议使用三类指标：
 - 大会另设 Agentic coding、AI Infra、Data + AI、Community 等 track。Agentic coding 的官方介绍已经把可审查性、代码质量和 ASF 社区原则列为核心问题，和本 keynote 的主线高度一致。
 - Apache Fory 已于 2025-07-17 毕业为 TLP；Apache Celeborn 已于 2024-03-21 毕业。
 - Apache GeaFlow 和 Apache Seata 当前官方页面仍标注为 Incubating。
-- 2026-07-28 20:13 CST 的 GitHub 快照：Fory 4,424 stars，GeaFlow 788，Seata 25,976，Celeborn 1,059；四个仓库均由 GitHub API 识别为 Apache-2.0。star 只用于描述关注度，不用于判断社区健康。
+- 四个项目的 GitHub stars、forks 和许可证统一按 2026-08-01 口径展示；star 只用于描述关注度，不用于判断社区健康。
 
 ## 仍需最终确认
 

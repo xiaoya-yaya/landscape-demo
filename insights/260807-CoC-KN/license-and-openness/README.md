@@ -1,6 +1,7 @@
 # Landscape 许可证与模型开放度研究
 
-数据快照：2026-07-28  
+数据截至：2026-08-01
+
 统计对象：Agent Infra 74 个项目、Model Infra 58 个项目，共 132 个唯一 GitHub 仓库。  
 许可证字段：GitHub 仓库元数据中的 SPDX 标识。它适合做仓库层分布统计，不替代逐项目法律审查，也不能代表另行分发的模型权重、数据或文档所用条款。
 
@@ -25,11 +26,11 @@ Apache-2.0 与 MIT 合计 98 个，占全部项目的 74.2%；在 107 个有可�
 python3 insights/260807-CoC-KN/license-and-openness/analysis/build_license_snapshot.py
 ```
 
-输出文件：[license_distribution_2026-07-28.json](data/license_distribution_2026-07-28.json)
+输出文件：[license_distribution_2026-08-01.json](data/license_distribution_2026-08-01.json)
 
 ## Hugging Face 文本生成模型仓库 Top 100
 
-快照日期：2026-07-31
+快照日期：2026-08-01
 
 统计对象：Hugging Face Hub 中标注为 `text-generation`、按 Hub `downloads` 字段降序排列的前 100 个模型仓库。许可证来自模型卡 metadata 的 `license` tag。
 
@@ -55,7 +56,7 @@ python3 insights/260807-CoC-KN/license-and-openness/analysis/build_license_snaps
 python3 insights/260807-CoC-KN/license-and-openness/analysis/build_hf_top100_license_snapshot.py
 ```
 
-输出文件：[hf_top100_text_generation_licenses_2026-07-31.json](data/hf_top100_text_generation_licenses_2026-07-31.json)
+输出文件：[hf_top100_text_generation_licenses_2026-08-01.json](data/hf_top100_text_generation_licenses_2026-08-01.json)
 
 ## 从软件许可证到模型条款，发生了什么变化
 

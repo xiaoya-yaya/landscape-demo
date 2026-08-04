@@ -1,0 +1,591 @@
+{
+  "generated_at": "2026-08-03T16:12:55.719157+00:00",
+  "snapshot_date": "2026-08-01",
+  "source": "https://huggingface.co/api/models",
+  "query": {
+    "pipeline_tag": "text-generation",
+    "sort": "downloads",
+    "direction": "-1",
+    "limit": "100",
+    "full": "true"
+  },
+  "scope": "Top 100 Hugging Face repositories tagged text-generation, ranked by the Hub downloads field at collection time.",
+  "repositories": 100,
+  "distribution": [
+    {
+      "license": "apache-2.0",
+      "repositories": 57,
+      "share": 57.0
+    },
+    {
+      "license": "mit",
+      "repositories": 19,
+      "share": 19.0
+    },
+    {
+      "license": "other",
+      "repositories": 8,
+      "share": 8.0
+    },
+    {
+      "license": "UNSPECIFIED",
+      "repositories": 4,
+      "share": 4.0
+    },
+    {
+      "license": "llama3.2",
+      "repositories": 4,
+      "share": 4.0
+    },
+    {
+      "license": "gemma",
+      "repositories": 2,
+      "share": 2.0
+    },
+    {
+      "license": "llama3",
+      "repositories": 2,
+      "share": 2.0
+    },
+    {
+      "license": "llama3.1",
+      "repositories": 2,
+      "share": 2.0
+    },
+    {
+      "license": "apple-amlr",
+      "repositories": 1,
+      "share": 1.0
+    },
+    {
+      "license": "bigscience-bloom-rail-1.0",
+      "repositories": 1,
+      "share": 1.0
+    }
+  ],
+  "groups": [
+    {
+      "group": "Apache-2.0 or MIT",
+      "repositories": 76,
+      "share": 76.0
+    },
+    {
+      "group": "Model-specific or other terms",
+      "repositories": 20,
+      "share": 20.0
+    },
+    {
+      "group": "No license tag",
+      "repositories": 4,
+      "share": 4.0
+    }
+  ],
+  "records": [
+    {
+      "id": "Qwen/Qwen3-0.6B",
+      "downloads": 29023065,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "facebook/opt-125m",
+      "downloads": 17912365,
+      "license": "other"
+    },
+    {
+      "id": "Qwen/Qwen3-8B",
+      "downloads": 15911466,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "trl-internal-testing/tiny-Qwen2ForCausalLM-2.5",
+      "downloads": 15400419,
+      "license": "UNSPECIFIED"
+    },
+    {
+      "id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "downloads": 14024051,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "openai-community/gpt2",
+      "downloads": 13645997,
+      "license": "mit"
+    },
+    {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "downloads": 12160501,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "nvidia/Qwen3.6-35B-A3B-NVFP4",
+      "downloads": 11256994,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "meta-llama/Llama-3.2-1B-Instruct",
+      "downloads": 10100649,
+      "license": "llama3.2"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-R1",
+      "downloads": 9604023,
+      "license": "mit"
+    },
+    {
+      "id": "Qwen/Qwen3-32B",
+      "downloads": 8526764,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "downloads": 8501701,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "meta-llama/Llama-3.1-8B-Instruct",
+      "downloads": 7886695,
+      "license": "llama3.1"
+    },
+    {
+      "id": "Qwen/Qwen3-1.7B",
+      "downloads": 7692528,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "downloads": 6428806,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen2.5-3B-Instruct",
+      "downloads": 5928401,
+      "license": "other"
+    },
+    {
+      "id": "hmellor/tiny-random-LlamaForCausalLM",
+      "downloads": 5254139,
+      "license": "UNSPECIFIED"
+    },
+    {
+      "id": "farbodtavakkoli/OTel-LLM-E4B-IT",
+      "downloads": 4855878,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "deepreinforce-ai/Ornith-1.0-9B-GGUF",
+      "downloads": 4796182,
+      "license": "mit"
+    },
+    {
+      "id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+      "downloads": 4631898,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "dphn/dolphin-2.9.1-yi-1.5-34b",
+      "downloads": 4616724,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen3-4B",
+      "downloads": 4523865,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "google/gemma-3-1b-it",
+      "downloads": 4507610,
+      "license": "gemma"
+    },
+    {
+      "id": "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF",
+      "downloads": 4264415,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "openai/gpt-oss-120b",
+      "downloads": 4197649,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "ibm-granite/granite-4.1-8b",
+      "downloads": 4085575,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "deepreinforce-ai/Ornith-1.0-35B-GGUF",
+      "downloads": 3650344,
+      "license": "mit"
+    },
+    {
+      "id": "Qwen/Qwen2.5-14B-Instruct",
+      "downloads": 3356668,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen3-4B-Instruct-2507",
+      "downloads": 3213183,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen2-1.5B-Instruct",
+      "downloads": 3143565,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen3-30B-A3B",
+      "downloads": 3084500,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+      "downloads": 3024970,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "farbodtavakkoli/OTel-2.0-LLM-31B-IT",
+      "downloads": 2990232,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4",
+      "downloads": 2857779,
+      "license": "other"
+    },
+    {
+      "id": "Qwen/Qwen3-14B",
+      "downloads": 2837654,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "nvidia/Gemma-4-31B-IT-NVFP4",
+      "downloads": 2800233,
+      "license": "other"
+    },
+    {
+      "id": "deepreinforce-ai/Ornith-1.0-35B",
+      "downloads": 2797174,
+      "license": "mit"
+    },
+    {
+      "id": "zai-org/GLM-5.2-FP8",
+      "downloads": 2780649,
+      "license": "mit"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-V4-Flash",
+      "downloads": 2746291,
+      "license": "mit"
+    },
+    {
+      "id": "distilbert/distilgpt2",
+      "downloads": 2595864,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "prism-ml/Bonsai-27B-gguf",
+      "downloads": 2571603,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen2.5-0.5B",
+      "downloads": 2568890,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+      "downloads": 2510226,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "EleutherAI/pythia-160m",
+      "downloads": 2472330,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen2.5-14B-Instruct-AWQ",
+      "downloads": 2471069,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen3-14B-AWQ",
+      "downloads": 2390335,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "deepreinforce-ai/Ornith-1.0-9B",
+      "downloads": 2325290,
+      "license": "mit"
+    },
+    {
+      "id": "Qwen/Qwen3-Coder-Next-FP8",
+      "downloads": 2212202,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "zai-org/GLM-5.2",
+      "downloads": 2180509,
+      "license": "mit"
+    },
+    {
+      "id": "google/gemma-3-270m",
+      "downloads": 2148297,
+      "license": "gemma"
+    },
+    {
+      "id": "zai-org/GLM-4.7-Flash",
+      "downloads": 2074814,
+      "license": "mit"
+    },
+    {
+      "id": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "downloads": 2009307,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "downloads": 1956176,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "meta-llama/Meta-Llama-3-8B",
+      "downloads": 1953997,
+      "license": "llama3"
+    },
+    {
+      "id": "nvidia/Qwen3.6-27B-NVFP4",
+      "downloads": 1917741,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "downloads": 1902844,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "HuggingFaceTB/SmolLM2-135M",
+      "downloads": 1825358,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "nvidia/GLM-5.2-NVFP4",
+      "downloads": 1798110,
+      "license": "mit"
+    },
+    {
+      "id": "Qwen/Qwen-72B",
+      "downloads": 1796745,
+      "license": "other"
+    },
+    {
+      "id": "ibm-research/PowerMoE-3b",
+      "downloads": 1790931,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "downloads": 1789187,
+      "license": "llama3"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+      "downloads": 1744030,
+      "license": "mit"
+    },
+    {
+      "id": "Qwen/Qwen2.5-Coder-32B-Instruct-AWQ",
+      "downloads": 1729633,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen2.5-32B-Instruct",
+      "downloads": 1727663,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "nvidia/diffusiongemma-26B-A4B-it-NVFP4",
+      "downloads": 1725847,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "meta-llama/Llama-3.2-1B",
+      "downloads": 1724289,
+      "license": "llama3.2"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-V4-Pro",
+      "downloads": 1596582,
+      "license": "mit"
+    },
+    {
+      "id": "Qwen/Qwen3-0.6B-FP8",
+      "downloads": 1572541,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "apple/OpenELM-1_1B-Instruct",
+      "downloads": 1518207,
+      "license": "apple-amlr"
+    },
+    {
+      "id": "openai-community/gpt2-large",
+      "downloads": 1515920,
+      "license": "mit"
+    },
+    {
+      "id": "meta-llama/Llama-3.1-8B",
+      "downloads": 1500627,
+      "license": "llama3.1"
+    },
+    {
+      "id": "nm-testing/SmolLM-1.7B-Instruct-quantized.w4a16",
+      "downloads": 1485306,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "RedHatAI/Llama-3.2-1B-Instruct-FP8-dynamic",
+      "downloads": 1480003,
+      "license": "llama3.2"
+    },
+    {
+      "id": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+      "downloads": 1462772,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "meta-llama/Llama-3.2-3B-Instruct",
+      "downloads": 1461226,
+      "license": "llama3.2"
+    },
+    {
+      "id": "farbodtavakkoli/OTel-LLM-8B-A1B-IT",
+      "downloads": 1441182,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "nvidia/Gemma-4-26B-A4B-NVFP4",
+      "downloads": 1424962,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+      "downloads": 1384621,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen2.5-72B-Instruct-AWQ",
+      "downloads": 1312114,
+      "license": "other"
+    },
+    {
+      "id": "mistralai/Mistral-7B-Instruct-v0.2",
+      "downloads": 1308270,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-V2-Lite-Chat",
+      "downloads": 1295725,
+      "license": "other"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-V3.2",
+      "downloads": 1238427,
+      "license": "mit"
+    },
+    {
+      "id": "h2oai/h2ovl-mississippi-800m",
+      "downloads": 1212931,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen2.5-Coder-32B-Instruct",
+      "downloads": 1205822,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "h2oai/h2ovl-mississippi-2b",
+      "downloads": 1202224,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "tiiuae/falcon-7b",
+      "downloads": 1192066,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "sshleifer/tiny-gpt2",
+      "downloads": 1182824,
+      "license": "UNSPECIFIED"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-V3",
+      "downloads": 1177282,
+      "license": "UNSPECIFIED"
+    },
+    {
+      "id": "zai-org/GLM-5-FP8",
+      "downloads": 1160778,
+      "license": "mit"
+    },
+    {
+      "id": "nvidia/DeepSeek-V4-Flash-NVFP4",
+      "downloads": 1160298,
+      "license": "mit"
+    },
+    {
+      "id": "Qwen/Qwen3-4B-Instruct-2507-FP8",
+      "downloads": 1156833,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "microsoft/Phi-3.5-mini-instruct",
+      "downloads": 1132523,
+      "license": "mit"
+    },
+    {
+      "id": "QuantTrio/Qwen3-VL-30B-A3B-Instruct-AWQ",
+      "downloads": 1129699,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen3-8B-AWQ",
+      "downloads": 1089942,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "bigscience/bloomz-560m",
+      "downloads": 1073579,
+      "license": "bigscience-bloom-rail-1.0"
+    },
+    {
+      "id": "TheBloke/TinyLlama-1.1B-Chat-v0.3-GPTQ",
+      "downloads": 1063811,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen2.5-Coder-7B",
+      "downloads": 1047594,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "Qwen/Qwen2-0.5B",
+      "downloads": 990101,
+      "license": "apache-2.0"
+    },
+    {
+      "id": "deepreinforce-ai/Ornith-1.0-35B-FP8",
+      "downloads": 958060,
+      "license": "mit"
+    },
+    {
+      "id": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+      "downloads": 920209,
+      "license": "other"
+    }
+  ],
+  "data_quality": [
+    "The unit is a model repository, not a unique base-model family.",
+    "Fine-tunes, quantizations, test artifacts, and duplicate families may appear.",
+    "License values come from model-card metadata tags and are not a legal review.",
+    "A license tag does not prove that training data, code, or other modification materials were released."
+  ]
+}

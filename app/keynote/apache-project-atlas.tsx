@@ -6,6 +6,7 @@ import Image from "next/image";
 import {
   type ApacheDomainKey,
   apacheDomains,
+  apacheLandscapeProjects,
 } from "./apache-ecosystem";
 import styles from "./page.module.css";
 
@@ -18,6 +19,8 @@ export default function ApacheProjectAtlas({
   onDomainChange?: (domain: ApacheDomainKey) => void;
   stage?: boolean;
 }) {
+  const selectedProjects = apacheLandscapeProjects;
+
   return (
     <div
       className={`${styles.apacheAtlas} ${styles.deepDive}`}
@@ -26,12 +29,12 @@ export default function ApacheProjectAtlas({
       <div className={styles.apacheAtlasHeading}>
         <div>
           <strong>APACHE PROJECT ATLAS</strong>
-          <span>项目领域 × Agentic landscape 入选</span>
+          <span>Apache 项目领域与 Agentic Landscape 入选</span>
         </div>
         <dl>
           <div><dt>领域</dt><dd>7 个</dd></div>
-          <div><dt>分类</dt><dd>DOAP 多标签</dd></div>
-          <div><dt>数量</dt><dd>领域间有重叠</dd></div>
+          <div><dt>来源</dt><dd>Apache Projects Directory</dd></div>
+          <div><dt>数量</dt><dd>同一项目可属于多个领域</dd></div>
           <div><dt>头部项目</dt><dd>主要 GitHub repo stars</dd></div>
         </dl>
       </div>
@@ -61,7 +64,7 @@ export default function ApacheProjectAtlas({
         <article className={styles.apacheDomainDetail} key={activeDomain}>
           <div className={styles.apacheDomainLead}>
             <div>
-              <span>PROJECT RECORDS · MULTI-LABEL</span>
+              <span>PROJECT RECORDS</span>
               <strong>{apacheDomains[activeDomain].count}</strong>
             </div>
             <div className={styles.apacheDomainName}>
@@ -90,35 +93,30 @@ export default function ApacheProjectAtlas({
           </div>
 
           <div className={styles.apacheLandscapeMatch}>
-            <p>SELECTED INTO AGENTIC LANDSCAPE</p>
-            {apacheDomains[activeDomain].landscape.length ? (
-              <div>
-                {apacheDomains[activeDomain].landscape.map((project) => (
-                  <span key={project}>
-                    <Image
-                      src="/project-logos/apache.png"
-                      alt=""
-                      width={18}
-                      height={18}
-                    />
-                    Apache {project}
-                  </span>
-                ))}
-              </div>
-            ) : (
-              <small>当前主图没有从这一官方分类直接入选的 ASF 项目。</small>
-            )}
+            <p>6 APACHE PROJECTS IN AGENTIC LANDSCAPE</p>
+            <div>
+              {selectedProjects.map((project) => (
+                <span key={project.name}>
+                  <Image
+                    src={project.logo}
+                    alt=""
+                    width={18}
+                    height={18}
+                  />
+                  Apache {project.name}
+                </span>
+              ))}
+            </div>
           </div>
         </article>
       </div>
 
       <div className={styles.apacheMetadataGap}>
-        <strong>46</strong>
+        <strong>45</strong>
         <div>
-          <span>virtual project records without TLP DOAP categories</span>
+          <span>目录中缺少可用项目分类的记录</span>
           <p>
-            Paimon、Gravitino、Fory、Celeborn 等项目存在于目录，但没有可用于这次分类的项目 DOAP
-            标签。这 46 条记录不计入领域统计，下方按照技术角色呈现相关项目。
+            Paimon、Gravitino、Fory、Celeborn 等项目仍计入项目总览，但不参与上方领域数量统计。
           </p>
         </div>
         <div className={styles.apacheSourceLinks}>

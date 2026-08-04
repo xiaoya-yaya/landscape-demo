@@ -295,7 +295,7 @@ export function ProjectInsightDialog({
           <div className={styles.insightContent}>
             <div className={styles.insightMetricGrid}>
               <MetricCard
-                label="OpenRank · Jun 2026"
+                label="OpenRank · Jul 2026"
                 value={project.openrank}
               />
               <MetricCard label="Stars" value={project.stars} />

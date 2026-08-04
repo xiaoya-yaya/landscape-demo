@@ -254,7 +254,7 @@ export function EcosystemSignals({
       value: NUMBER_FORMAT.format(totalParticipants),
     },
     {
-      label: "OpenRank · Jun 2026",
+      label: "OpenRank · Jul 2026",
       value: NUMBER_FORMAT.format(totalOpenRank),
     },
     {

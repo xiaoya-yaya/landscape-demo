@@ -1,12 +1,12 @@
 # Awesome Agentic 全景图说明
 
-GitHub 快照：2026-07-29。
+数据截至：2026-08-01。
 
 指标窗口：
 
-- 可见 WatchEvent：2026-05-01 至 07-28；
+- 可见 WatchEvent：2026-05-01 至 08-01；
 - issue / PR / review 参与者：同上；
-- Repo OpenRank：2026-04、05、06。
+- Repo OpenRank：2026-05、06、07。
 
 ## 这张图为什么存在
 
@@ -161,9 +161,9 @@ README 明确提供以下材料时，仓库更接近 direct：
 
 26 个项目中有 19 个 direct consumability。README 仍然承担说明，但目录结构已经开始指向具体的 skill、hook、workflow 和配置文件。
 
-### Install 阶段 7 / 7 都是 direct
+### 7 个安装类项目都有机器可执行入口
 
-沿使用路径看，Install 的 7 个项目全部达到 direct，Operate 也有 6 / 7。越接近安装与日常运行，知识越多地以配置、工具入口和固定流程出现。
+这里的 Install 指安装或注册工具，direct 指仓库给出了 Agent 可直接调用的命令、manifest 或配置。Install 的 7 个项目全部满足，Operate 也有 6 / 7。这个字段描述材料形态，不评价项目质量或成熟度。
 
 ### 22 / 26 创建于 2025 年以后
 
@@ -173,7 +173,7 @@ README 明确提供以下材料时，仓库更接近 direct：
 
 - 460 个候选是 candidate-first 扫描，不是 Awesome 生态的完整 census。
 - WatchEvent 是方向性信号，不是精确 star 增长。
-- 2026 年 4—6 月 OpenRank 对覆盖与回填敏感。
+- 2026 年 5—7 月 OpenRank 对覆盖与回填敏感，尤其 7 月仍可能继续回填。
 - README consumability 是可复核的编辑判断，不是永久标签。
 - core、watch、benchmark 表达本次叙事角色，不是项目质量评级。
 
@@ -189,7 +189,7 @@ README 明确提供以下材料时，仓库更接近 direct：
 
 第二次翻页放大 Install：
 
-> Install 阶段的 7 个项目全部是 direct；Operate 也有 6 / 7。到了安装和日常运行环节，清单、配置和工具入口已经普遍变成机器可执行的交付物。
+> Install 是安装或注册工具，direct 表示 Agent 可以直接调用仓库里的命令、manifest 或配置。7 个安装类项目都满足；Operate 也有 6 / 7。这个口径只看入口能否执行。
 
 第三次翻页回到全图：
 

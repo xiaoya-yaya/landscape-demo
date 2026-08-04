@@ -155,7 +155,7 @@ def read_selected_rows() -> list[dict[str, Any]]:
             key: str(value or "").strip()
             for key, value in row.items()
         }
-        normalized["openrank_value"] = as_number(row.get("openrank_2606"))
+        normalized["openrank_value"] = as_number(row.get("openrank_2607"))
         normalized["stars_value"] = as_number(row.get("stars"))
         selected.append(normalized)
     return selected
@@ -632,7 +632,7 @@ def page_shell(
     </header>
     <section class="summary">
       <div class="summary-item primary">
-        <strong>JULY 2026</strong>
+        <strong>AUGUST 1, 2026</strong>
         <span>editorial selection snapshot</span>
       </div>
       <div class="summary-item">
@@ -645,13 +645,13 @@ def page_shell(
       </div>
       <div class="summary-item">
         <strong>{added} NEW</strong>
-        <span>{with_openrank}/{len(rows)} projects have June OpenRank</span>
+        <span>{with_openrank}/{len(rows)} projects have July OpenRank</span>
       </div>
     </section>
     <section class="content">{content}</section>
     <footer>
       <div>
-        Source: data/agentic-ai-projects.csv. OR = OpenRank for 2026-06; a missing value is shown as "-".
+        Source: data/agentic-ai-projects.csv. OR = OpenRank for 2026-07; a missing value is shown as "-".
       </div>
       <div class="legend">
         <span><i class="new"></i>New in this refresh</span>
@@ -716,7 +716,7 @@ def write_rows(path: Path, rows: list[dict[str, Any]]) -> None:
         "landscape_action",
         "landscape_layer",
         "landscape_section",
-        "openrank_2606",
+        "openrank_2607",
         "stars",
         "license",
         "description",
@@ -724,7 +724,7 @@ def write_rows(path: Path, rows: list[dict[str, Any]]) -> None:
         "selection_caveat",
     ]
     with path.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(
             {field: row.get(field, "") for field in fields}
@@ -795,7 +795,7 @@ def main() -> None:
         ),
         "avatar_source": "https://github.com/{owner}.png?size=128",
         "avatar_status_counts": dict(Counter(avatar_status.values())),
-        "openrank_window": "2026-06",
+        "openrank_window": "2026-07",
     }
     SUMMARY_PATH.write_text(
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n",

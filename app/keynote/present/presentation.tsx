@@ -17,7 +17,6 @@ import LandscapeLogo from "@/app/components/landscape-logo";
 import type { LandscapeProject } from "@/lib/landscape-types";
 
 import {
-  type ApacheDomainKey,
   apacheBackbone,
 } from "../apache-ecosystem";
 import ApacheProjectAtlas from "../apache-project-atlas";
@@ -75,14 +74,14 @@ function resolveSwipeDirection(
 const scenes: Scene[] = [
   { id: "title", chapter: "open", label: "OPEN", duration: "0:00—0:45", maxBuild: 0 },
   { id: "question", chapter: "open", label: "QUESTION", duration: "0:45—1:40", maxBuild: 1 },
-  { id: "agent", chapter: "landscape", label: "AGENT INFRA", duration: "1:40—3:25", maxBuild: 4 },
+  { id: "agent", chapter: "landscape", label: "AGENT INFRA", duration: "1:40—3:25", maxBuild: 3 },
   { id: "model", chapter: "landscape", label: "MODEL INFRA", duration: "3:25—5:05", maxBuild: 3 },
   { id: "large", chapter: "landscape", label: "LARGE MODELS", duration: "5:05—6:35", maxBuild: 3 },
   { id: "awesome", chapter: "landscape", label: "AWESOME", duration: "6:35—7:55", maxBuild: 3 },
   { id: "method", chapter: "landscape", label: "METHOD", duration: "7:55—9:45", maxBuild: 3 },
-  { id: "production", chapter: "apache", label: "TURN", duration: "9:45—10:20", maxBuild: 1 },
+  { id: "production", chapter: "apache", label: "TURN", duration: "9:45—10:20", maxBuild: 0 },
   { id: "apache-scale", chapter: "apache", label: "APACHE", duration: "10:20—11:45", maxBuild: 1 },
-  { id: "apache-position", chapter: "apache", label: "POSITION", duration: "11:45—14:00", maxBuild: 3 },
+  { id: "apache-position", chapter: "apache", label: "POSITION", duration: "11:45—14:00", maxBuild: 0 },
   { id: "ant-apache", chapter: "apache", label: "ANT × APACHE", duration: "14:00—15:50", maxBuild: 3 },
   { id: "inclusion-scale", chapter: "inclusion", label: "INCLUSIONAI", duration: "15:50—17:20", maxBuild: 1 },
   { id: "inclusion-stack", chapter: "inclusion", label: "PARTICIPATION", duration: "17:20—20:20", maxBuild: 4 },
@@ -100,7 +99,7 @@ const chapterLabels: Array<{ id: Chapter; label: string }> = [
   { id: "landscape", label: "生态" },
   { id: "apache", label: "Apache" },
   { id: "inclusion", label: "InclusionAI" },
-  { id: "license", label: "开放模型" },
+  { id: "license", label: "开源软件与开放模型的约束" },
   { id: "community", label: "Community" },
 ];
 
@@ -115,36 +114,51 @@ type LandscapeStageInsight = {
 
 const externalLandscapes: Record<
   "large" | "awesome",
-  { src: string; insights: LandscapeStageInsight[] }
+  {
+    src: string;
+    posters: Record<string, string>;
+    insights: LandscapeStageInsight[];
+  }
 > = {
   large: {
     src: "/keynote/large-models/index.html",
+    posters: {
+      all: "/keynote/large-models/overview.jpg",
+      top10: "/keynote/large-models/top10.jpg",
+      open: "/keynote/large-models/open.jpg",
+      aai: "/keynote/large-models/aai.jpg",
+    },
     insights: [
       {
         angle: "真实使用",
-        metric: "5 / 5",
-        label: "Top 10 两类模型各占一半",
-        note: "2026 年 6 月，开放权重与无公开权重模型都进入了主流使用区。",
+        metric: "4 / 6",
+        label: "Top 10 仍由两种开放路径共同组成",
+        note: "2026 年 7 月，4 个开放权重模型和 6 个未公开权重模型进入使用 Top 10。",
         interaction: "top10",
       },
       {
         angle: "能力分布",
-        metric: "12 / 13",
+        metric: "9 / 10",
         label: "Reasoning 区几乎都是开放权重模型",
-        note: "Multimodal / VLM 则相反：30 个模型中有 22 个没有公开权重。开放程度和模型类型明显相关。",
+        note: "Frontier Generalist 则是 0 / 13。开放程度与模型所处的能力区间高度相关。",
         interaction: "open",
       },
       {
         angle: "使用与能力",
-        metric: "#1 / #25",
+        metric: "#1 / #12",
         label: "公开使用与能力榜没有排成同一条队伍",
-        note: "8 个可比 AAI 样本中，使用第 1 的模型 AAI 为 40.3；AAI 最高的模型使用排名第 25。",
+        note: "8 个可比 AAI 样本中，使用第 1 的模型 AAI 为 51.1；AAI 最高的模型使用排名第 12。",
         interaction: "aai",
       },
     ],
   },
   awesome: {
     src: "/keynote/awesome/awesome_agentic_landscape_2026.html",
+    posters: {
+      all: "/keynote/awesome/overview.jpg",
+      direct: "/keynote/awesome/direct.jpg",
+      install: "/keynote/awesome/install.jpg",
+    },
     insights: [
       {
         angle: "可消费性",
@@ -154,10 +168,10 @@ const externalLandscapes: Record<
         interaction: "direct",
       },
       {
-        angle: "使用路径",
+        angle: "安装类项目",
         metric: "7 / 7",
-        label: "Install 是唯一全部达到 direct 的阶段",
-        note: "到了安装环节，清单、配置和工具入口已经普遍变成机器可执行的交付物。",
+        label: "7 个项目都给出了机器可执行入口",
+        note: "Install 指安装或注册工具；direct 指 Agent 可直接调用命令、manifest 或配置。",
         interaction: "install",
       },
       {
@@ -184,8 +198,8 @@ const landscapeInsights: Record<"agent" | "model", LandscapeStageInsight[]> = {
     },
     {
       angle: "近期信号",
-      metric: "35.96 → 140.23",
-      label: "OpenViking · 2026-03—06 OpenRank",
+      metric: "112.46 → 177.61",
+      label: "OpenViking · 2026-03—07 OpenRank",
       note: "Memory、RAG 和 skills 开始收进 context database；上下文正在成为独立的数据层。",
       focus: "Memory, knowledge & context",
     },
@@ -196,20 +210,13 @@ const landscapeInsights: Record<"agent" | "model", LandscapeStageInsight[]> = {
       note: "MCP、A2A 之外，AG-UI 与 A2UI 把事件流和界面带进了公共接口层。",
       focus: "Protocols & interoperability",
     },
-    {
-      angle: "改进方式",
-      metric: "15.2K / 45",
-      label: "SkillOpt · stars / 7 月可见参与者",
-      note: "skill 文档开始经历 rollout、评估和验证门；Agent 改进正在走出模型权重空间。",
-      focus: "Observability & evaluation",
-    },
   ],
   model: [
     {
-      angle: "近期信号",
-      metric: "4.07 → 39.04",
-      label: "OmniRoute · 2026-02—06 OpenRank",
-      note: "Gateway 正从模型 API 代理延伸到配额 fallback、MCP 与 A2A 流量。",
+      angle: "功能复核",
+      metric: "4.48 → 31.92",
+      label: "OmniRoute 的增长触发了 gateway 重新分型",
+      note: "LiteLLM 在补 MCP；AgentGateway 与 ContextForge 已同时处理 MCP、A2A 和模型流量。",
       focus: "Model API gateways",
     },
     {
@@ -227,13 +234,6 @@ const landscapeInsights: Record<"agent" | "model", LandscapeStageInsight[]> = {
     },
   ],
 };
-
-const apacheDomainSequence: ApacheDomainKey[] = [
-  "data",
-  "libraries",
-  "network",
-  "operations",
-];
 
 const releaseMaterials = [
   ["模型权重", 0],
@@ -253,9 +253,9 @@ const softwareLicenseDistribution = [
 
 const modelLicenseDistribution = [
   { label: "Apache-2.0", value: 57, share: 57, color: "#6d50ff" },
-  { label: "MIT", value: 18, share: 18, color: "#ff68b4" },
+  { label: "MIT", value: 19, share: 19, color: "#ff68b4" },
   { label: "Model-specific / other", value: 20, share: 20, color: "#73dce9" },
-  { label: "No license tag", value: 5, share: 5, color: "#b7b7b1" },
+  { label: "No license tag", value: 4, share: 4, color: "#b7b7b1" },
 ] as const;
 
 const licenseComparisonRows = [
@@ -482,12 +482,6 @@ export default function KeynotePresentation({
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerCancel}
     >
-      <div className={styles.preload} aria-hidden="true">
-        {Object.values(externalLandscapes).map((landscape) => (
-          <iframe key={landscape.src} src={landscape.src} title="" tabIndex={-1} />
-        ))}
-      </div>
-
       <section className={styles.deck} aria-live="polite">
         <header className={styles.stageHeader}>
           <div className={styles.stageHeaderLeft}>
@@ -507,8 +501,6 @@ export default function KeynotePresentation({
             id={scene.id}
             build={build}
             projects={projects}
-            onSwipeNext={next}
-            onSwipePrevious={previous}
           />
         </div>
 
@@ -533,140 +525,31 @@ export default function KeynotePresentation({
 function ExternalLandscapeFrame({
   id,
   build,
-  onSwipeNext,
-  onSwipePrevious,
 }: {
   id: ExternalLandscapeId;
   build: number;
-  onSwipeNext: () => void;
-  onSwipePrevious: () => void;
 }) {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [loadVersion, setLoadVersion] = useState(0);
-  const loaded = loadVersion > 0;
   const landscape = externalLandscapes[id];
   const activeInsight = landscape.insights[build - 1];
-
-  useEffect(() => {
-    if (!loaded) return;
-
-    const applyStageState = () => {
-      const documentInFrame = iframeRef.current?.contentDocument;
-      if (!documentInFrame) return;
-
-      if (id === "large") {
-        const reset = documentInFrame.querySelector<HTMLButtonElement>(
-          "#reset-filter",
-        );
-        reset?.click();
-        if (activeInsight?.interaction === "top10") {
-          documentInFrame
-            .querySelector<HTMLButtonElement>('[data-primary-filter="top10"]')
-            ?.click();
-        }
-        if (activeInsight?.interaction === "open") {
-          documentInFrame
-            .querySelector<HTMLButtonElement>('[data-primary-filter="open"]')
-            ?.click();
-        }
-        if (activeInsight?.interaction === "aai") {
-          documentInFrame
-            .querySelector<HTMLButtonElement>("#aai-filter")
-            ?.click();
-        }
-        return;
-      }
-
-      const resetFilters = documentInFrame.querySelector<HTMLButtonElement>(
-        "#reset-filters",
-      );
-      const resetView = documentInFrame.querySelector<HTMLButtonElement>(
-        ".reset-view",
-      );
-      const directAssets = documentInFrame.querySelector<HTMLButtonElement>(
-        "#direct-filter",
-      );
-      resetFilters?.click();
-      resetView?.click();
-      if (activeInsight?.interaction === "direct") directAssets?.click();
-      if (activeInsight?.interaction === "install") {
-        documentInFrame
-          .querySelector<HTMLButtonElement>(
-            '[data-stage="install"] .stage-heading',
-          )
-          ?.click();
-      }
-    };
-
-    const timers = [40, 180, 500].map((delay) =>
-      window.setTimeout(applyStageState, delay),
-    );
-    return () => timers.forEach((timer) => window.clearTimeout(timer));
-  }, [activeInsight?.interaction, build, id, loadVersion, loaded]);
-
-  useEffect(() => {
-    if (!loaded) return;
-
-    const documentInFrame = iframeRef.current?.contentDocument;
-    if (!documentInFrame) return;
-
-    let start: SwipeStart | null = null;
-    const handlePointerDown = (event: PointerEvent) => {
-      if (event.pointerType !== "touch") return;
-      start = {
-        pointerId: event.pointerId,
-        x: event.clientX,
-        y: event.clientY,
-        time: event.timeStamp,
-      };
-      if (event.target instanceof Element) {
-        try {
-          event.target.setPointerCapture(event.pointerId);
-        } catch {
-          // Pointer capture may be unavailable for a synthetic event.
-        }
-      }
-    };
-
-    const handlePointerUp = (event: PointerEvent) => {
-      if (!start || start.pointerId !== event.pointerId) return;
-      const direction = resolveSwipeDirection(
-        start,
-        event.clientX,
-        event.clientY,
-        event.timeStamp,
-        documentInFrame.defaultView?.innerWidth ?? window.innerWidth,
-      );
-      start = null;
-      if (direction) event.preventDefault();
-      if (direction === "next") onSwipeNext();
-      if (direction === "previous") onSwipePrevious();
-    };
-
-    const handlePointerCancel = () => {
-      start = null;
-    };
-
-    documentInFrame.addEventListener("pointerdown", handlePointerDown);
-    documentInFrame.addEventListener("pointerup", handlePointerUp);
-    documentInFrame.addEventListener("pointercancel", handlePointerCancel);
-    return () => {
-      documentInFrame.removeEventListener("pointerdown", handlePointerDown);
-      documentInFrame.removeEventListener("pointerup", handlePointerUp);
-      documentInFrame.removeEventListener("pointercancel", handlePointerCancel);
-    };
-  }, [loadVersion, loaded, onSwipeNext, onSwipePrevious]);
+  const posterKey = activeInsight?.interaction ?? "all";
 
   return (
-    <iframe
-      key={`${id}-${build}`}
-      ref={iframeRef}
-      className={styles.externalLandscapeFrame}
-      src={landscape.src}
-      title={`${id} landscape`}
-      tabIndex={-1}
-      onLoad={() => setLoadVersion((version) => version + 1)}
-    />
+    <div className={styles.externalLandscapeFrameShell}>
+      {Object.entries(landscape.posters).map(([key, poster]) => (
+        <Image
+          key={poster}
+          className={styles.externalLandscapePoster}
+          data-active={key === posterKey}
+          src={poster}
+          alt=""
+          fill
+          priority
+          unoptimized
+          sizes="100vw"
+          aria-hidden="true"
+        />
+      ))}
+    </div>
   );
 }
 
@@ -710,14 +593,10 @@ function SceneContent({
   id,
   build,
   projects,
-  onSwipeNext,
-  onSwipePrevious,
 }: {
   id: string;
   build: number;
   projects: LandscapeProject[];
-  onSwipeNext: () => void;
-  onSwipePrevious: () => void;
 }) {
   if (id === "title") {
     return (
@@ -793,12 +672,7 @@ function SceneContent({
     const activeInsight = landscape.insights[build - 1];
     return (
       <div className={styles.externalLandscapeScene}>
-        <ExternalLandscapeFrame
-          id={id}
-          build={build}
-          onSwipeNext={onSwipeNext}
-          onSwipePrevious={onSwipePrevious}
-        />
+        <ExternalLandscapeFrame id={id} build={build} />
         {activeInsight ? (
           <LandscapeInsightCard
             insight={activeInsight}
@@ -816,7 +690,7 @@ function SceneContent({
         id: "agent",
         view: "Agent Infra",
         count: "74 项",
-        window: "GitHub 07-28 · OpenRank 04—06",
+        window: "截至 08-01 · OpenRank 05—07",
         sources: [
           { label: "OpenDigger", mark: "OD" },
           { label: "GitHub", icon: "/project-logos/github.png" },
@@ -827,7 +701,7 @@ function SceneContent({
         id: "model",
         view: "Model Infra",
         count: "58 项",
-        window: "GitHub 07-28 · OpenRank 04—06",
+        window: "截至 08-01 · OpenRank 05—07",
         sources: [
           { label: "OpenDigger", mark: "OD" },
           { label: "GitHub", icon: "/project-logos/github.png" },
@@ -838,7 +712,7 @@ function SceneContent({
         id: "large",
         view: "Large Models",
         count: "50 个 endpoint",
-        window: "完整自然月 · 2026-06",
+        window: "完整自然月 · 2026-07",
         sources: [
           {
             label: "OpenRouter",
@@ -853,7 +727,7 @@ function SceneContent({
         id: "awesome",
         view: "Awesome",
         count: "26 项",
-        window: "GitHub 07-29 · OpenRank 04—06",
+        window: "截至 08-01 · OpenRank 05—07",
         sources: [
           { label: "GitHub", icon: "/project-logos/github.png" },
           { label: "OpenDigger", mark: "OD" },
@@ -965,15 +839,6 @@ function SceneContent({
           <br />
           老问题一起回来。
         </h2>
-        <div className={styles.productionPath} data-visible={build >= 1}>
-          <span>任务</span>
-          <i>→</i>
-          <span>共享状态</span>
-          <i>→</i>
-          <span>执行</span>
-          <i>→</i>
-          <strong>失败怎么办？</strong>
-        </div>
       </div>
     );
   }
@@ -1028,10 +893,9 @@ function SceneContent({
   }
 
   if (id === "apache-position") {
-    const domain = apacheDomainSequence[build];
     return (
       <div className={styles.apacheAtlasStage}>
-        <ApacheProjectAtlas activeDomain={domain} stage />
+        <ApacheProjectAtlas activeDomain="data" stage />
       </div>
     );
   }
@@ -1039,7 +903,7 @@ function SceneContent({
   if (id === "ant-apache") {
     return (
       <div className={`${styles.researchScene} ${styles.apacheBackboneScene}`}>
-        <div className={researchStyles.apacheBridgeLead}>
+        <div className={researchStyles.apacheBridgeLead} data-stage="true">
           <div className={researchStyles.apacheBridgeSource}>
             <Image src="/project-logos/apache.png" alt="Apache" width={44} height={44} />
             <span>LANDSCAPE</span>
@@ -1066,7 +930,7 @@ function SceneContent({
             <strong>4 个 Apache 项目</strong>
           </div>
         </div>
-        <div className={researchStyles.apacheBackbone}>
+        <div className={researchStyles.apacheBackbone} data-stage="true">
           {apacheBackbone.map((stage, index) => (
             <article
               key={stage.label}
@@ -1164,21 +1028,21 @@ function SceneContent({
         <div className={researchStyles.platformGrid} data-visible={build >= 1}>
           <a href="https://github.com/inclusionAI" tabIndex={-1}>
             <header><span>GitHub · 3 orgs</span></header>
-            <strong>92</strong>
+            <strong>93</strong>
             <p>公开仓库</p>
-            <div><span><b>41,045</b> Stars</span><span><b>3,820</b> Forks</span></div>
+            <div><span><b>41,542</b> Stars</span><span><b>3,933</b> Forks</span></div>
           </a>
           <a href="https://huggingface.co/inclusionAI" tabIndex={-1}>
             <header><span>Hugging Face · 3 orgs</span></header>
-            <strong>197</strong>
+            <strong>198</strong>
             <p>公开模型</p>
-            <div><span><b>531,025</b> 近 30 天下载</span><span><b>8,757</b> Likes</span></div>
+            <div><span><b>534,356</b> 近 30 天下载</span><span><b>8,790</b> Likes</span></div>
           </a>
           <a href="https://modelscope.cn/organization/inclusionAI" tabIndex={-1}>
             <header><span>ModelScope · 3 orgs</span></header>
             <strong>188</strong>
             <p>公开模型</p>
-            <div><span><b>204,942</b> Downloads</span><span><b>634</b> Likes</span></div>
+            <div><span><b>205,569</b> Downloads</span><span><b>638</b> Likes</span></div>
           </a>
         </div>
       </div>
@@ -1290,13 +1154,13 @@ function SceneContent({
         title: "Agent Infra + Model Infra",
         subtitle: "132 个开源软件仓库",
         items: softwareLicenseDistribution,
-        source: "GitHub SPDX metadata · 2026-07-28",
+        source: "GitHub SPDX metadata · 2026-08-01",
       },
       {
         title: "Hugging Face Text Generation",
         subtitle: "下载量排序 Top 100 模型仓库",
         items: modelLicenseDistribution,
-        source: "Hugging Face Hub API · 2026-07-31",
+        source: "Hugging Face Hub API · 2026-08-01",
       },
     ];
     return (
@@ -1313,7 +1177,7 @@ function SceneContent({
                   <strong>{bar.title}</strong>
                   <span>{bar.subtitle}</span>
                 </div>
-                <b>{index === 0 ? "74.2%" : "75%"}</b>
+                <b>{index === 0 ? "74.2%" : "76%"}</b>
               </header>
               <p>Apache-2.0 或 MIT</p>
               <div className={styles.stackedLicenseBar}>

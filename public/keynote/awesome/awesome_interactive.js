@@ -250,6 +250,15 @@
   });
   window.addEventListener("resize", fitCanvas);
 
+  const presetView = new URLSearchParams(window.location.search).get("view");
+  if (presetView === "direct") {
+    directOnly = true;
+    directButton.setAttribute("aria-pressed", "true");
+  }
+
   fitCanvas();
   applyFilters();
+  if (presetView === "install") {
+    document.querySelector('[data-stage="install"] .stage-heading')?.click();
+  }
 })();

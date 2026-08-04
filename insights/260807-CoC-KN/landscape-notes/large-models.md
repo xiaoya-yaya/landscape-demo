@@ -1,6 +1,6 @@
 # Large Models 全景图说明
 
-数据窗口：2026-06-01 至 2026-06-30，上一完整自然月。
+数据窗口：2026-07-01 至 2026-07-31，上一完整自然月。
 
 ## 为什么不用 GitHub stars 排模型
 
@@ -19,7 +19,7 @@
 2. 向前退一天得到上月最后一天；
 3. 再取该月第一天。
 
-脚本在 2026 年 7 月运行，因此数据窗口固定为 2026-06-01 至 06-30。当前月数据不会进入主表。
+脚本在 2026 年 8 月运行，因此数据窗口固定为 2026-07-01 至 07-31。当前月数据不会进入主表。
 
 实现见 [build_monthly_open_closed_model_table.py](../large-models-refresh/analysis/build_monthly_open_closed_model_table.py)。
 
@@ -34,18 +34,18 @@ https://openrouter.ai/api/v1/datasets/rankings-daily
 请求参数：
 
 ```text
-start_date=2026-06-01
-end_date=2026-06-30
+start_date=2026-07-01
+end_date=2026-07-31
 ```
 
 处理方式：
 
 - 每天公开 Top 50 模型和一个 `other` 汇总项；
-- 30 天共返回 1,530 条日度记录；
-- 月内 78 个具名模型至少进入过一次每日 Top 50；
+- 完整返回 31 天；
+- 月内 86 个具名模型至少进入过一次每日 Top 50；
 - 每个模型累加 prompt + completion tokens；
 - 同时记录进入日榜的天数；
-- 具名模型覆盖 93.5989% 的可见 token。
+- 具名模型覆盖 93.5394% 的可见 token。
 
 限制：一个模型如果整月都没有进入每日 Top 50，它的流量会落在 `other`，无法获得具名月度 token。
 
@@ -61,8 +61,8 @@ https://zenmux.ai/api/v1/management/statistics/leaderboard
 
 ```text
 metric=tokens
-starting_at=2026-06-01
-ending_at=2026-06-30
+starting_at=2026-07-01
+ending_at=2026-07-31
 limit=50
 ```
 
@@ -71,7 +71,7 @@ limit=50
 - 50 个具名模型；
 - 1 个 `__others__` 汇总项；
 - 指标为整月 prompt + completion tokens；
-- 具名模型覆盖 99.5243% 的 token。
+- 具名模型覆盖 98.8781% 的 token。
 
 榜外意味着“没有进入可见 Top 50”，不等于零使用。
 
@@ -104,7 +104,7 @@ Hugging Face 不进入开放与闭源模型的共同 usage composite。它用于
 - architecture、model type 与参数量；
 - 模型卡信息。
 
-开放权重候选 36 个，36 个都完成了 Hugging Face 仓库解析。
+开放权重候选 37 个，37 个都完成了 Hugging Face 仓库解析。
 
 `hf_open_ecosystem_score` 只描述开放权重模型内部的生态采用：
 
@@ -117,13 +117,13 @@ Hugging Face 不进入开放与闭源模型的共同 usage composite。它用于
 
 ## 最终 Top 50 的结构
 
-- 开放权重：24；
-- 无公开权重：26；
-- Top 10 中开放权重：5；
-- Top 10 中无公开权重：5；
-- 两个平台都有可见使用信号：37 / 50；
-- 综合排名最高的开放权重模型：DeepSeek V4 Flash，rank 1；
-- 综合排名最高的无公开权重模型：Claude Opus 4.8，rank 3。
+- 开放权重：20；
+- 无公开权重：30；
+- Top 10 中开放权重：4；
+- Top 10 中无公开权重：6；
+- 两个平台都有可见使用信号：40 / 50；
+- 综合排名最高的开放权重模型：GLM 5.2，rank 1；
+- 综合排名最高的无公开权重模型：Claude Opus 4.8，rank 4。
 
 主表：[monthly_models_top50_open_closed.csv](../large-models-refresh/data/monthly_models_top50_open_closed.csv)
 
@@ -145,19 +145,19 @@ Hugging Face 不进入开放与闭源模型的共同 usage composite。它用于
 
 先把时间窗口讲清楚：
 
-> 我们取的是 2026 年 6 月 1 日到 30 日，一个完整自然月。OpenRouter 和 ZenMux 的原始 token 数不能直接相加，所以先在各自平台内部换成百分位，再各占 50%。
+> 我们取的是 2026 年 7 月 1 日到 31 日，一个完整自然月。OpenRouter 和 ZenMux 的原始 token 数不能直接相加，所以先在各自平台内部换成百分位，再各占 50%。
 
 第一步筛出 Top 10：
 
-> Top 50 里有 24 个开放权重模型，26 个没有公开权重，几乎对半。Top 10 里两边刚好各 5 个，综合第一还是 DeepSeek V4 Flash。至少在这一个月、这两个平台上，开放权重模型已经处在主流使用区。
+> Top 50 里有 20 个开放权重模型、30 个没有公开权重。Top 10 里是 4 比 6，综合第一是 GLM 5.2。开放权重仍然处在主流使用区，但不是多数。
 
 第二步切到开放权重模型，看模型类型：
 
-> 13 个 Reasoning 模型中有 12 个开放权重；30 个 Multimodal / VLM 中有 22 个没有公开权重。开放程度与模型类型明显相关。
+> 10 个 Reasoning 模型中有 9 个开放权重；13 个 Frontier Generalist 全部没有公开权重。开放程度与模型类型明显相关。
 
 第三步只看 8 个公开 AAI 可比样本：
 
-> 使用排名第 1 的模型 AAI 为 40.3；AAI 最高的模型使用排名第 25。真实使用还受价格、延迟、渠道与产品适配影响，能力榜只是其中一个变量。
+> 使用排名第 1 的模型 AAI 为 51.1；AAI 最高的模型使用排名第 12。真实使用还受价格、延迟、渠道与产品适配影响，能力榜只是其中一个变量。
 
 主动限制结论：
 

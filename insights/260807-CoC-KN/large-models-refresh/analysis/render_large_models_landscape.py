@@ -19,6 +19,7 @@ import requests
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "data" / "monthly_models_top50_open_closed.csv"
+SOURCE_SUMMARY_PATH = ROOT / "data" / "monthly_source_summary.json"
 OUTPUT_DATA_PATH = ROOT / "data" / "large_models_landscape_top50.csv"
 BENCHMARK_PATH = ROOT / "data" / "artificial_analysis_public_snapshot.json"
 HTML_PATH = ROOT / "large_models_landscape_prototype.html"
@@ -55,29 +56,32 @@ DOMAIN_MODELS = {
         "Claude Fable 5",
         "Qwen3.7 Max",
         "GPT-5.2",
-        "owl-alpha",
+        "Claude Opus 5",
+        "Grok 4.5",
+        "GPT-5.6 Luna",
+        "Doubao-Seed-2.1-pro",
     ],
     "Reasoning, Math & Science": [
         "DeepSeek V4 Flash",
         "DeepSeek V4 Pro",
         "GLM 5.2",
-        "GLM 5.1",
+        "DeepSeek V4 Flash 0731",
         "DeepSeek V3.2",
         "MiMo-V2.5-Pro",
         "Hy3 preview",
         "GLM 5",
-        "MiniMax M2.7",
-        "GLM 4.7",
+        "Hy3",
+        "Ling-3.0-flash (free)",
     ],
     "Coding & Agentic": [
         "Claude Sonnet 4.6",
         "Kimi K2.7 Code",
         "Kimi K2.6",
-        "Claude Sonnet 4.5",
-        "GPT-5.3-Codex",
+        "Claude Sonnet 5",
+        "GPT-5.6 Sol",
         "laguna-m.1-20260312:free",
-        "Kimi K2.5",
-        "Nex-N2-Pro",
+        "Kimi K3",
+        "GPT-5.6 Terra",
     ],
     "Multimodal & Realtime": [
         "Step 3.7 Flash",
@@ -89,7 +93,7 @@ DOMAIN_MODELS = {
         "Qwen3.7 Plus",
         "Gemma 4 26B A4B",
         "Gemma 4 31B",
-        "Claude Opus 4.5",
+        "Anthropic Claude Sonnet Latest",
     ],
     "Efficient, Edge & Specialized": [
         "Gemini 2.5 Flash Lite",
@@ -97,13 +101,10 @@ DOMAIN_MODELS = {
         "Gemini 3.1 Flash Lite",
         "GPT-5.4 Mini",
         "GPT-4o-mini",
-        "Gemini 3.1 Flash Lite Preview",
         "gpt-oss-120b",
         "Nemotron 3 Super",
         "Mistral Nemo",
-        "GPT-5 Mini",
-        "Qwen3 235B A22B Instruct 2507",
-        "Qwen3 Embedding 8B",
+        "Doubao-Seed-Character",
     ],
 }
 
@@ -483,6 +484,8 @@ def benchmark_panel_html(rows: list[dict[str, Any]]) -> str:
 
 
 def build_html(rows: list[dict[str, Any]]) -> str:
+    source_summary = json.loads(SOURCE_SUMMARY_PATH.read_text(encoding="utf-8"))
+    month_label = datetime.fromisoformat(source_summary["window_start"]).strftime("%B %Y")
     panels = []
     for domain in DOMAIN_ORDER:
         domain_rows = [row for row in rows if row["landscape_domain"] == domain]
@@ -516,6 +519,7 @@ def build_html(rows: list[dict[str, Any]]) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=3840, initial-scale=1">
+  <script>document.documentElement.classList.toggle("poster-mode", new URLSearchParams(window.location.search).get("poster") === "1");</script>
   <title>Large Models Landscape 2026</title>
   <style>
     * {{ box-sizing: border-box; }}
@@ -530,6 +534,15 @@ def build_html(rows: list[dict[str, Any]]) -> str:
       letter-spacing: 0;
     }}
     body {{ position: relative; }}
+    html.poster-mode,
+    html.poster-mode body {{
+      width: 1920px;
+      height: 1080px;
+    }}
+    html.poster-mode .canvas {{
+      transform: scale(0.5);
+      transform-origin: top left;
+    }}
     .canvas {{
       width: 3840px;
       height: 2160px;
@@ -941,7 +954,7 @@ def build_html(rows: list[dict[str, Any]]) -> str:
 
     <section class="summary" aria-label="Landscape filters">
       <button class="summary-item score is-active" type="button" data-primary-filter="all" aria-pressed="true">
-        <strong>June 2026</strong>
+        <strong>{month_label}</strong>
         <span>All 50 · OpenRouter + ZenMux complete month</span>
       </button>
       <button class="summary-item open" type="button" data-primary-filter="open" aria-pressed="false">

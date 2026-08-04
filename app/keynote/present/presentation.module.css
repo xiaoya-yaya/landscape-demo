@@ -138,20 +138,6 @@
   height: 0.42cqh;
 }
 
-.preload {
-  position: fixed;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.preload iframe {
-  width: 1px;
-  height: 1px;
-}
-
 .titleScene,
 .questionScene,
 .methodScene,
@@ -320,13 +306,23 @@
   height: 100%;
 }
 
-.externalLandscapeFrame {
-  width: 100%;
-  height: 100%;
-  display: block;
-  border: 0;
+.externalLandscapeFrameShell {
+  position: absolute;
+  inset: 3.7cqh 2.2cqw 5.2cqh;
+  overflow: hidden;
   background: #fff;
-  pointer-events: none;
+}
+
+.externalLandscapePoster {
+  z-index: 0;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0;
+}
+
+.externalLandscapePoster[data-active="true"] {
+  z-index: 1;
+  opacity: 1;
 }
 
 .landscapeInsight {
@@ -719,7 +715,6 @@
 .productionScene {
   display: grid;
   align-content: center;
-  gap: 8cqh;
   background: var(--ink);
   color: #fff;
 }
@@ -728,39 +723,6 @@
   max-width: 72cqw;
   font-size: 5.3cqw;
   line-height: 0.96;
-}
-
-.productionPath {
-  display: flex;
-  align-items: center;
-  gap: 1.25cqw;
-  opacity: 0;
-  transform: translateY(2cqh);
-  transition: opacity 240ms ease, transform 280ms ease;
-}
-
-.productionPath[data-visible="true"] {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.productionPath span,
-.productionPath strong {
-  padding: 1.2cqh 1.2cqw;
-  border: 1px solid rgb(255 255 255 / 28%);
-  font-size: 1.05cqw;
-}
-
-.productionPath strong {
-  color: var(--ink);
-  background: var(--orange);
-  border-color: var(--orange);
-}
-
-.productionPath i {
-  color: var(--cyan);
-  font-size: 1.5cqw;
-  font-style: normal;
 }
 
 .researchScene {
@@ -1863,7 +1825,7 @@
   .methodPath,
   .methodChecks,
   .methodTakeaways,
-  .productionPath,
+  .externalLandscapePoster,
   .guidedApacheGroup,
   .licenseLayers article,
   .missingMaterials,

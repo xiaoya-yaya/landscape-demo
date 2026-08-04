@@ -1,6 +1,6 @@
 # Model Infra 全景图说明
 
-数据快照：GitHub 2026-07-28；图中 OpenRank 使用 2026-06。
+数据截至：2026-08-01；图中 OpenRank 使用 2026-07。
 
 ## 这张图回答什么
 
@@ -20,8 +20,8 @@ Model Infra 沿模型生命周期组织项目：数据怎样进入训练，计�
 
 Model Infra 与 Agent Infra 共用一套候选扫描。6,118 个原始候选来自：
 
-- 2026-05-01 至 07-28 可见 WatchEvent 前 2,500；
-- 2026 年 4—6 月 Repo OpenRank 合计前 4,000；
+- 2026-05-01 至 08-01 可见 WatchEvent 前 2,500；
+- 2026 年 5—7 月 Repo OpenRank 合计前 4,000；
 - 12 组 GitHub 定向搜索，每组最多 100 条；
 - 按稳定 repo ID 去重，并排除旧图已有的 227 个仓库。
 
@@ -63,19 +63,26 @@ Model Infra 与 Agent Infra 共用一套候选扫描。6,118 个原始候选来�
 
 新版把 6 个 Model API gateway 放回 Model Infra。这个调整让分类沿流量职责展开，也解释了为什么 Agent gateway 与 Model gateway 不应只因为名字相似就放在一起。
 
-OmniRoute 是这次复盘补入的项目。它并没有被最初的扫描遗漏：候选池里有它，但绝对 Top-N 门槛没有把它送进 A/B 人工短名单。截至 2026-07-28，它有 32,706 stars，2—6 月 OpenRank 从 4.07 升到 39.04，候选池记录了 417 个可见 WatchEvent。这类项目今后走独立的高增速复核通道。
+OmniRoute 是这次复盘补入的项目。它并没有被最初的扫描遗漏：候选池里有它，但绝对 Top-N 门槛没有把它送进 A/B 人工短名单。8 月 1 日口径下它有 38,536 stars，2—7 月 OpenRank 从 4.48 升到 31.92。这类项目今后走独立的高增速复核通道。
 
 当前计数见 [infra_landscape_source_summary.json](../landscape-refresh/data/infra_landscape_source_summary.json)；首轮前后差异仍保留在 [landscape_editorial_summary.json](../landscape-refresh/data/landscape_editorial_summary.json)。
 
-## 台上只讲一个近期信号
+## Gateway 的功能复核
 
-Gateway 又热了，但职责已经分叉。OmniRoute 同时覆盖模型路由、配额 fallback、MCP 与 A2A；LiteLLM 更接近 model API gateway，AgentGateway 更接近 agentic proxy。项目之间有重叠，正好说明这一层不能再靠名字分类。
+OmniRoute 的增长只负责触发复核。台上的功能判断来自各项目近期发布内容：
+
+- [LiteLLM releases](https://github.com/BerriAI/litellm/releases)：增加 MCP OAuth、工具列表与调用管理；
+- [AgentGateway releases](https://github.com/agentgateway/agentgateway/releases)：1.1 将 MCP 鉴权放进流量策略，并覆盖 A2A 与 LLM 流量；
+- [ContextForge releases](https://github.com/IBM/mcp-context-forge/releases)：1.0 增加 A2A runtime 和 MCP proxy security；
+- [OmniRoute](https://github.com/diegosouzapw/OmniRoute)：把配额感知 fallback、MCP 与 A2A 放在同一个入口。
+
+这些变化支持一个较窄的结论：同叫 gateway，项目处理的流量和治理对象已经不同。分类时需要看实际功能，项目名只能作为初始线索。
 
 ## 数据口径
 
-- OpenRank：2026-06 Repo OpenRank，图中用于表达近期协作信号。
-- Stars：GitHub 2026-07-28 快照，只表示累计关注度。
-- WatchEvent：2026-05-01 至 07-28 的可见事件，只用于候选发现。
+- OpenRank：2026-07 Repo OpenRank，图中用于表达近期协作信号。
+- Stars：GitHub REST API 当前值，按演讲约定归入 2026-08-01 快照，只表示累计关注度。
+- WatchEvent：2026-05-01 至 08-01 的可见事件，只用于候选发现。
 - License：GitHub API 当前识别结果，`NOASSERTION` 不等于没有许可证，需要回到仓库核验。
 
 ## 数据限制
@@ -89,11 +96,11 @@ Gateway 又热了，但职责已经分叉。OmniRoute 同时覆盖模型路由�
 
 第一屏先看当前结构，然后只停在 gateway：
 
-> Model Infra 现在有 58 个项目。OmniRoute 截至 7 月 28 日有 32,706 stars，2 月到 6 月 OpenRank 从 4.07 升到 39.04。它进入过 222 个机器候选，却被绝对 Top-N 门槛漏出了人工短名单。
+> Model Infra 现在有 58 个项目。OmniRoute 在 8 月 1 日口径下有 38,536 stars，2 月到 7 月 OpenRank 从 4.48 升到 31.92。它进入过 222 个机器候选，却被绝对 Top-N 门槛漏出了人工短名单。
 
 第二次翻页解释判断：
 
-> 我们把它补回来，也补了一条高增速复核通道。它与 LiteLLM、New API、AgentGateway 都有交叉；入图不是说它“独一无二”，而是它足以说明 gateway 的职责正在从模型 API 代理延伸到配额 fallback 和 agent 协议流量。
+> 增长只能说明值得重看。LiteLLM 近期在补 MCP OAuth 和工具管理；AgentGateway 1.1 同时覆盖 MCP、A2A 与 LLM 流量；ContextForge 1.0 增加 A2A runtime。OmniRoute 自己把配额感知 fallback、MCP 与 A2A 放到一个入口。同叫 gateway，实际处理的流量和治理对象已经不同。
 
 OpenRank 只能描述协作活跃度，不能拿来证明哪个推理系统性能最好。
 

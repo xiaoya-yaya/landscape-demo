@@ -4,7 +4,7 @@
 
 全程 20 页。方括号是台上动作，不需要念。每次“下一步”可按 `PageDown` / `↓` / `→`，也可在触屏上向左滑。右上角是累计时间，排练时尽量按该时间进入下一页。
 
-数据口径沿用页面标注：GitHub 与 OpenDigger 快照截至 2026 年 7 月 28—29 日；Large Models 使用 2026 年 6 月完整自然月；Apache 规模来自 ASF FY2025 Annual Report；Hugging Face Top 100 许可证快照截至 2026 年 7 月 31 日。
+全场统计统一到 2026 年 8 月 1 日。OpenRank 使用 7 月完整月；Large Models 使用 7 月 1—31 日；GitHub 仓库指标取当前 REST API 返回值，按演讲约定归入 8 月 1 日快照；Apache 规模来自 ASF FY2025 Annual Report。
 
 ---
 
@@ -56,7 +56,7 @@ Stars 很高，未必还在维护；增长很快，可能只是一次发布带�
 
 [下一步，聚焦 Memory, knowledge & context。]
 
-近期更明显的信号出现在上下文层。OpenViking 的月度 OpenRank 从三月的 35.96 上升到六月的 140.23。它把 memory、RAG 和 skills 收进 context database。Agent 的上下文已经不再只是 prompt 前面的一段文字，它开始有自己的存储、版本、检索和生命周期。
+近期更明显的信号出现在上下文层。OpenViking 的月度 OpenRank 从三月的 112.46 上升到七月的 177.61。它把 memory、RAG 和 skills 收进 context database。Agent 的上下文已经不再只是 prompt 前面的一段文字，它开始有自己的存储、版本、检索和生命周期。
 
 后面做企业级 Agent 时，谁写入、谁读取、什么时候失效，都会成为工程问题。
 
@@ -65,12 +65,6 @@ Stars 很高，未必还在维护；增长很快，可能只是一次发布带�
 第三个视角是接口。这个 section 从 3 个项目增加到 5 个。MCP 和 A2A 解决工具与 Agent 之间的连接，AG-UI 和 A2UI 又把事件流和界面带进公共接口。
 
 协议变多不一定意味着最终会留下很多协议。它说明大家已经碰到同一批互操作问题，公共语言正在形成。未来可能合并，也可能分层，但接口这一层已经不能省略。
-
-[下一步，聚焦 Observability & evaluation。]
-
-第四个视角是 Agent 自身的改进方式。SkillOpt 在 7 月快照里有 15.2K stars 和 45 名可见参与者。它没有训练模型权重，而是把 skill 文档当作可优化状态，用 rollout、评估和验证门决定怎样更新。
-
-这给 Agent 改进增加了一条路径：模型可以不变，执行策略和技能材料持续迭代。项目创建时间还短，所以图上标的是 NEW，我们暂时把它当作值得继续观察的信号。
 
 [下一步。]
 
@@ -86,9 +80,13 @@ Stars 很高，未必还在维护；增长很快，可能只是一次发布带�
 
 [下一步，聚焦 Model API gateways。]
 
-第一是 gateway。OmniRoute 的月度 OpenRank 从二月的 4.07 上升到六月的 39.04。最初的人工短名单漏掉了它，增长信号让我们重新复核。
+第一是 gateway。OmniRoute 的月度 OpenRank 从二月的 4.48 上升到七月的 31.92。最初的人工短名单漏掉了它，增长信号让我们重新复核。
 
-它和 LiteLLM、New API、AgentGateway 有能力交叉，所以这个数字不能直接解释成“更好”。更值得看的是 gateway 的职责正在扩大：模型 API 代理之外，还要处理配额、fallback，以及 MCP、A2A 带来的新流量。
+增长只能说明它值得重新检查，功能结论还要回到项目近期做了什么。
+
+我们对照了三个项目的官方 release。LiteLLM 增加 MCP OAuth、工具列表与调用管理；AgentGateway 1.1 把 MCP 鉴权放进流量策略，同时覆盖 A2A 与 LLM 流量；ContextForge 1.0 增加 A2A runtime 和 MCP proxy security。OmniRoute 自己则把配额感知 fallback、MCP 与 A2A 放在同一个入口。
+
+这组变化能支持的判断比较具体：同叫 gateway，项目处理的流量和治理对象已经不同。分类时要看实际功能，不能只看名字。
 
 [下一步，聚焦 Serving · Inference。]
 
@@ -108,21 +106,21 @@ Stars 很高，未必还在维护；增长很快，可能只是一次发布带�
 
 [画面：Large Models 全图。]
 
-第三张图把观察对象换成模型 endpoint。GitHub 活跃度不适合回答“模型有没有被真实使用”，所以这里合并 OpenRouter 和 ZenMux 在 2026 年 6 月完整自然月的数据，再用 Hugging Face 核验官方权重。
+第三张图把观察对象换成模型 endpoint。GitHub 活跃度不适合回答“模型有没有被真实使用”，所以这里合并 OpenRouter 和 ZenMux 在 2026 年 7 月完整自然月的数据，再用 Hugging Face 核验官方权重。
 
-样本一共 50 个 endpoint：24 个提供公开权重，26 个没有公开权重，数量接近一半一半。
+样本一共 50 个 endpoint：20 个提供公开权重，30 个没有公开权重。开放权重仍占重要位置，但没有占据多数。
 
 [下一步，自动筛选 Top 10。]
 
-先看真实使用前十。开放权重和无公开权重各占 5 个。这个结果只能代表两个平台、这个月份和这组样本，但它至少说明，开放权重模型已经进入主流使用区，不再只出现在研究和尝鲜场景。
+先看真实使用前十。4 个提供开放权重，6 个没有公开权重。这个结果只能代表两个平台、这个月份和这组样本，但它至少说明，开放权重模型已经进入主流使用区，也出现在真实使用的头部位置。
 
 [下一步，切到开放权重视角。]
 
-再按能力类型看，分布很不一样。Reasoning 区 13 个模型里有 12 个开放权重；Multimodal 和 VLM 的 30 个模型里，22 个没有公开权重。不同能力路线在训练成本、数据风险和产品化方式上有自己的选择，不能用一个“开放率”概括全部。
+再按能力类型看，分布很不一样。Reasoning 区 10 个模型里有 9 个开放权重；Frontier Generalist 的 13 个模型则都没有公开权重。不同能力路线在训练成本、数据风险和产品化方式上有自己的选择，不能用一个“开放率”概括全部。
 
 [下一步，切到 AAI 可比样本。]
 
-最后看使用和能力。8 个可比 AAI 样本中，使用排名第一的模型，AAI 是 40.3；AAI 最高的模型，在使用数据里排第 25。
+最后看使用和能力。8 个可比 AAI 样本中，使用排名第一的模型，AAI 是 51.1；AAI 最高的模型，在使用数据里排第 12。
 
 榜单回答的是特定能力，采用还会受到价格、延迟、部署方式和渠道影响。能力评测与真实选择应当并排看，不能互相替代。
 
@@ -144,7 +142,7 @@ Stars 很高，未必还在维护；增长很快，可能只是一次发布带�
 
 [下一步，聚焦 Install。]
 
-Install 阶段的 7 个项目全部达到 direct。安装最容易形成明确接口：一条命令、一个 manifest、一份配置。机器可以执行，也容易验证成功或失败。
+这里的 Install 是我们按使用路径划出的“安装或注册工具”，direct 表示仓库给出了 Agent 可直接调用的命令、manifest 或配置。这个组有 7 个项目，7 个都满足。它只说明入口可以被机器执行，不代表项目质量或成熟度更高。
 
 [下一步，恢复全图。]
 
@@ -194,8 +192,6 @@ Install 阶段的 7 个项目全部达到 direct。安装最容易形成明确�
 
 Agent 进入真实系统，会碰到一批软件工程里很熟悉的问题。
 
-[下一步，执行路径出现。]
-
 任务怎样编排，共享状态怎样在不同语言和系统之间传递，工具真的执行以后，失败怎样恢复，副作用怎样补偿。
 
 这些问题长期存在。Agent 把更多步骤、更大权限和更长执行链放到了一起，于是它们同时变得紧迫。接下来回到 Apache。
@@ -230,23 +226,13 @@ ASF FY2025 年报列出 295 个 Projects、1,310 次 software releases、9,905 �
 
 如果只看 Agent UI 和框架，Apache 似乎离 Agent 热点有些远。把范围扩到数据、计算和运行系统，位置就清楚了。
 
-这张图用 Apache 官方目录和 DOAP 标签做多标签分类，所以各领域项目数会有重叠。没有可用分类的 46 条目录记录单独保留，没有硬塞进某一个技术领域。
+左侧 7 个领域来自 Apache Projects Directory 的项目分类。同一项目可以属于多个分类，所以领域数量会重叠。这个来源是 Apache 官方维护的项目元数据，台上不需要记 DOAP 这个缩写。
 
-第一屏是 Data, analytics and AI，共有 80 条分类记录。Superset、ECharts、Airflow、Spark、Kafka、Flink 是 GitHub 关注度较高的项目。我们这次 landscape 里的 Airflow、Spark、Iceberg 也落在这里。它们承接数据编排、分布式计算和版本化数据。
+右侧停在 Data, analytics and AI。Superset、ECharts、Airflow、Spark、Kafka 和 Flink 是这一领域关注度较高的项目。下面一行把进入 Landscape 的 6 个 Apache 项目全部列出来。
 
-[下一步，切到 Libraries, languages & formats。]
+Airflow 负责编排，Spark 负责分布式计算。Iceberg、Hudi 和 Paimon 处理数据表与持续更新，Gravitino 处理跨系统元数据。Paimon 和 Gravitino 在目录里缺少可用的项目分类，统计时没有塞进某个领域，入选结果仍然完整保留。
 
-第二屏是 libraries、languages 和 formats，共 119 条，是数量最多的一类。Arrow、Thrift、DataFusion 这一类组件处理跨语言数据交换和通用计算。Agent runtime 要在模型、工具、数据服务之间搬运状态，这些成熟组件会被反复用到。
-
-[下一步，切到 Network, messaging & integration。]
-
-第三屏是 network、messaging 和 integration，共 41 条。一次工具调用跨过进程和服务以后，连接、消息、超时和重试都进入主链路。协议层的创新，最后仍要落到可靠的系统集成上。
-
-[下一步，切到 Cloud, build & operations。]
-
-第四屏是 cloud、build 和 operations，共 34 条。SkyWalking、JMeter、Maven、CloudStack 代表可观测、测试、构建和运行治理。Agent 的执行链越长，越需要知道哪一步失败、怎样复现、如何恢复。
-
-这也是 Apache 在 Agentic 生态里很重要的位置：它提供了许多已经被生产环境反复检验的公共底座。
+这一页的重点很简单：Agent 使用的很多数据与计算能力，已经由这些成熟的 Apache 项目承接。右侧的头部项目也提醒我们，Apache 的技术底盘远大于入图的这 6 个项目。
 
 [下一步。]
 
@@ -296,7 +282,7 @@ Apache 展示的是跨组织基础设施怎样长期协作。接下来用 Inclus
 
 [下一步，GitHub、Hugging Face、ModelScope 三张卡出现。]
 
-截至页面标注的快照，三个相关组织在 GitHub 有 92 个公开仓库；在 Hugging Face 有 197 个公开模型；在 ModelScope 有 188 个公开模型。
+截至 2026 年 8 月 1 日，三个相关组织在 GitHub 有 93 个公开仓库；在 Hugging Face 有 198 个公开模型；在 ModelScope 有 188 个公开模型。
 
 这三个数字不能相加。模型可能跨平台发布，GitHub 的 star、模型 Hub 的 download 和 like 也代表不同动作。它们共同说明，这套生态同时在交付软件和模型，而且已经形成跨平台的发布习惯。
 

@@ -35,9 +35,9 @@ INTEGER_FIELDS = {
 }
 FLOAT_FIELDS = {
     "awesome_value_score",
-    "openrank_202604",
     "openrank_202605",
     "openrank_202606",
+    "openrank_202607",
     "openrank_3m",
 }
 
@@ -78,7 +78,7 @@ def write_data_bundle(projects: dict[str, dict[str, object]]) -> None:
 
 def sync_public_artifact() -> None:
     PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
-    for name in (HTML_NAME, CSS_NAME, JS_NAME, DATA_NAME):
+    for name in (HTML_NAME, CSS_NAME, JS_NAME, DATA_NAME, CSV_PATH.name):
         shutil.copyfile(INTERACTIVE_DIR / name, PUBLIC_DIR / name)
 
 

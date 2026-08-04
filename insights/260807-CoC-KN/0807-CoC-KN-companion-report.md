@@ -3,7 +3,7 @@
 CommunityOverCode China 2026 Keynote 辅助报告
 演讲时间：2026 年 8 月 7 日
 演讲时长：30 分钟
-核心数据截止：2026 年 7 月 28 日
+数据截至：2026 年 8 月 1 日
 
 
 ## 核心判断
@@ -22,13 +22,13 @@ Agentic AI 正在同时改变三件事：
 
 | 数据 | 本次使用口径 | 说明 |
 |---|---:|---|
-| GitHub stars、仓库元数据 | 2026-07-28 快照 | 可用于横截面规模与近期增长比较 |
-| GitHub apache org 宏观观察 | 2026-07-29 | 比演讲主要截止日晚一天，单独标注，不与 7 月 28 日快照混算 |
-| OpenRank 当月值 | 2026-06 | 7 月尚未结束，6 月是最后一个可比较的完整月份 |
-| OpenRank 趋势窗口 | 2025-07—2026-06 | 连续 12 个完整月，避免拿不完整的 2026-07 与历史完整月比较 |
-| Apache 官网宏观数字 | 2026-07-29 页面展示 | 290+ projects、1,300+ annual releases、10,000+ committers、1,190+ members |
+| GitHub stars、仓库元数据 | 2026-08-01 快照 | 当前 REST API 返回值按演讲约定归入该口径 |
+| GitHub apache org 宏观观察 | 2026-08-01 | 项目记录、仓库与治理身份分开统计 |
+| OpenRank 当月值 | 2026-07 | 7 月全库分区仍在回填，只作为方向信号 |
+| OpenRank 趋势窗口 | 2025-08—2026-07 | 连续 12 个月 |
+| Apache 官网宏观数字 | 2026-08-01 口径 | 官网整数与 FY2025 年报分别解释 |
 | ASF 年报冻结口径 | FY2025 | 适合年度复核，不应被表述成 2026 年 7 月实时值 |
-| InclusionAI 组织快照 | 2026-07-28 | 58 个公开仓库、10,753 stars；许可证为 GitHub API 识别结果 |
+| InclusionAI 三平台 | 2026-08-01 | GitHub、Hugging Face、ModelScope 分平台解释，不跨平台相加 |
 
 OpenRank 是用于发现项目活跃度和社区协作趋势的信号，不是项目质量排行榜；stars 是关注度累积值，也不等于近期活跃度。最终是否进入 landscape，还要结合项目角色、可采用性、代表性、可替代性与版面容量。
 
@@ -83,8 +83,8 @@ Large Models 决定能力边界，但模型之间的比较不应只停留在参�
 
 对 460 个 awesome、skills 与 agentic workflow 相关仓库的扫描中，24 个项目进入图谱，另保留 2 个历史参照：
 
-- 19/24 可以被 agent 直接发现、复用、安装或执行，约 79%；
-- 22/24 创建于 2025 年以后，约 92%。
+- 19/26 可以被 agent 直接发现、复用、安装或执行；
+- 22/26 创建于 2025 年以后。
 
 这里的“直接消费”包含四种模式：
 
@@ -110,21 +110,13 @@ Apache 官网当前展示：
 
 FY2025 冻结口径为 295 个项目、9,905 位 committers、1,147 位 members、1,310 次 releases。官网当前数字与年报数字可以相互校验，但不能拼成同一个时间点。
 
-GitHub `apache` 组织在 2026 年 7 月 29 日观察到：
-
-- 3,148 个公开仓库；
-- 648 个已归档仓库；
-- 2,474 个非 fork、非 archive 仓库；
-- 947 个仓库在近 30 天有 push；
-- 1,986 个仓库在近 90 天有 push；
-- 2,337 个仓库在近 365 天有 push；
-- 非 fork、非 archive 仓库中，Java 为主要语言的有 1,045 个，占 42.2%。
+8 月 1 日口径下，Apache Projects Directory 有 375 条项目记录，其中 305 条非 retired；GitHub `apache` 组织有 3,150 个公开仓库，其中 2,469 个既非 fork 也未归档。
 
 这些 GitHub 数字说明 ASF 的工程表面积与持续维护范围，但“3,148 个仓库”不能说成“3,148 个 Apache 项目”。一个项目可能包含代码、网站、文档、发布、工具与历史仓库。
 
 ### 为什么 Apache 看起来不在 Agent 产品层，却在系统主干上
 
-在当前 Model Infra landscape 的 57 个入图项目中，Apache 项目有 6 个，占 10.5%。但分到具体领域后，集中度非常明显。
+在当前 Model Infra landscape 的 58 个入图项目中，Apache 项目有 6 个，占 10.3%。但分到具体领域后，集中度非常明显。
 
 ![Apache projects in Model Infra](./rendered/slide-8.png)
 
@@ -133,20 +125,20 @@ GitHub `apache` 组织在 2026 年 7 月 29 日观察到：
 | Data · Governance | Iceberg、Hudi、Paimon、Gravitino | 4/7，57.1% |
 | Data · Integration | Airflow | 1/3，33.3% |
 | Compute & Scheduling | Spark | 1/4，25.0% |
-| Model Infra 全体 | 上述 6 个 | 6/57，10.5% |
+| Model Infra 全体 | 上述 6 个 | 6/58，10.3% |
 
 这个结果不是“Apache 影响力排名”，而是结构位置：Apache 更容易在标准、格式、计算、调度、工作流和治理等生命周期长、跨组织协作成本高的层形成密度。
 
-截至 2026 年 7 月 28 日的项目快照：
+截至 2026 年 8 月 1 日的项目快照：
 
-| 项目 | Stars | 2026-06 OpenRank | 生态角色 |
+| 项目 | Stars | 2026-07 OpenRank | 生态角色 |
 |---|---:|---:|---|
-| Apache Airflow | 46,289 | 144.80 | 工作流编排与数据集成 |
-| Apache Spark | 43,716 | 87.87 | 计算与调度 |
-| Apache Iceberg | 9,085 | 57.16 | 开放表格式与数据治理 |
-| Apache Hudi | 6,197 | 38.83 | 数据湖事务与增量处理 |
-| Apache Gravitino | 3,136 | 40.68 | 元数据与数据治理 |
-| Apache Paimon | 3,353 | 18.40 | 流批统一湖存储 |
+| Apache Airflow | 46,361 | 98.32 | 工作流编排与数据集成 |
+| Apache Spark | 43,776 | 68.18 | 计算与调度 |
+| Apache Iceberg | 9,106 | 34.89 | 开放表格式与数据治理 |
+| Apache Hudi | 6,205 | 24.44 | 数据湖事务与增量处理 |
+| Apache Gravitino | 3,141 | 22.03 | 元数据与数据治理 |
+| Apache Paimon | 3,360 | 16.38 | 流批统一湖存储 |
 
 可直接用于演讲的判断是：
 
@@ -156,12 +148,12 @@ Agent 自主调用工具和服务后，失败不再只是一条报错：它可�
 
 ### 蚂蚁深度参与的 Apache 项目
 
-| 项目 | 2026-07-28 Stars | Apache 状态 | 与 Agentic AI 的连接 |
+| 项目 | Apache 状态 | 与 Agentic AI 的连接 |
 |---|---:|---|---|
-| Apache Fory | 4,424 | 2025-07-17 成为 TLP | 高性能跨语言序列化；状态、消息与工具结果传输 |
-| Apache GeaFlow | 788 | Incubating | 图流融合；实时关系、知识与行为计算 |
-| Apache Seata | 25,976 | Incubating | 分布式事务；跨服务副作用、一致性与补偿 |
-| Apache Celeborn | 1,059 | 2024-03-21 成为 TLP | 大数据 shuffle；计算与数据移动解耦 |
+| Apache Fory | 2025-07-17 成为 TLP | 高性能跨语言序列化；状态、消息与工具结果传输 |
+| Apache GeaFlow | Incubating | 图流融合；实时关系、知识与行为计算 |
+| Apache Seata | Incubating | 分布式事务；跨服务副作用、一致性与补偿 |
+| Apache Celeborn | 2024-03-21 成为 TLP | 大数据 shuffle；计算与数据移动解耦 |
 
 介绍这四个项目时，不要把它们包装成“Agent 项目”。更准确的说法是：它们解决的是 agent 从 demo 进入生产系统后必然遇到的系统问题。
 
@@ -181,13 +173,7 @@ InclusionAI 的价值不只是一组公开仓库，而是让不同能力和资�
 
 这条路径把“开放模型”从下载权重扩展为多个可验证的贡献入口。一个没有大规模训练资源的开发者，仍然可以改环境、工具、评测或运行时；系统与模型研究者也可以在不同层形成协作。
 
-截至 2026 年 7 月 28 日的 InclusionAI GitHub 组织冻结快照：
-
-- 58 个公开仓库；
-- 10,753 GitHub stars；
-- GitHub API 识别到 26 个 Apache-2.0、19 个 MIT；
-- 45/58 使用 Apache-2.0 或 MIT；
-- 13 个仓库的许可证未识别或未声明，需要逐仓人工核验。
+截至 2026 年 8 月 1 日，三个相关组织在 GitHub 有 93 个公开仓库、41,542 stars 和 3,933 forks；Hugging Face 有 198 个公开模型、近 30 天 534,356 次下载和 8,790 likes；ModelScope 有 188 个公开模型、205,569 downloads 和 638 likes。三个平台存在重复发布，数字不跨平台相加。
 
 这里应避免两个过度结论：
 
@@ -243,12 +229,12 @@ MOF 与 OSAID 的作用，是补足许可证无法单独表达的“材料与自
 
 ![License distribution among open-weight models](./rendered/slide-16.png)
 
-本仓库 2026 年 7 月 28 日 Top 50 大模型选择集中：
+本仓库 2026 年 7 月完整月 Top 50 大模型选择集中：
 
-- 26/50 没有公开权重；
-- 24/50 提供公开权重；
-- 24 个公开权重模型中，MIT 9 个、Apache-2.0 8 个、其他许可证 7 个；
-- MIT 与 Apache-2.0 合计 17/24，占 70.8%。
+- 30/50 没有公开权重；
+- 20/50 提供公开权重；
+- Top 10 中有 4 个开放权重模型、6 个未公开权重模型；
+- 10 个 Reasoning 模型中有 9 个开放权重，13 个 Frontier Generalist 全部未解析到公开权重。
 
 这不是全球模型市场份额，而是本次 landscape 选择集。它说明宽松软件许可证在公开权重模型中仍占主流，同时也暴露出一个问题：如果只看 `license` 字段，很容易高估模型的开放完整度。
 

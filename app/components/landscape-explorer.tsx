@@ -1287,7 +1287,7 @@ export default function LandscapeExplorer({
                       <strong>INCLUSION AI</strong>
                     </div>
                     <span>
-                      {agentProjects.length} projects · Jun OpenRank weighted
+                      {agentProjects.length} projects · Jul OpenRank weighted
                     </span>
                     {focusedStage?.module === "agent" ? (
                       <button
@@ -1445,7 +1445,7 @@ export default function LandscapeExplorer({
                       <strong>INCLUSION AI</strong>
                     </div>
                     <span>
-                      {modelProjects.length} projects · Jun OpenRank weighted
+                      {modelProjects.length} projects · Jul OpenRank weighted
                     </span>
                     {focusedStage?.module === "model" ? (
                       <button

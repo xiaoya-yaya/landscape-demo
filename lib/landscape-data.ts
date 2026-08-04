@@ -367,8 +367,8 @@ function readSelectedRecords() {
     .sort(
       (a, b) =>
         a.section.index - b.section.index ||
-        (nullableNumber(b.record.openrank_2606) ?? -1) -
-          (nullableNumber(a.record.openrank_2606) ?? -1) ||
+        (nullableNumber(b.record.openrank_2607) ?? -1) -
+          (nullableNumber(a.record.openrank_2607) ?? -1) ||
         a.record.repo_name.localeCompare(b.record.repo_name),
     );
 }
@@ -391,7 +391,7 @@ export function getLandscapeProjects(): LandscapeProject[] {
       forks: numberOrZero(record.forks),
       openIssues: numberOrZero(record.open_issues),
       license: record.license || "—",
-      openrank: nullableNumber(record.openrank_2606),
+      openrank: nullableNumber(record.openrank_2607),
       participants: nullableNumber(record.participants_2607),
       language: record.language || "—",
       createdAt: record.created_at,

@@ -57,7 +57,7 @@ const sharedInfraMethod: MethodStep[] = [
   {
     number: "02",
     title: "三个入口把网撒开",
-    body: "OpenDigger WatchEvent 取近期关注度前 2,500；2026 年 4—6 月 Repo OpenRank 合计取前 4,000；再执行 12 组 GitHub 定向搜索，每组最多 100 条。三个入口合并、按 repo ID 去重并排除基线，得到 6,118 个候选。",
+    body: "首轮从 OpenDigger WatchEvent 取近期关注度前 2,500，从当时最近三个完整月的 Repo OpenRank 取前 4,000，再执行 12 组 GitHub 定向搜索。三个入口合并、按 repo ID 去重并排除基线，得到 6,118 个候选；8 月 1 日更新又用 5—7 月数据单独补扫新生与加速项目。",
   },
   {
     number: "03",
@@ -84,7 +84,7 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
     htmlSrc: "/embed/agent-infra",
     sourceHref: "/embed/agent-infra",
     caption: "直接复用站内 Agent Infra 原图组件；不经过 iframe，也不包含柱状图和站点导航。",
-    snapshot: "GitHub 2026-07-28 · OpenRank 2026-06",
+    snapshot: "数据截至 2026-08-01 · OpenRank 2026-07",
     base: [1440, 810],
     metrics: [
       {
@@ -106,15 +106,15 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
     insight: {
       signal: "最值得讲的变化",
       title: "上下文开始长成独立的数据层",
-      body: "OpenViking 把 memory、RAG 和 skills 收进 context database。它在 2026 年 3—6 月的 OpenRank 从 35.96 升至 140.23；这比再多一个 agent framework 更值得关注：上下文正在从框架里的一个功能，变成可以单独演进的基础设施。",
-      evidence: "OpenViking · OpenRank 35.96 → 140.23",
+      body: "OpenViking 把 memory、RAG 和 skills 收进 context database。它在 2026 年 3—7 月的 OpenRank 从 112.46 升至 177.61；这比再多一个 agent framework 更值得关注：上下文正在从框架里的一个功能，变成可以单独演进的基础设施。",
+      evidence: "OpenViking · OpenRank 112.46 → 177.61",
     },
     methodIntro:
       "Agent Infra 与 Model Infra 共用一套候选发现管线。6,118 是高召回候选池，里面包含大量最终会被排除的教程、应用与弱相关仓库，不能解读成 6,118 个 Agentic AI 基础设施项目。",
     methodSteps: sharedInfraMethod,
     caveats: [
       "WatchEvent 只用于发现候选，不是完整 star 增长；GitHub 的公开 stargazer 明细在 2026 年 7 月收紧。",
-      "2026 年 5、6 月 OpenRank 仍可能回填，近期总量下降不能直接解释为项目活跃度下降。",
+      "2026 年 7 月 OpenRank 仍在回填，近期总量下降不能直接解释为项目活跃度下降。",
       "进入主图是生态结构判断，不是项目质量排名；同一厂商的相近仓库会主动去重。",
     ],
     sources: [
@@ -142,7 +142,7 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
     speakerTime: "约 2 分钟",
     speakerScript: [
       "先看现在的结构。74 个项目里，Agentic coding 有 12 个，Code-first frameworks 有 10 个，最大的两个 section 都围绕 coding。代码仍是 Agent 生态最密集的入口。",
-      "第二个视角看上下文。OpenViking 把 memory、RAG 和 skills 放进 context database，3 月到 6 月 OpenRank 从 35.96 升到 140.23。上下文开始从框架内部功能变成独立数据层。",
+      "第二个视角看上下文。OpenViking 把 memory、RAG 和 skills 放进 context database，3 月到 7 月 OpenRank 从 112.46 升到 177.61。上下文开始从框架内部功能变成独立数据层。",
       "第三个视角看公共接口：MCP、A2A 之外，AG-UI 与 A2UI 把事件流和界面带进协议层。第四个视角看改进方式：SkillOpt 把 skill 文档当作可训练状态，用 rollout、评估和验证门更新。",
       "图上的 NEW 和 RISING 只表达最近 90 天的新生或加速信号，不再等同于这版刚加入主图。下一张继续沿执行链路看 Model Infra。",
     ],
@@ -155,7 +155,7 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
     htmlSrc: "/embed/model-infra",
     sourceHref: "/embed/model-infra",
     caption: "直接复用站内 Model Infra 原图组件；不经过 iframe，也不包含柱状图和站点导航。",
-    snapshot: "GitHub 2026-07-28 · OpenRank 2026-06",
+    snapshot: "数据截至 2026-08-01 · OpenRank 2026-07",
     base: [1440, 810],
     metrics: [
       {
@@ -177,8 +177,8 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
     insight: {
       signal: "最值得讲的变化",
       title: "Gateway 又热了，但职责已经分叉",
-      body: "OmniRoute 截至 7 月 28 日有 32,706 stars，2—6 月 OpenRank 从 4.07 升至 39.04。它和 LiteLLM、AgentGateway 的重叠很明显，但也说明 gateway 正同时承担模型路由、配额 fallback 与 agent 协议流量；分类必须按职责，而不是按名字。",
-      evidence: "OmniRoute · OpenRank 4.07 → 39.04",
+      body: "OmniRoute 在 8 月 1 日口径下有 38,536 stars，2—7 月 OpenRank 从 4.48 升至 31.92。它和 LiteLLM、AgentGateway 的重叠很明显，但也说明 gateway 正同时承担模型路由、配额 fallback 与 agent 协议流量；分类必须按职责，而不是按名字。",
+      evidence: "OmniRoute · OpenRank 4.48 → 31.92",
     },
     methodIntro:
       "候选池与 Agent Infra 共用，但最后一轮会确认项目是否真正影响模型训练、数据、计算、推理或访问；只调用模型 API 的应用不会因此进入 Model Infra。",
@@ -204,7 +204,7 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
       {
         label: "Model Infra 主表",
         href: `${repoBase}/landscape-refresh/data/model_infra_landscape_projects.csv`,
-        note: "57 个项目、指标与编辑理由",
+        note: "58 个项目、指标与编辑理由",
       },
       {
         label: "版面决策摘要",
@@ -220,7 +220,7 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
     speakerTime: "约 2 分钟",
     speakerScript: [
       "Model Infra 现在有 58 个项目。Serving · Inference 与 Compiler & accelerator 仍是两个最大的执行区，但这张图只讲一个近期信号：gateway 又热了。",
-      "OmniRoute 截至 7 月 28 日有 32,706 stars，2 月到 6 月 OpenRank 从 4.07 升到 39.04。它其实进过 222 个机器候选，但被绝对 Top-N 门槛漏出了人工短名单。这次补回主图，也补了一条高增速复核通道。",
+      "OmniRoute 在 8 月 1 日口径下有 38,536 stars，2 月到 7 月 OpenRank 从 4.48 升到 31.92。它其实进过 222 个机器候选，但被绝对 Top-N 门槛漏出了人工短名单。这次补回主图，也补了一条高增速复核通道。",
       "它与 LiteLLM、New API、AgentGateway 都有交叉。这里不把热度等同于独特性；我们用它说明 gateway 的职责正在从模型 API 代理扩展到配额 fallback、MCP 和 A2A 流量。",
       "OpenRank 只能描述协作活跃度，不能证明哪个推理系统性能最好。接下来换一套口径，用完整月份的真实使用数据看模型端。",
     ],
@@ -232,30 +232,30 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
     question: "一个模型在排行榜上很强，和它能否被社区研究、修改、再发布，是同一件事吗？",
     htmlSrc: "/keynote/large-models/index.html",
     caption: "同一个完整自然月内比较 50 个模型 endpoint；开放权重与闭源模型使用同一套使用分数。",
-    snapshot: "OpenRouter + ZenMux · 2026-06-01—06-30",
+    snapshot: "OpenRouter + ZenMux · 2026-07-01—07-31",
     base: [3840, 2160],
     metrics: [
       {
-        value: "24 / 26",
+        value: "20 / 30",
         label: "开放权重 / 无公开权重",
-        note: "Top 50 几乎对半",
+        note: "开放权重仍进入主流，但不是多数",
       },
       {
-        value: "5 / 5",
+        value: "4 / 6",
         label: "Top 10 中的两类模型",
         note: "真实使用没有形成单边格局",
       },
       {
-        value: "37 / 50",
+        value: "40 / 50",
         label: "两平台同时可见",
-        note: "74% 的 Top 50 有跨平台证据",
+        note: "80% 的 Top 50 有跨平台证据",
       },
     ],
     insight: {
       signal: "最值得讲的变化",
       title: "开放权重模型已经进入主流使用区",
-      body: "2026 年 6 月的 Top 10 中，开放权重与无公开权重模型各 5 个，综合第一是 DeepSeek V4 Flash。这个结果能说明开放权重已经进入主流使用，不能说明开放模型已经赢了。",
-      evidence: "Top 10 · open 5 / closed 5",
+      body: "2026 年 7 月的 Top 10 中有 4 个开放权重模型、6 个未公开权重模型，综合第一是 GLM 5.2。开放权重仍在主流使用区，但没有形成单边格局。",
+      evidence: "Top 10 · open 4 / closed 6",
     },
     methodIntro:
       "Large Models 没有沿用 GitHub 仓库热度。主表把“一个托管模型 endpoint / release”作为一行，合并同一 endpoint 的免费与付费别名，在上一完整自然月内比较真实 token 使用。",
@@ -263,17 +263,17 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
       {
         number: "01",
         title: "锁定上一完整自然月",
-        body: "脚本在 2026 年 7 月运行，因此窗口自动回退到 2026-06-01—06-30。当前月不会进入主比较，避免拿不完整月份和完整月份混在一起。",
+        body: "脚本在 2026 年 8 月运行，因此窗口自动回退到 2026-07-01—07-31。当前月不会进入主比较，避免拿不完整月份和完整月份混在一起。",
       },
       {
         number: "02",
-        title: "OpenRouter 汇总 30 天日榜",
-        body: "认证数据集每天公开 Top 50 与一个 other 汇总项。30 天共返回 1,530 条记录，月内 78 个具名模型至少进入过一次日榜；具名模型覆盖 93.5989% 的可见 token。",
+        title: "OpenRouter 汇总 31 天日榜",
+        body: "认证数据集每天公开 Top 50 与一个 other 汇总项。7 月完整返回 31 天，月内 86 个具名模型至少进入过一次日榜；具名模型覆盖 93.5394% 的可见 token。",
       },
       {
         number: "03",
         title: "ZenMux 查询同窗月榜",
-        body: "management leaderboard 使用 tokens 指标、相同起止日期与 limit=50，返回 50 个具名模型和一个 __others__；具名模型覆盖 99.5243% 的 token。",
+        body: "management leaderboard 使用 tokens 指标、相同起止日期与 limit=50，返回 50 个具名模型和一个 __others__；具名模型覆盖 98.8781% 的 token。",
       },
       {
         number: "04",
@@ -315,10 +315,10 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
     ],
     speakerTime: "约 2 分钟",
     speakerScript: [
-      "这张图先讲数据口径。我们取的是 2026 年 6 月 1 日到 30 日，一个完整自然月。OpenRouter 和 ZenMux 的原始 token 数不能直接相加，所以先在各自平台内部换成百分位，再各占 50%。",
-      "Top 10 里开放权重与无公开权重各有 5 个。这个月、这两个平台上，两类模型都进入了主流使用区。数据覆盖有限，所以结论只落在这份样本上。",
-      "把 Top 50 按模型类型拆开，差异就出来了：13 个 Reasoning 模型中有 12 个开放权重；30 个 Multimodal / VLM 中有 22 个没有公开权重。开放程度和模型类型明显相关。",
-      "公开 AAI 能匹配到 8 个样本。使用排名第 1 的模型 AAI 为 40.3；AAI 最高的模型使用排名第 25。真实使用还受价格、延迟、渠道与产品适配影响，能力榜只是其中一个变量。",
+      "这张图先讲数据口径。我们取的是 2026 年 7 月 1 日到 31 日，一个完整自然月。OpenRouter 和 ZenMux 的原始 token 数不能直接相加，所以先在各自平台内部换成百分位，再各占 50%。",
+      "Top 10 里有 4 个开放权重模型、6 个未公开权重模型。两类模型都进入了主流使用区，但没有形成对半或单边格局。数据覆盖有限，所以结论只落在这份样本上。",
+      "把 Top 50 按模型类型拆开，差异就出来了：10 个 Reasoning 模型中有 9 个开放权重；13 个 Frontier Generalist 全部没有公开权重。开放程度和模型类型明显相关。",
+      "公开 AAI 能匹配到 8 个样本。使用排名第 1 的模型 AAI 为 51.1；AAI 最高的模型使用排名第 12。真实使用还受价格、延迟、渠道与产品适配影响，能力榜只是其中一个变量。",
       "同样叫开放权重，发布材料仍有很大差别。有的只有权重，有的还有训练代码、数据说明和评测；这一层差异留到许可证部分继续讲。",
     ],
     fullNoteHref: `${repoBase}/landscape-notes/large-models.md`,
@@ -329,7 +329,7 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
     question: "README 还是一张给人看的链接表，还是已经变成 Agent 可以直接执行的接口？",
     htmlSrc: "/keynote/awesome/awesome_agentic_landscape_2026.html",
     caption: "把 Awesome 类仓库按 Discover、Reuse、Install、Operate 排列，观察知识怎样进入 Agent 工作流。",
-    snapshot: "GitHub 2026-07-29 · OpenRank 2026-04—06",
+    snapshot: "数据截至 2026-08-01 · OpenRank 2026-05—07",
     base: [3840, 2160],
     metrics: [
       {
@@ -370,7 +370,7 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
       {
         number: "03",
         title: "叠加协作与关注信号",
-        body: "使用 2026 年 5 月以来可见 WatchEvent、issue / PR / review 的独立参与者，以及 2026 年 4—6 月 Repo OpenRank。指标只做排序证据，不替代 README 语义判断。",
+        body: "8 月 1 日补漏使用 2026 年 5 月以来可见 WatchEvent、issue / PR / review 的独立参与者，以及 2026 年 5—7 月 Repo OpenRank。指标只做排序证据，不替代 README 语义判断。",
       },
       {
         number: "04",

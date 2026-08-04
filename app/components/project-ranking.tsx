@@ -20,6 +20,7 @@ const RANKING_MONTHS = [
   { label: "Apr 2026", index: 8 },
   { label: "May 2026", index: 9 },
   { label: "Jun 2026", index: 10 },
+  { label: "Jul 2026", index: 11 },
 ] as const;
 
 const NUMBER_FORMAT = new Intl.NumberFormat("en", {
@@ -37,7 +38,7 @@ export function ProjectRanking({
   projects: LandscapeProject[];
   onSelect: (repo: string) => void;
 }) {
-  const [monthIndex, setMonthIndex] = useState(10);
+  const [monthIndex, setMonthIndex] = useState(11);
   const [field, setField] = useState("all");
   const [language, setLanguage] = useState("all");
 
@@ -58,7 +59,7 @@ export function ProjectRanking({
           project,
           openrank:
             project.trend[monthIndex] ??
-            (monthIndex === 10 ? project.openrank : null),
+            (monthIndex === 11 ? project.openrank : null),
         }))
         .filter(
           (row) =>
@@ -75,7 +76,7 @@ export function ProjectRanking({
   );
   const activeMonth =
     RANKING_MONTHS.find((month) => month.index === monthIndex)?.label ??
-    "Jun 2026";
+    "Jul 2026";
 
   return (
     <section className={styles.projectRanking} id="project-ranking">

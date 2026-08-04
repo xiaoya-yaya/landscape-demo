@@ -33,23 +33,22 @@ InclusionAI 把“谁可以参与”展开到模型、具身智能、基础设�
 
 ## 上台前
 
-1. 打开 <https://landscape.16507.cn/keynote/present>，停在标题页，等待 Large Models 与 Awesome 的 HTML 完成预加载。
+1. 打开 <https://landscape.16507.cn/keynote/present>。第 5、6 页使用从原始 HTML 预先生成的总览与筛选画面，翻页交互不依赖现场网络。
 2. 按 `Enter` 进入全屏，确认画面没有变化；按 `Esc` 退出，再按 `Enter` 回到全屏。
 3. 按一次“下一步”，再按一次“上一步”回到标题。确认标题页完整、页面没有滚动条。
-4. 前进到 Agent Infra，确认整张动态生态图已经出现；连续检查四次“下一步”：`Agentic coding`、`Memory, knowledge & context`、`Protocols & interoperability`、`Observability & evaluation` 应依次聚焦。
+4. 前进到 Agent Infra，确认整张动态生态图已经出现；连续检查三次“下一步”：`Agentic coding`、`Memory, knowledge & context`、`Protocols & interoperability` 应依次聚焦。
 5. 继续检查 Model Infra：`Model API gateways`、`Serving · Inference`、许可证视角应依次出现，最后一次恢复全图。
 6. 继续检查 Large Models：第一屏应完整显示六个领域；随后依次切到 Top 10、开放权重、AAI 可比样本，卡片数量应为 10、24、8。
-7. 继续检查 Awesome：随后依次切到 direct 项目、`Install`、全量视角，项目数量应为 19、26、26。
+7. 继续检查 Awesome：随后依次切到可直接消费项目、安装类项目、全量视角。安装类项目的卡片会解释 `Install` 与 `direct` 的口径。
 8. 用“上一步”原路退回标题。正式演讲前不要刷新页面。
 9. 若浏览器拦截全屏，先在浏览器设置中允许当前站点使用全屏。
 
 数据口径：
 
-- GitHub 项目快照：2026-07-28。
-- OpenRank：趋势字段覆盖 2025-08—2026-07；2026-07 尚未完整，舞台分析只使用截至 2026-06 的完整月份。
-- OpenRouter 与 ZenMux：2026-06-01—2026-06-30。
-- InclusionAI 三个平台：2026-07-30。
-- Apache 官网数字：2026-07-29 页面口径。
+- 全场统计口径：数据截至 2026-08-01。
+- OpenRank：趋势字段覆盖 2025-08—2026-07，舞台分析使用 2026-07 完整月；7 月全库分区仍在回填，因此只把它当方向信号。
+- OpenRouter 与 ZenMux：2026-07-01—2026-07-31 完整自然月。
+- GitHub 仓库指标：采用当前 REST API 返回值，按演讲约定归入 8 月 1 日快照。
 
 ---
 
@@ -109,7 +108,7 @@ Agent Infra 的真实网页组件铺满屏幕，项目 Logo、分区和 OpenRank
 
 这张图沿着 Agent 完成一次任务的路径来组织项目。上面有应用和框架，下面是工具、环境、记忆、协议和运行基础设施。
 
-这张图有 74 个项目。先看当前结构，再看近期增长、公共接口和 Agent 自身的改进方式。
+这张图有 74 个项目。先看当前结构，再看近期增长和公共接口。
 
 ### 按一次 `PageDown`
 
@@ -125,11 +124,11 @@ Agentic coding 有 12 个项目，Code-first frameworks 有 10 个。代码仍�
 
 `Memory, knowledge & context` 抬高；讲解卡切换为：
 
-> OpenViking · OpenRank：35.96 → 140.23
+> OpenViking · OpenRank：112.46 → 177.61
 
 ### 继续讲
 
-OpenViking 把 memory、RAG 和 skills 收进 context database。2026 年 3 月到 6 月，它的 OpenRank 从 35.96 升到 140.23。
+OpenViking 把 memory、RAG 和 skills 收进 context database。2026 年 3 月到 7 月，它的 OpenRank 从 112.46 升到 177.61。
 
 上下文原本常被包在 framework 里面。现在开始出现独立的 context database，社区可以单独改进存储、检索和更新方式。图上的 `RISING` 只给有时间窗口证据的项目；它和“这一版刚加入主图”是两个字段。
 
@@ -142,18 +141,6 @@ OpenViking 把 memory、RAG 和 skills 收进 context database。2026 年 3 月�
 ### 继续讲
 
 MCP 连接 Agent 与工具，A2A 处理 Agent 之间的协作。AG-UI 和 A2UI 又把事件流与界面带进公共接口层。这些协议还很年轻，现场不要讲成标准已经稳定。
-
-### 再按一次 `PageDown`
-
-`Observability & evaluation` 抬高；讲解卡显示：
-
-> SkillOpt：15.2K stars / 45 名 7 月可见参与者
-
-### 继续讲
-
-SkillOpt 不是在训练模型权重。它把 skill 文档当作可训练状态，用 rollout、评估和验证门决定怎样更新。
-
-Agent 的改进开始有了另一条路径：模型不变，执行策略和技能材料持续迭代。项目 5 月 8 日才创建，历史还短，所以图上标 `NEW`，不把它讲成已经成熟的类别。
 
 再按 `PageDown`，进入 Model Infra。
 
@@ -173,13 +160,24 @@ Model Infra 看的是模型访问、训练、数据、计算和推理。现在�
 
 Model API gateways 自动聚焦，项目 Logo 和分区仍然可见；右下角出现：
 
-> OmniRoute · OpenRank：4.07 → 39.04
+> OmniRoute · OpenRank：4.48 → 31.92
 
 ### 继续讲
 
-OmniRoute 截至 7 月 28 日有 32,706 stars，2 月到 6 月 OpenRank 从 4.07 升到 39.04。机器扫描发现了它，按绝对排名截断的人工短名单却把它漏掉了。
+OmniRoute 在 8 月 1 日口径下有 38,536 stars，2 月到 7 月 OpenRank 从 4.48 升到 31.92。机器扫描发现了它，按绝对排名截断的人工短名单却把它漏掉了。
 
-这次把它补回来，也补了一条高增速复核通道。OmniRoute 与 LiteLLM、New API、AgentGateway 有交叉；这里不把热度等同于独特性，而是用它说明 gateway 的职责正在从模型 API 代理延伸到配额 fallback、MCP 和 A2A 流量。
+这次把它补回来，也补了一条高增速复核通道。增长只能说明值得重看，不能替代功能判断。
+
+我们又对照了几个项目的近期迭代。LiteLLM 增加 MCP OAuth、工具列表与调用管理；AgentGateway 1.1 把 MCP 鉴权放进流量策略，同时覆盖 A2A 与 LLM 流量；ContextForge 1.0 增加 A2A runtime 和 MCP proxy security。OmniRoute 自己则把配额感知 fallback、MCP 与 A2A 放在同一个入口。
+
+所以这里收窄为一个可复核的判断：同叫 gateway，项目正在处理不同的流量和治理对象，分类时要看实际功能，不能只看名字。
+
+证据来自各项目官方仓库与 release：
+
+- <https://github.com/BerriAI/litellm/releases>
+- <https://github.com/agentgateway/agentgateway/releases>
+- <https://github.com/IBM/mcp-context-forge/releases>
+- <https://github.com/diegosouzapw/OmniRoute>
 
 ### 再按一次 `PageDown`
 
@@ -211,19 +209,19 @@ OpenRank 在这里表示协作活跃度，不表示性能排名。
 
 ### 进入画面
 
-Large Models 原始 HTML 按 3840×2160 画布等比缩放到舞台中。六个领域、筛选栏和每张模型卡都应完整出现。
+Large Models 总览铺满舞台。六个领域、筛选栏和每张模型卡都应完整出现。
 
 ### 讲法
 
 这张图换了一个数据来源。GitHub 活跃度不适合说明模型的实际使用，因此我们把 OpenRouter 和 ZenMux 放在同一个完整自然月里比较。
 
-选择集一共 50 个模型 endpoint，其中 24 个提供公开权重，26 个没有公开权重，几乎对半。
+选择集一共 50 个模型 endpoint，其中 20 个提供公开权重，30 个没有公开权重。开放权重仍占重要位置，但没有占据多数。
 
 ### 按一次 `PageDown`
 
-原 HTML 自动点击 `TOP 10`，50 张模型卡收束到真实使用前十；右下角同时出现：
+画面切到 `TOP 10`，50 张模型卡收束到真实使用前十；右下角同时出现：
 
-> Top 10：开放权重 5 / 无公开权重 5
+> Top 10：开放权重 4 / 无公开权重 6
 
 ### 继续讲
 
@@ -231,9 +229,9 @@ Large Models 原始 HTML 按 3840×2160 画布等比缩放到舞台中。六个�
 
 ### 再按一次 `PageDown`
 
-原 HTML 切换到开放权重视角；右下角显示：
+画面切到开放权重视角；右下角显示：
 
-> Reasoning：12 / 13 为开放权重
+> Reasoning：9 / 10 为开放权重
 
 ### 继续讲
 
@@ -241,13 +239,13 @@ Large Models 原始 HTML 按 3840×2160 画布等比缩放到舞台中。六个�
 
 ### 再按一次 `PageDown`
 
-原 HTML 切到 AAI 可比样本；右下角显示：
+画面切到 AAI 可比样本；右下角显示：
 
-> 使用 #1 / AAI 最高模型使用 #25
+> 使用 #1 / AAI 最高模型使用 #12
 
 ### 继续讲
 
-公开使用与能力榜没有排成同一条队伍。8 个可比样本中，使用第 1 的模型 AAI 为 40.3；AAI 最高的模型在使用数据里排第 25。部署成本、价格和渠道都会改变实际选择。
+公开使用与能力榜没有排成同一条队伍。8 个可比样本中，使用第 1 的模型 AAI 为 51.1；AAI 最高的模型在使用数据里排第 12。部署成本、价格和渠道都会改变实际选择。
 
 再按 `PageDown`，进入 Awesome。
 
@@ -257,7 +255,7 @@ Large Models 原始 HTML 按 3840×2160 画布等比缩放到舞台中。六个�
 
 ### 进入画面
 
-Awesome Agentic Landscape 原始 HTML 铺满屏幕，保留四列总览、筛选栏和项目卡。
+Awesome Agentic Landscape 总览铺满屏幕，保留四列、筛选栏和项目卡。
 
 ### 讲法
 
@@ -267,7 +265,7 @@ Awesome Agentic Landscape 原始 HTML 铺满屏幕，保留四列总览、筛选
 
 ### 按一次 `PageDown`
 
-原 HTML 自动打开 `AGENT-READY`，只保留可以被 Agent 直接消费的项目；右下角出现：
+画面打开 `AGENT-READY`，只保留可以被 Agent 直接消费的项目；右下角出现：
 
 > 入图的 26 个项目中，19 个可被 Agent 直接消费
 
@@ -279,17 +277,17 @@ README 过去主要解释软件怎么安装。现在有些 README 已经在告�
 
 ### 再按一次 `PageDown`
 
-原 HTML 聚焦 `Install`；右下角显示：
+画面聚焦 `Install`；右下角显示：
 
-> 7 / 7：Install 阶段全部达到 direct
+> 7 / 7：7 个安装类项目都给出了机器可执行入口
 
 ### 继续讲
 
-安装环节最容易写成机器可以执行的入口：一条命令、一个 manifest，或者一份明确的配置。可消费性在这里已经比较成熟。
+这里的 `Install` 是编辑分类，指安装或注册工具；`direct` 是材料形态，表示仓库提供 Agent 可直接调用的命令、manifest 或配置。这 7 个项目都满足该条件。它衡量入口是否能执行，不评价项目质量或成熟度。
 
 ### 再按一次 `PageDown`
 
-原 HTML 恢复全图；右下角显示：
+画面恢复全图；右下角显示：
 
 > 22 / 26：创建于 2025 年以后
 
@@ -309,7 +307,7 @@ README 过去主要解释软件怎么安装。现在有些 README 已经在告�
 
 - Agent Infra：OpenDigger 与 GitHub，74 个入图项目；
 - Model Infra：共用仓库候选池，58 个入图项目；
-- Large Models：OpenRouter、ZenMux 与 Hugging Face，2026 年 6 月完整自然月，50 个模型 endpoint；
+- Large Models：OpenRouter、ZenMux 与 Hugging Face，2026 年 7 月完整自然月，50 个模型 endpoint；
 - Awesome：GitHub、OpenDigger 与手工种子，26 个编辑样本。
 
 ### 讲法
@@ -408,31 +406,15 @@ Apache 官网目前写的是 290 多个开源项目。这个数字背后还有�
 
 ### 进入画面｜Data, analytics & AI
 
-Apache Project Atlas 直接沿用研究视图。顶部保留分类口径，左侧是 7 个领域，右侧显示当前领域的官方标签、头部项目和进入 Agentic Landscape 的 Apache 项目；底部 46 条无可用 DOAP 分类的目录记录也完整保留。
-
-PageDown 不会离开这张图，它会像有人操作网页一样，替演讲者依次切换领域。
+左侧保留 Apache 项目的 7 个技术领域，右侧停在 Data, analytics & AI。下方单独列出进入 Agentic Landscape 的 6 个项目，不随目录分类缺失而漏项。
 
 ### 讲法
 
-如果只看 Agent UI 和框架，Apache 似乎离中心很远。把视线移到数据、计算和运行系统，位置就很清楚。
+如果只看 Agent UI 和框架，Apache 离热点有些远。数据、计算和运行系统里，它的位置很清楚。Apache Projects Directory 允许一个项目带多个分类，因此左侧领域数量会有重叠；页面直接写成“同一项目可属于多个领域”，台上不使用缩写。
 
-第一屏先看 Data, analytics & AI。80 条多标签项目记录里，Airflow、Spark、Iceberg 等项目和 Agent 的数据、编排与计算底座直接相连。
+进入 Landscape 的 6 个项目一次展示完整：Airflow 负责编排，Spark 负责分布式计算，Iceberg、Hudi 和 Paimon 处理数据表与持续更新，Gravitino 处理跨系统元数据。Paimon 和 Gravitino 在目录分类里缺少可用标签，但它们仍是本次 Landscape 的入选项目，所以这里不会把它们漏掉。
 
-### 第一次按 `PageDown`｜Libraries, languages & formats
-
-左侧 active Tab 移到 Libraries。这里有 Arrow、Thrift、Fory 一类跨语言库和格式。Agent runtime 需要在不同语言和进程间交换状态，这些公共组件会被重新用到。
-
-### 第二次按 `PageDown`｜Network, messaging & integration
-
-active Tab 移到 Network。工具调用跨过进程和服务以后，协议、消息与系统集成不再只是外围能力。
-
-### 第三次按 `PageDown`｜Operations & orchestration
-
-active Tab 移到 Operations。调度、工作流和部署让一次 Agent 任务能够被运行、观察和恢复。
-
-### 收束
-
-这些项目没有因为 Agent 出现才变得重要。Agent 把许多步骤连在一起以后，它们解决的问题同时出现了。
+右侧同时保留当前领域的头部项目，让观众看到 Apache 的技术底盘远大于这 6 个入选项目。演讲模式不再自动切换没有入选项目的领域。
 
 再按 `PageDown`。
 
@@ -484,8 +466,8 @@ Apache 展示的是跨组织基础设施怎样长期协作。InclusionAI 提供�
 
 研究页原有的三张平台卡一起出现：
 
-- GitHub：92 个公开仓库；
-- Hugging Face：197 个公开模型；
+- GitHub：93 个公开仓库；
+- Hugging Face：198 个公开模型；
 - ModelScope：188 个公开模型。
 
 ### 继续讲

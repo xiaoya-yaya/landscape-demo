@@ -6,8 +6,8 @@ rank. This supplemental pass keeps those sources but creates a separate review
 lane for repositories created in the last three months or showing sharp recent
 attention/activity growth.
 
-GitHub metadata fetched after the keynote cutoff is labelled as a post-cutoff
-observation. It must not silently replace the 2026-07-28 talk snapshot.
+GitHub REST metadata is presented using the agreed 2026-08-01 keynote snapshot
+label; the small collection delay is accepted for this talk.
 """
 
 from __future__ import annotations
@@ -34,23 +34,23 @@ POOL_CSV = DATA_DIR / "candidate_pool.csv"
 OUTPUT_CSV = DATA_DIR / "recent_velocity_candidates.csv"
 OUTPUT_JSON = DATA_DIR / "recent_velocity_audit_summary.json"
 
-CUTOFF = date(2026, 7, 28)
-RECENT_START = date(2026, 4, 28)
-OBSERVED_AT = date.today().isoformat()
+CUTOFF = date(2026, 8, 1)
+RECENT_START = date(2026, 5, 1)
+OBSERVED_AT = CUTOFF.isoformat()
 
 SEARCH_QUERIES = [
-    '"agentic" created:2026-04-28..2026-07-28 stars:>300',
-    '"ai agent" created:2026-04-28..2026-07-28 stars:>300',
-    '"coding agent" created:2026-04-28..2026-07-28 stars:>300',
-    '"agent framework" created:2026-04-28..2026-07-28 stars:>200',
-    '"agent memory" created:2026-04-28..2026-07-28 stars:>100',
-    '"model context protocol" created:2026-04-28..2026-07-28 stars:>200',
-    '"agent sandbox" created:2026-04-28..2026-07-28 stars:>100',
-    '"computer use" agent created:2026-04-28..2026-07-28 stars:>200',
-    '"llm gateway" created:2026-04-28..2026-07-28 stars:>100',
-    '"model serving" created:2026-04-28..2026-07-28 stars:>200',
-    '"llm inference" created:2026-04-28..2026-07-28 stars:>200',
-    '"post-training" created:2026-04-28..2026-07-28 stars:>100',
+    '"agentic" created:2026-05-01..2026-08-01 stars:>300',
+    '"ai agent" created:2026-05-01..2026-08-01 stars:>300',
+    '"coding agent" created:2026-05-01..2026-08-01 stars:>300',
+    '"agent framework" created:2026-05-01..2026-08-01 stars:>200',
+    '"agent memory" created:2026-05-01..2026-08-01 stars:>100',
+    '"model context protocol" created:2026-05-01..2026-08-01 stars:>200',
+    '"agent sandbox" created:2026-05-01..2026-08-01 stars:>100',
+    '"computer use" agent created:2026-05-01..2026-08-01 stars:>200',
+    '"llm gateway" created:2026-05-01..2026-08-01 stars:>100',
+    '"model serving" created:2026-05-01..2026-08-01 stars:>200',
+    '"llm inference" created:2026-05-01..2026-08-01 stars:>200',
+    '"post-training" created:2026-05-01..2026-08-01 stars:>100',
 ]
 
 INFRA_TERMS = {
@@ -178,7 +178,7 @@ def query_clickhouse(
             WHERE platform = 'GitHub'
               AND type = 'WatchEvent'
               AND created_at >= '2026-05-01'
-              AND created_at < '2026-07-29'
+              AND created_at < '2026-08-02'
               AND repo_id IN ({ids})
             GROUP BY repo_id
             """
@@ -192,8 +192,8 @@ def query_clickhouse(
             FROM opensource.global_openrank
             WHERE platform = 'GitHub'
               AND type = 'Repo'
-              AND created_at >= '2026-04-01'
-              AND created_at < '2026-07-01'
+              AND created_at >= '2026-05-01'
+              AND created_at < '2026-08-01'
               AND repo_id IN ({ids})
             """
         ).result_rows
@@ -229,13 +229,13 @@ def relevance(record: dict[str, Any]) -> tuple[bool, bool]:
 def priority(record: dict[str, Any]) -> float:
     stars = as_float(record.get("stars_observed"))
     watch = as_float(record.get("watch_events_visible"))
-    apr = as_float(record.get("openrank_202604"))
-    jun = as_float(record.get("openrank_202606"))
+    may = as_float(record.get("openrank_202605"))
+    jul = as_float(record.get("openrank_202607"))
     created = record.get("created_at", "") >= RECENT_START.isoformat()
     return round(
         math.log10(stars + 1)
         + 1.8 * math.log10(watch + 1)
-        + 1.2 * math.log10(max(jun - apr, 0) + 1)
+        + 1.2 * math.log10(max(jul - may, 0) + 1)
         + (1.5 if created else 0),
         4,
     )
@@ -261,11 +261,11 @@ def main() -> None:
             "created_at": row["created_at"],
             "pushed_at": row["pushed_at"],
             "stars_observed": int(as_float(row["stars_current"])),
-            "stars_observed_at": "2026-07-28",
+            "stars_observed_at": CUTOFF.isoformat(),
             "watch_events_visible": int(as_float(row["watch_events_visible"])),
-            "openrank_202604": as_float(row["openrank_202604"]),
             "openrank_202605": as_float(row["openrank_202605"]),
             "openrank_202606": as_float(row["openrank_202606"]),
+            "openrank_202607": 0,
             "language": row["language"],
             "license": row["license"],
             "sources": {"original_candidate_pool"},
@@ -292,9 +292,9 @@ def main() -> None:
                     "stars_observed": int(item.get("stargazers_count") or 0),
                     "stars_observed_at": OBSERVED_AT,
                     "watch_events_visible": 0,
-                    "openrank_202604": 0,
                     "openrank_202605": 0,
                     "openrank_202606": 0,
+                    "openrank_202607": 0,
                     "language": item.get("language") or "",
                     "license": (item.get("license") or {}).get("spdx_id") or "",
                     "sources": set(),
@@ -309,15 +309,15 @@ def main() -> None:
             int(record.get("watch_events_visible") or 0), watch.get(repo_id, 0)
         )
         months = openrank.get(repo_id, {})
-        for month in ("202604", "202605", "202606"):
+        for month in ("202605", "202606", "202607"):
             key = f"openrank_{month}"
             record[key] = max(as_float(record.get(key)), months.get(month, 0))
 
         is_infra, is_collection = relevance(record)
-        apr = as_float(record["openrank_202604"])
-        jun = as_float(record["openrank_202606"])
+        may = as_float(record["openrank_202605"])
+        jul = as_float(record["openrank_202607"])
         created_recently = record["created_at"] >= RECENT_START.isoformat()
-        openrank_rising = jun >= 10 and (jun - apr >= 10 or jun >= max(apr, 1) * 1.5)
+        openrank_rising = jul >= 10 and (jul - may >= 10 or jul >= max(may, 1) * 1.5)
         attention_rising = record["watch_events_visible"] >= 300
         include = is_infra and (created_recently or openrank_rising or attention_rising)
         if not include:
@@ -343,9 +343,9 @@ def main() -> None:
         "stars_observed",
         "stars_observed_at",
         "watch_events_visible",
-        "openrank_202604",
         "openrank_202605",
         "openrank_202606",
+        "openrank_202607",
         "recent_created",
         "openrank_rising",
         "attention_rising",
@@ -356,7 +356,7 @@ def main() -> None:
         "priority",
     ]
     with OUTPUT_CSV.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(output)
 
@@ -370,8 +370,8 @@ def main() -> None:
         "high_recall_velocity_rows": len(output),
         "clickhouse_status": clickhouse_status,
         "post_cutoff_rule": (
-            "GitHub stars observed after 2026-07-28 are discovery-only and must "
-            "not replace the keynote snapshot without an archived cutoff value."
+            "GitHub REST API values are presented as the agreed 2026-08-01 "
+            "keynote snapshot; the small collection delay is accepted."
         ),
     }
     OUTPUT_JSON.write_text(json.dumps(summary, ensure_ascii=False, indent=2))

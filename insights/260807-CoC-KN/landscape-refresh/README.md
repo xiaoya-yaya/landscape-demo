@@ -13,7 +13,7 @@ From the repository root:
 
 The renderer selects rows where `landscape_action` is `keep` or `add`, uses the
 current `landscape_layer` and `landscape_section`, caches GitHub owner avatars
-locally, and displays the June 2026 OpenRank value. The generated HTML files are
+locally, and displays the July 2026 OpenRank value. The generated HTML files are
 offline-capable after the avatar cache has been created.
 
 Render 4K PNG files with:
