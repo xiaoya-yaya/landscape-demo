@@ -271,12 +271,52 @@
   border: 0;
 }
 
+.embedExplorer[data-presentation-mode="true"] .landscapeModule {
+  height: 100%;
+}
+
+.embedExplorer[data-presentation-mode="true"] .boardMasthead {
+  min-height: 75px;
+  padding: 10px 8px 12px;
+  border-bottom: 3px solid var(--ink);
+}
+
+.embedExplorer[data-presentation-mode="true"] .boardTitleLockup h2 {
+  font-size: 41px;
+  font-weight: 900;
+  letter-spacing: -0.045em;
+}
+
+.embedExplorer[data-presentation-mode="true"] .boardTitleLockup > span,
+.embedExplorer[data-presentation-mode="true"] .infraRail {
+  display: none;
+}
+
+.embedExplorer[data-presentation-mode="true"] .landscapeBand {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.embedExplorer[data-presentation-mode="true"] .boardSource > span {
+  display: none;
+}
+
+.embedExplorer[data-presentation-mode="true"] .boardSource strong {
+  font-size: 11px;
+}
+
 .embedExplorer .boardViewport {
   width: 100%;
   max-width: none;
   margin: 0;
   overflow: hidden;
   border-radius: 0;
+}
+
+.embedExplorer .boardViewport[data-fit-container-height="true"] {
+  height: 100%;
+  display: grid;
+  place-items: center;
 }
 
 .embedExplorer .landscapeBoard {
@@ -287,6 +327,10 @@
 
 .embedExplorer .landscapeSlide {
   border-radius: 0;
+}
+
+.embedExplorer[data-presentation-mode="true"] .landscapeSlide {
+  border: 0;
 }
 
 .embedExplorer .zone {

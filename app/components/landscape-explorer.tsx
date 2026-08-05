@@ -198,10 +198,12 @@ function FixedLandscapeFrame({
   children,
   fitViewport,
   allowUpscale,
+  fitContainerHeight,
 }: {
   children: ReactNode;
   fitViewport?: boolean;
   allowUpscale?: boolean;
+  fitContainerHeight?: boolean;
 }) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
@@ -211,8 +213,11 @@ function FixedLandscapeFrame({
     if (!viewport) return;
 
     const fit = () => {
+      const availableHeight = fitContainerHeight
+        ? viewport.clientHeight
+        : window.innerHeight;
       const heightScale = fitViewport
-        ? window.innerHeight / LANDSCAPE_CANVAS_HEIGHT
+        ? availableHeight / LANDSCAPE_CANVAS_HEIGHT
         : 1;
       setScale(
         Math.min(
@@ -232,10 +237,14 @@ function FixedLandscapeFrame({
       observer.disconnect();
       if (fitViewport) window.removeEventListener("resize", fit);
     };
-  }, [allowUpscale, fitViewport]);
+  }, [allowUpscale, fitContainerHeight, fitViewport]);
 
   return (
-    <div ref={viewportRef} className={styles.boardViewport}>
+    <div
+      ref={viewportRef}
+      className={styles.boardViewport}
+      data-fit-container-height={fitContainerHeight || undefined}
+    >
       <div
         className={styles.landscapeFrameSizer}
         style={{
@@ -1171,6 +1180,7 @@ export default function LandscapeExplorer({
   return (
     <section
       className={cn(styles.explorer, embedOnly && styles.embedExplorer)}
+      data-presentation-mode={presentationMode || undefined}
       id="landscape"
       aria-label={
         embedOnly
@@ -1270,6 +1280,7 @@ export default function LandscapeExplorer({
           <FixedLandscapeFrame
             fitViewport={standalone || presentationMode}
             allowUpscale={presentationMode}
+            fitContainerHeight={presentationMode}
           >
             <div className={styles.landscapeBoard}>
               <section ref={agentSlideRef} className={styles.landscapeSlide}>
@@ -1278,7 +1289,9 @@ export default function LandscapeExplorer({
                     <span aria-hidden="true">A</span>
                     <div>
                       <h2>Agent Infra Landscape 2026</h2>
-                      <p>Applications · frameworks · runtime infrastructure</p>
+                      {!presentationMode ? (
+                        <p>Applications · frameworks · runtime infrastructure</p>
+                      ) : null}
                     </div>
                   </div>
                   <div className={styles.boardSource}>
@@ -1422,6 +1435,7 @@ export default function LandscapeExplorer({
           <FixedLandscapeFrame
             fitViewport={standalone || presentationMode}
             allowUpscale={presentationMode}
+            fitContainerHeight={presentationMode}
           >
             <div className={styles.landscapeBoard}>
               <section
@@ -1436,7 +1450,9 @@ export default function LandscapeExplorer({
                     <span aria-hidden="true">M</span>
                     <div>
                       <h2>Model Infra Landscape 2026</h2>
-                      <p>Routing · serving · training · data · compute</p>
+                      {!presentationMode ? (
+                        <p>Routing · serving · training · data · compute</p>
+                      ) : null}
                     </div>
                   </div>
                   <div className={styles.boardSource}>

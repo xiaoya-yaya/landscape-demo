@@ -7,6 +7,16 @@ export type ApacheDomainKey =
   | "security"
   | "edge";
 
+export const apacheDomainOrder: ApacheDomainKey[] = [
+  "data",
+  "libraries",
+  "network",
+  "web",
+  "operations",
+  "security",
+  "edge",
+];
+
 export type ApacheProject = {
   name: string;
   repo: string;
@@ -25,6 +35,19 @@ export const apacheLandscapeProjects = [
   { name: "Gravitino", logo: "/keynote/apache/assets/project-logos/gravitino.png" },
 ] as const;
 
+export const apacheLandscapeGroups = [
+  {
+    label: "TASK & COMPUTE",
+    title: "任务与计算",
+    projects: ["Airflow", "Spark"],
+  },
+  {
+    label: "OPEN DATA PLANE",
+    title: "Lakehouse 与元数据",
+    projects: ["Iceberg", "Hudi", "Paimon", "Gravitino"],
+  },
+] as const;
+
 export const apacheDomains: Record<
   ApacheDomainKey,
   {
@@ -33,14 +56,13 @@ export const apacheDomains: Record<
     definition: string;
     officialLabels: string[];
     heads: [string, string][];
-    landscape: string[];
   }
 > = {
   data: {
     label: "Data, analytics & AI",
     count: 80,
     definition:
-      "覆盖数据处理、数据库、搜索、分析与 AI 计算。下方单列 Landscape 中的六个项目，不受目录分类缺失影响。",
+      "覆盖数据处理、数据库、搜索、分析与 AI 计算。技术领域按 Apache Projects Directory 的项目分类汇总，同一项目可出现在多个领域。",
     officialLabels: [
       "big-data",
       "database",
@@ -56,7 +78,6 @@ export const apacheDomains: Record<
       ["Kafka", "33.3k"],
       ["Flink", "26.2k"],
     ],
-    landscape: ["Airflow", "Spark", "Iceberg"],
   },
   libraries: {
     label: "Libraries, languages & formats",
@@ -72,7 +93,6 @@ export const apacheDomains: Record<
       ["DataFusion", "9.0k"],
       ["IoTDB", "6.4k"],
     ],
-    landscape: ["Hudi"],
   },
   network: {
     label: "Network, messaging & integration",
@@ -93,7 +113,6 @@ export const apacheDomains: Record<
       ["Camel", "6.3k"],
       ["Ignite", "5.1k"],
     ],
-    landscape: [],
   },
   web: {
     label: "Web & application platforms",
@@ -109,7 +128,6 @@ export const apacheDomains: Record<
       ["Nutch", "3.3k"],
       ["PDFBox", "3.1k"],
     ],
-    landscape: [],
   },
   operations: {
     label: "Cloud, build & operations",
@@ -131,7 +149,6 @@ export const apacheDomains: Record<
       ["Ignite", "5.1k"],
       ["CloudStack", "3.0k"],
     ],
-    landscape: [],
   },
   security: {
     label: "Security & identity",
@@ -149,7 +166,6 @@ export const apacheDomains: Record<
       ["Santuario", "57"],
       ["Fortress", "53"],
     ],
-    landscape: [],
   },
   edge: {
     label: "IoT & geospatial",
@@ -165,7 +181,6 @@ export const apacheDomains: Record<
       ["Mynewt", "889"],
       ["SIS", "124"],
     ],
-    landscape: [],
   },
 };
 

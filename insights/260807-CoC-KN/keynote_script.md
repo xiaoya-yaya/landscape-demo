@@ -168,16 +168,27 @@ OmniRoute 在 8 月 1 日口径下有 38,536 stars，2 月到 7 月 OpenRank 从
 
 这次把它补回来，也补了一条高增速复核通道。增长只能说明值得重看，不能替代功能判断。
 
-我们又对照了几个项目的近期迭代。LiteLLM 增加 MCP OAuth、工具列表与调用管理；AgentGateway 1.1 把 MCP 鉴权放进流量策略，同时覆盖 A2A 与 LLM 流量；ContextForge 1.0 增加 A2A runtime 和 MCP proxy security。OmniRoute 自己则把配额感知 fallback、MCP 与 A2A 放在同一个入口。
+我们又对照了几个 gateway 的近期实现。它们都开始进入 Agent 的调用链，站的位置却不一样。
 
-所以这里收窄为一个可复核的判断：同叫 gateway，项目正在处理不同的流量和治理对象，分类时要看实际功能，不能只看名字。
+LiteLLM 位于 Agent 和上游 MCP Server 之间。它接管 OAuth，取得 `tools/list`，代理 `tools/call`，也能按用户限制可调用的工具。这里管理的是 Agent 对外部工具的访问。
+
+AgentGateway 是协议感知的数据平面。MCP、A2A 和 LLM 请求进入以后，它先识别协议，再执行路由和流量策略。1.1 把 MCP JWT 鉴权移到 route level，身份信息可以继续用于工具授权、限流和请求转换。它代理的是协议流量，不是把自己包装成一个 Agent。
+
+ContextForge 更接近注册中心和聚合代理。它把多个 MCP Server、A2A Agent 以及 REST、gRPC 服务登记在一个目录里，组合成统一入口；还可以把外部 A2A Agent 暴露成 MCP Tool。这样，只懂 MCP 的客户端也能调用那个 Agent。它曾加入 Rust A2A runtime，但这套 Rust sidecar 已被官方弃用，现场不要再把 runtime 当作当前趋势来讲。
+
+OmniRoute 的方向又不同。它把自己的模型路由、额度、成本和健康状态做成 MCP 工具，同时把自己包装成带有 `smart-routing` 等固定技能的 A2A Agent。Agent 可以把“替我选一个合适的模型并执行请求”委托给它。它不是通用的 MCP Server 或 A2A Agent 聚合代理。
+
+这一页真正要讲的趋势是：Gateway 开始接管工具与 Agent 调用链。同叫 gateway，有的代理工具访问，有的执行流量策略，有的聚合协议后端，还有的把自身能力直接开放给 Agent。分类时要看它在链路中的位置和实际动作，不能只看项目介绍里有没有 MCP、A2A 两个词。
 
 证据来自各项目官方仓库与 release：
 
-- <https://github.com/BerriAI/litellm/releases>
-- <https://github.com/agentgateway/agentgateway/releases>
-- <https://github.com/IBM/mcp-context-forge/releases>
-- <https://github.com/diegosouzapw/OmniRoute>
+- LiteLLM releases：<https://github.com/BerriAI/litellm/releases>
+- AgentGateway 1.1 release notes：<https://agentgateway.dev/docs/kubernetes/1.1.x/reference/release-notes/>
+- AgentGateway MCP authorization：<https://agentgateway.dev/docs/standalone/latest/mcp/mcp-authz/>
+- ContextForge architecture：<https://ibm.github.io/mcp-context-forge/latest/architecture/>
+- ContextForge A2A integration：<https://ibm.github.io/mcp-context-forge/using/agents/a2a/>
+- OmniRoute MCP Server：<https://github.com/diegosouzapw/OmniRoute/blob/main/docs/frameworks/MCP-SERVER.md>
+- OmniRoute A2A Server：<https://github.com/diegosouzapw/OmniRoute/blob/main/docs/frameworks/A2A-SERVER.md>
 
 ### 再按一次 `PageDown`
 
@@ -406,15 +417,25 @@ Apache 官网目前写的是 290 多个开源项目。这个数字背后还有�
 
 ### 进入画面｜Data, analytics & AI
 
-左侧保留 Apache 项目的 7 个技术领域，右侧停在 Data, analytics & AI。下方单独列出进入 Agentic Landscape 的 6 个项目，不随目录分类缺失而漏项。
+上半部分保留 Apache 项目的 7 个技术领域，右侧停在 Data, analytics & AI。这套领域和数量来自 Apache Projects Directory 的项目分类，用来观察 Apache 全部项目的技术分布。同一项目可以出现在多个领域，数量不能直接相加。
+
+画面下方始终列出进入 Agentic Landscape 的 6 个 Apache 项目，并按它们在 Agentic AI 技术栈里的实际角色分成两组。
 
 ### 讲法
 
 如果只看 Agent UI 和框架，Apache 离热点有些远。数据、计算和运行系统里，它的位置很清楚。Apache Projects Directory 允许一个项目带多个分类，因此左侧领域数量会有重叠；页面直接写成“同一项目可属于多个领域”，台上不使用缩写。
 
-进入 Landscape 的 6 个项目一次展示完整：Airflow 负责编排，Spark 负责分布式计算，Iceberg、Hudi 和 Paimon 处理数据表与持续更新，Gravitino 处理跨系统元数据。Paimon 和 Gravitino 在目录分类里缺少可用标签，但它们仍是本次 Landscape 的入选项目，所以这里不会把它们漏掉。
+Apache Projects Directory 的标签是统计来源，不适合直接拿来解释这六个项目。比如 Hudi 会落到 library，Paimon 和 Gravitino 又缺少可用领域标签。这里把两个口径分开，避免观众误以为六个项目都属于当前选中的 Data tab。
 
-右侧同时保留当前领域的头部项目，让观众看到 Apache 的技术底盘远大于这 6 个入选项目。演讲模式不再自动切换没有入选项目的领域。
+### 连续按 `PageDown`
+
+右侧依次切换其余六个领域：Libraries、Network、Web、Cloud & Operations、Security、IoT & Geospatial。每一页都显示该领域的数量、范围和六个头部项目。现场快速扫过项目名，不需要逐个报 GitHub stars。
+
+Libraries 可以点 ECharts、Arrow 和 Thrift；Network 可以点 Arrow、Thrift 和 Camel；Web 可以点 Tomcat 和 CouchDB；Cloud & Operations 可以点 SkyWalking、JMeter 和 Maven；Security 的项目很少，Ranger 排在最前；IoT & Geospatial 可以点 IoTDB 和 PLC4X。
+
+画面下方始终保留 6 个 Landscape 入选项目。Airflow 和 Spark 放在“任务与计算”：一个组织任务，一个完成分布式计算。Iceberg、Hudi、Paimon 和 Gravitino 放在“Lakehouse 与元数据”。前三个处理开放数据表、增量更新和流批数据，Gravitino 负责跨系统的元数据与目录。
+
+这个分布很集中。Apache 在当前 Agentic Landscape 里的六个项目，主要构成数据和计算底座。Agent framework、协议和应用层没有为了凑数硬放 Apache 项目。下一页会继续沿着实际运行链，看这些基础项目怎样接在一起。
 
 再按 `PageDown`。
 
@@ -460,7 +481,7 @@ Apache 官网目前写的是 290 多个开源项目。这个数字背后还有�
 
 Apache 展示的是跨组织基础设施怎样长期协作。InclusionAI 提供了一个更靠近模型和 Agent 的样本。
 
-这里的 “Everyone” 指很多种参与方式。有人做模型，也有人贡献环境、工具、评测和具体场景。
+这里的 “Everyone” 指很多种参与方式。Available 是模型和工具能被拿到、理解和适配；Affordable 是使用成本足够低，能够进入真实服务；Inclusive 是开发者、领域专家和普通用户都能参与，也能分享技术带来的价值。
 
 ### 按一次 `PageDown`
 
@@ -518,7 +539,7 @@ LingGuang、金融服务和 AQ 等真实服务，把用户遇到的问题重新�
 
 ---
 
-## 14｜允许商用，够不够称为开放（20:20—21:10）
+## 14｜允许商用，够不够称为开放（20:20—21:05）
 
 ### 进入画面
 
@@ -546,35 +567,69 @@ LingGuang、金融服务和 AQ 等真实服务，把用户遇到的问题重新�
 
 ---
 
-## 15｜许可证说权利，开放度看材料（21:10—23:10）
+## 15｜软件仓库与模型仓库的许可证分布（21:05—22:35）
+
+### 进入画面｜Agent Infra + Model Infra
+
+132 个软件项目中，Apache-2.0 有 61 个，MIT 有 37 个，两者合计 74.2%。25 个 NOASSERTION 只表示 GitHub / SPDX 没有给出可确认的标识，不能直接读成没有许可证。
+
+### 按一次 `PageDown`｜Hugging Face Top 100
+
+Hugging Face Text Generation 下载量 Top 100 中，Apache-2.0 有 57 个，MIT 有 19 个，两者合计 76%。20 个使用模型专用或其他许可证，另外 4 个没有 license tag。
+
+两组比例接近，只能说明宽松许可在软件仓库和模型仓库里都很常见。模型仓库里的许可证究竟覆盖权重、代码还是更多材料，需要回到许可文本和实际发布内容。
+
+再按 `PageDown`，进入两份许可证的分发对照。
+
+---
+
+## 16｜Apache-2.0 与 OpenMDW-1.1 怎样约束分发（22:35—24:10）
 
 ### 进入画面
 
-标题：
+屏幕保留两条尚未展开的分发路径。
 
-> 先把两个问题分开。
+### 第一次按 `PageDown`｜Apache-2.0
+
+Apache-2.0 允许分发 Source、Object 和 Derivative Works，不要求二进制分发时同时交出源码。
+
+下游需要附许可证，显著标记修改过的文件，保留适用的原始声明；原作品带有 NOTICE 时，还要传递其中适用的内容。因相关 Work 或 Contribution 发起专利诉讼时，终止的是专利许可。条款没有处理模型推理输出。
+
+### 第二次按 `PageDown`｜OpenMDW-1.1
+
+OpenMDW 把模型架构、参数，以及实际置于该许可下的数据、代码和文档合称 Model Materials。它明示覆盖版权、专利、数据库权利和商业秘密权利。
+
+下游分发时附许可证，并保留适用的版权和来源声明；没有修改文件标记和 NOTICE 机制。针对 Model Materials 发起专利或版权侵权诉讼时，全部授权终止，防御性应诉除外。生成输出不承接 OpenMDW 的使用、修改或分享义务。
+
+两份许可证都允许商业使用，也都没有 share-alike。它们不会要求发布者补齐没有交付的训练代码和数据。
+
+来源：
+
+- Apache License 2.0：<https://www.apache.org/licenses/LICENSE-2.0.html>
+- OpenMDW 1.1：<https://openmdw.ai/license/1-1/>
+- OpenMDW FAQ：<https://openmdw.ai/faq/>
+
+再按 `PageDown`。
+
+---
+
+## 17｜许可证给权利，材料决定研究能走多远（24:10—25:30）
 
 ### 第一次按 `PageDown`｜Rights
 
-左侧出现法律权利层。
+Apache-2.0 和 OpenMDW 都允许使用、修改和分发，具体分发手续、诉讼终止和输出边界不同。
 
-Apache-2.0 是成熟的软件许可证。OpenMDW 面向发布者实际提供的 Model Materials。它们回答使用、修改、分发以及责任边界。
-
-OpenMDW 不会要求发布者自动补齐没有交付的训练代码和数据。
+OpenMDW 没有定义一套“衍生模型”分类。微调 checkpoint、adapter 和蒸馏模型怎样适用条款，要看下游实际分发了哪些 Model Materials。它明确写清的是生成输出：输出不承接 OpenMDW 的义务。
 
 ### 第二次按 `PageDown`｜Materials
 
-右侧出现材料层。
-
-Model Openness Framework 检查模型发布的材料完整度。OSAID 给出 Open Source AI 的定义，并要求 Use、Study、Modify、Share 所需的 preferred form。
-
-这些工具承担的角色不同。许可证、开放度框架和定义需要分开检查。
+许可证不会要求发布者自动补齐训练代码和数据。Model Openness Framework 检查发布材料，OSAID 给出 Use、Study、Modify、Share 所需的自由和 preferred form。
 
 再按 `PageDown`，进入发布检查。
 
 ---
 
-## 16｜一个模型发布，到底交付了什么（23:10—25:10）
+## 18｜一个模型发布，到底交付了什么（25:30—27:00）
 
 ### 进入画面
 
@@ -614,7 +669,7 @@ Model Openness Framework 检查模型发布的材料完整度。OSAID 给出 Ope
 
 ---
 
-## 17｜陌生贡献怎样变成长期信任（25:10—28:35）
+## 19｜陌生贡献怎样变成长期信任（27:00—29:20）
 
 这一页有五个状态。贡献路径沿用研究页的交互组件，`PageDown` 会移动 active 节点并替换下方说明。
 
@@ -646,7 +701,7 @@ CommunityOverCode 描述的就是这套机制：把陌生贡献逐步变成共�
 
 ---
 
-## 18｜结尾（28:35—30:00）
+## 20｜结尾（29:20—30:00）
 
 ### 画面
 

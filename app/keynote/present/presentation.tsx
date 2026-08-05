@@ -18,6 +18,7 @@ import type { LandscapeProject } from "@/lib/landscape-types";
 
 import {
   apacheBackbone,
+  apacheDomainOrder,
 } from "../apache-ecosystem";
 import ApacheProjectAtlas from "../apache-project-atlas";
 import {
@@ -81,13 +82,13 @@ const scenes: Scene[] = [
   { id: "method", chapter: "landscape", label: "METHOD", duration: "7:55—9:45", maxBuild: 3 },
   { id: "production", chapter: "apache", label: "TURN", duration: "9:45—10:20", maxBuild: 0 },
   { id: "apache-scale", chapter: "apache", label: "APACHE", duration: "10:20—11:45", maxBuild: 1 },
-  { id: "apache-position", chapter: "apache", label: "POSITION", duration: "11:45—14:00", maxBuild: 0 },
+  { id: "apache-position", chapter: "apache", label: "POSITION", duration: "11:45—14:00", maxBuild: 6 },
   { id: "ant-apache", chapter: "apache", label: "ANT × APACHE", duration: "14:00—15:50", maxBuild: 3 },
   { id: "inclusion-scale", chapter: "inclusion", label: "INCLUSIONAI", duration: "15:50—17:20", maxBuild: 1 },
   { id: "inclusion-stack", chapter: "inclusion", label: "PARTICIPATION", duration: "17:20—20:20", maxBuild: 4 },
   { id: "license-question", chapter: "license", label: "OPEN MODEL", duration: "20:20—21:05", maxBuild: 1 },
   { id: "license-distribution", chapter: "license", label: "LICENSE DATA", duration: "21:05—22:35", maxBuild: 1 },
-  { id: "license-compare", chapter: "license", label: "WHAT CHANGED", duration: "22:35—24:10", maxBuild: 2 },
+  { id: "license-compare", chapter: "license", label: "REDISTRIBUTE", duration: "22:35—24:10", maxBuild: 2 },
   { id: "license-layers", chapter: "license", label: "LICENSE", duration: "24:10—25:30", maxBuild: 2 },
   { id: "release-check", chapter: "license", label: "RELEASE CHECK", duration: "25:30—27:00", maxBuild: 3 },
   { id: "community", chapter: "community", label: "COMMUNITY", duration: "27:00—29:20", maxBuild: 4 },
@@ -213,10 +214,10 @@ const landscapeInsights: Record<"agent" | "model", LandscapeStageInsight[]> = {
   ],
   model: [
     {
-      angle: "功能复核",
+      angle: "Gateway 分型",
       metric: "4.48 → 31.92",
-      label: "OmniRoute 的增长触发了 gateway 重新分型",
-      note: "LiteLLM 在补 MCP；AgentGateway 与 ContextForge 已同时处理 MCP、A2A 和模型流量。",
+      label: "Gateway 开始接管工具与 Agent 调用链",
+      note: "LiteLLM 代理 MCP 工具访问；AgentGateway 管流量策略；ContextForge 聚合 MCP Server 与 A2A Agent。",
       focus: "Model API gateways",
     },
     {
@@ -260,34 +261,24 @@ const modelLicenseDistribution = [
 
 const licenseComparisonRows = [
   {
-    topic: "被许可的对象",
-    software: "源代码、目标代码、文档与衍生作品",
-    model: "权重、架构、代码、数据与文档可能分别授权",
+    label: "分发对象",
+    apache: "Source、Object 与衍生作品",
+    openmdw: "Model Materials",
   },
   {
-    topic: "修改所需材料",
-    software: "源代码通常就是首要修改形式",
-    model: "还需要参数、训练代码、数据说明与评测方法",
+    label: "下游保留",
+    apache: "LICENSE、修改说明、原始声明；符合条件时传递 NOTICE",
+    openmdw: "LICENSE、适用的版权与来源声明",
   },
   {
-    topic: "权利组合",
-    software: "版权与专利授权是核心",
-    model: "还会碰到数据库权利、商业秘密与数据第三方权利",
+    label: "诉讼终止",
+    apache: "相关专利许可终止",
+    openmdw: "专利或版权诉讼触发全部授权终止",
   },
   {
-    topic: "使用限制",
-    software: "OSI 许可不得限制特定用途或领域",
-    model: "部分专用条款另附可接受用途或领域限制",
-  },
-  {
-    topic: "衍生与分发",
-    software: "围绕 Source、Object 与 Derivative Works",
-    model: "checkpoint、微调、adapter 与输出可能适用不同规则",
-  },
-  {
-    topic: "怎样验证开放",
-    software: "能从源码构建、修改和再分发",
-    model: "先看法律权利，再看材料是否足以研究和修改",
+    label: "模型输出",
+    apache: "没有相关条款",
+    openmdw: "输出不承接 OpenMDW 义务",
   },
 ] as const;
 
@@ -762,17 +753,10 @@ function SceneContent({
     return (
       <div className={styles.methodScene}>
         <div className={styles.methodIntro}>
-          <span>METHOD · FOUR VIEWS</span>
           <h2>四张图各自取样，判断准则放在一起核对。</h2>
         </div>
 
         <div className={styles.methodMatrix}>
-          <div className={styles.methodMatrixHeader} aria-hidden="true">
-            <span>VIEW</span>
-            <span>DATA &amp; WINDOW</span>
-            <span>SAMPLE</span>
-            <span>SCREEN &amp; REVIEW</span>
-          </div>
           {methodRows.map((row) => (
             <div className={styles.methodRow} data-view={row.id} key={row.id}>
               <strong>{row.view}</strong>
@@ -885,17 +869,15 @@ function SceneContent({
             </div>
           ))}
         </div>
-        <p className={styles.sceneSource}>
-          Source: The Apache Software Foundation · FY2025 Annual Report, p.13
-        </p>
       </div>
     );
   }
 
   if (id === "apache-position") {
+    const activeDomain = apacheDomainOrder[Math.min(build, apacheDomainOrder.length - 1)];
     return (
       <div className={styles.apacheAtlasStage}>
-        <ApacheProjectAtlas activeDomain="data" stage />
+        <ApacheProjectAtlas activeDomain={activeDomain} stage stageBuild={build} />
       </div>
     );
   }
@@ -983,10 +965,6 @@ function SceneContent({
                         <dt>ROLE</dt>
                         <dd>{project.role}</dd>
                       </div>
-                      <div>
-                        <dt>POSITION</dt>
-                        <dd>{project.signal}</dd>
-                      </div>
                     </dl>
                   </a>
                 ))}
@@ -1011,21 +989,29 @@ function SceneContent({
             />
           </div>
           <div className={styles.inclusionHeroCopy}>
-            <p>03 · OPEN ECOSYSTEM</p>
             <h2>InclusionAI</h2>
-            <strong>AI Built By Everyone, For Everyone.</strong>
-            <p>
-              从基础模型、具身大脑到 Model Infra、Agent Infra 与 AI Service，
-              参与者可以从不同层进入。
-            </p>
-            <div className={researchStyles.valueChips}>
-              <span>Fairness</span>
-              <span>Transparency</span>
-              <span>Collaboration</span>
+            <strong className={styles.inclusionSlogan}>
+              AI Built By Everyone,
+              <br />
+              For Everyone.
+            </strong>
+            <div className={styles.inclusionPrinciples} aria-label="InclusionAI 3A 价值主张">
+              <div>
+                <span>AVAILABLE</span>
+                <strong>技术可获得</strong>
+              </div>
+              <div>
+                <span>AFFORDABLE</span>
+                <strong>成本可负担</strong>
+              </div>
+              <div>
+                <span>INCLUSIVE</span>
+                <strong>人人能受益</strong>
+              </div>
             </div>
           </div>
         </div>
-        <div className={researchStyles.platformGrid} data-visible={build >= 1}>
+        <div className={researchStyles.platformGrid} data-stage="true" data-visible={build >= 1}>
           <a href="https://github.com/inclusionAI" tabIndex={-1}>
             <header><span>GitHub · 3 orgs</span></header>
             <strong>93</strong>
@@ -1064,7 +1050,6 @@ function SceneContent({
               className={isService ? researchStyles.activeStack : ""}
             >
               <strong>AI Service</strong>
-              <span>{inclusionServices.map((service) => service.name).join(" · ")}</span>
             </button>
             {[...stackKeys].reverse().map((key) => (
               <button
@@ -1074,7 +1059,6 @@ function SceneContent({
                 className={!isService && key === stackKey ? researchStyles.activeStack : ""}
               >
                 <strong>{stackData[key].label}</strong>
-                <span>{stackData[key].projects.map((project) => project.name).join(" · ")}</span>
               </button>
             ))}
           </div>
@@ -1096,13 +1080,11 @@ function SceneContent({
                     </span>
                     <span>
                       <strong>{project.name}</strong>
-                      <small>{project.role}</small>
                     </span>
                     <p>{project.description}</p>
                   </a>
                 ))}
               </div>
-              <small className={researchStyles.participationCue}>{stack.ask}</small>
             </article>
           ) : (
             <div className={`${researchStyles.serviceBand} ${styles.serviceDetail}`}>
@@ -1121,7 +1103,6 @@ function SceneContent({
                     />
                     <span>{service.domain}</span>
                     <strong>{service.name}</strong>
-                    <small>{service.description}</small>
                   </article>
                 ))}
               </div>
@@ -1135,7 +1116,6 @@ function SceneContent({
   if (id === "license-question") {
     return (
       <div className={styles.licenseQuestionScene}>
-        <span>从开源软件走到开放模型</span>
         <h2>许可证要管的对象，变多了。</h2>
         <div className={styles.missingMaterials} data-visible={build >= 1}>
           <i>权重</i>
@@ -1154,19 +1134,16 @@ function SceneContent({
         title: "Agent Infra + Model Infra",
         subtitle: "132 个开源软件仓库",
         items: softwareLicenseDistribution,
-        source: "GitHub SPDX metadata · 2026-08-01",
       },
       {
         title: "Hugging Face Text Generation",
         subtitle: "下载量排序 Top 100 模型仓库",
         items: modelLicenseDistribution,
-        source: "Hugging Face Hub API · 2026-08-01",
       },
     ];
     return (
       <div className={styles.licenseDistributionScene}>
         <header>
-          <span>LICENSE DISTRIBUTION</span>
           <h2>模型仓库仍在大量使用软件许可证。</h2>
         </header>
         <div className={styles.licenseSamplePair}>
@@ -1201,13 +1178,9 @@ function SceneContent({
                   </span>
                 ))}
               </div>
-              <small>{bar.source}</small>
             </article>
           ))}
         </div>
-        <p className={styles.sceneSource}>
-          统计单位是仓库，不是独立模型家族；许可证来自仓库 / 模型卡元数据，不构成法律审查。
-        </p>
       </div>
     );
   }
@@ -1216,29 +1189,26 @@ function SceneContent({
     return (
       <div className={styles.licenseCompareScene}>
         <header>
-          <span>LICENSE SCOPE</span>
-          <h2>模型发布没有一份材料能代表全部。</h2>
+          <h2>两份宽松许可，分发清单不一样。</h2>
         </header>
-        <div className={styles.licenseCompareFrame}>
-          <div className={styles.licenseCompareColumns}>
-            <strong>开源软件</strong>
-            <span>对照项</span>
-            <strong>开放模型</strong>
+        <div className={styles.licenseComparisonTable}>
+          <div className={styles.licenseComparisonHead}>
+            <span />
+            <strong data-visible={build >= 1}>Apache License 2.0</strong>
+            <strong data-visible={build >= 2}>OpenMDW 1.1</strong>
           </div>
-          {licenseComparisonRows.map((row, index) => (
-            <div
-              key={row.topic}
-              data-visible={index < 3 ? build >= 1 : build >= 2}
-            >
-              <p>{row.software}</p>
-              <strong>{row.topic}</strong>
-              <p>{row.model}</p>
+          {licenseComparisonRows.map((row) => (
+            <div className={styles.licenseComparisonRow} key={row.label}>
+              <strong>{row.label}</strong>
+              <p data-visible={build >= 1}>{row.apache}</p>
+              <p data-visible={build >= 2}>{row.openmdw}</p>
             </div>
           ))}
         </div>
-        <p className={styles.sceneSource}>
-          Sources: Apache License 2.0 · OSAID 1.0 · OpenMDW 1.1 · Model Openness Framework 1.0
-        </p>
+        <div className={styles.licenseSharedBoundary} data-visible={build >= 2}>
+          <strong>共同边界</strong>
+          <p>两者都允许商业使用，也都没有 share-alike；许可证本身不要求发布者补齐训练代码和数据。</p>
+        </div>
       </div>
     );
   }
@@ -1246,17 +1216,17 @@ function SceneContent({
   if (id === "license-layers") {
     return (
       <div className={styles.licenseLayersScene}>
-        <h2>先问条款管什么，再看材料交付了没有。</h2>
+        <h2>许可证给权利，材料决定研究能走多远。</h2>
         <div className={styles.licenseLayers}>
           <article data-visible={build >= 1}>
             <span>RIGHTS</span>
             <strong>法律上可以做什么？</strong>
-            <p>Apache-2.0、MIT、OpenMDW 等条款回答使用、修改、分发以及相关义务。</p>
+            <p>Apache-2.0 与 OpenMDW 都允许使用、修改和分发；要继续核对 notices、诉讼终止和输出边界。</p>
           </article>
           <article data-visible={build >= 2}>
             <span>MATERIALS</span>
             <strong>实际上拿到了什么？</strong>
-            <p>OSAID 与 MOF 把参数、代码、数据说明、评测和文档放进检查范围。</p>
+            <p>MOF 与 OSAID 检查权重之外的代码、数据说明、评测和修改所需文档。</p>
           </article>
         </div>
       </div>
@@ -1295,7 +1265,7 @@ function SceneContent({
     return (
       <div className={`${styles.researchScene} ${styles.communityScene}`}>
         <h2>陌生贡献怎样变成长期信任</h2>
-        <div className={researchStyles.communityPath}>
+        <div className={researchStyles.communityPath} data-stage="true">
           {communityKeys.map((key, index) => (
             <button
               type="button"
@@ -1308,7 +1278,7 @@ function SceneContent({
             </button>
           ))}
         </div>
-        <article className={researchStyles.communityDetail} key={activeKey}>
+        <article className={researchStyles.communityDetail} data-stage="true" key={activeKey}>
           <h3>{title}</h3>
           <p>{body}</p>
         </article>

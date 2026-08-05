@@ -905,10 +905,10 @@ export default function KeynoteExperience({
               <p>
                 InclusionAI 同时开放模型和背后的工程系统。有人做训练，有人接环境，也有人把这些能力带进机器人和医疗场景。
               </p>
-              <div className={styles.valueChips} aria-label="InclusionAI 价值主张">
-                <span>Fairness</span>
-                <span>Transparency</span>
-                <span>Collaboration</span>
+              <div className={styles.valueChips} aria-label="InclusionAI 3A 价值主张">
+                <span>Available</span>
+                <span>Affordable</span>
+                <span>Inclusive</span>
               </div>
             </div>
           </div>
@@ -1049,7 +1049,7 @@ export default function KeynoteExperience({
             <div>
               <p>
                 先指着 Logo 和标题说：InclusionAI 的原话是 “AI Built By Everyone, For Everyone”。Everyone
-                说的是参与方式。有人训练模型，有人做环境、工具和评测，也有人把技术带进机器人、医疗和日常服务。公平、透明和协作落到工程上，就是材料能拿到、边界能看懂、实验能复现，后来者还能接着做。
+                说的是参与方式。Available 是模型和工具能被拿到、理解和适配；Affordable 是使用成本足够低，能够进入真实服务；Inclusive 是开发者、领域专家和普通用户都能参与，也能分享技术带来的价值。
               </p>
               <p>
                 然后快速扫三张平台卡。GitHub 看软件与协作，Hugging Face 和 ModelScope 看模型发布与分发。只念三个 headline：93 个公开仓库、HF

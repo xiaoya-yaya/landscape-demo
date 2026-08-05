@@ -6,6 +6,7 @@ import Image from "next/image";
 import {
   type ApacheDomainKey,
   apacheDomains,
+  apacheLandscapeGroups,
   apacheLandscapeProjects,
 } from "./apache-ecosystem";
 import styles from "./page.module.css";
@@ -14,29 +15,32 @@ export default function ApacheProjectAtlas({
   activeDomain,
   onDomainChange,
   stage = false,
+  stageBuild = 0,
 }: {
   activeDomain: ApacheDomainKey;
   onDomainChange?: (domain: ApacheDomainKey) => void;
   stage?: boolean;
+  stageBuild?: number;
 }) {
-  const selectedProjects = apacheLandscapeProjects;
-
   return (
     <div
       className={`${styles.apacheAtlas} ${styles.deepDive}`}
       data-stage={stage ? "true" : undefined}
+      data-build={stage ? stageBuild : undefined}
     >
       <div className={styles.apacheAtlasHeading}>
         <div>
-          <strong>APACHE PROJECT ATLAS</strong>
+          {!stage ? <strong>APACHE PROJECT ATLAS</strong> : null}
           <span>Apache 项目领域与 Agentic Landscape 入选</span>
         </div>
-        <dl>
-          <div><dt>领域</dt><dd>7 个</dd></div>
-          <div><dt>来源</dt><dd>Apache Projects Directory</dd></div>
-          <div><dt>数量</dt><dd>同一项目可属于多个领域</dd></div>
-          <div><dt>头部项目</dt><dd>主要 GitHub repo stars</dd></div>
-        </dl>
+        {!stage ? (
+          <dl>
+            <div><dt>领域</dt><dd>7 个</dd></div>
+            <div><dt>来源</dt><dd>Apache Projects Directory</dd></div>
+            <div><dt>数量</dt><dd>同一项目可属于多个领域</dd></div>
+            <div><dt>头部项目</dt><dd>主要 GitHub repo stars</dd></div>
+          </dl>
+        ) : null}
       </div>
 
       <div className={styles.apacheAtlasBody}>
@@ -64,7 +68,7 @@ export default function ApacheProjectAtlas({
         <article className={styles.apacheDomainDetail} key={activeDomain}>
           <div className={styles.apacheDomainLead}>
             <div>
-              <span>PROJECT RECORDS</span>
+              {!stage ? <span>PROJECT RECORDS</span> : null}
               <strong>{apacheDomains[activeDomain].count}</strong>
             </div>
             <div className={styles.apacheDomainName}>
@@ -81,7 +85,7 @@ export default function ApacheProjectAtlas({
           </div>
 
           <div className={styles.apacheHeadProjects}>
-            <p>HEAD PROJECTS · GITHUB STARS SNAPSHOT</p>
+            <p>{stage ? "头部项目" : "HEAD PROJECTS · GITHUB STARS SNAPSHOT"}</p>
             <div>
               {apacheDomains[activeDomain].heads.map(([name, stars]) => (
                 <span key={name}>
@@ -92,31 +96,49 @@ export default function ApacheProjectAtlas({
             </div>
           </div>
 
-          <div className={styles.apacheLandscapeMatch}>
-            <p>6 APACHE PROJECTS IN AGENTIC LANDSCAPE</p>
-            <div>
-              {selectedProjects.map((project) => (
-                <span key={project.name}>
-                  <Image
-                    src={project.logo}
-                    alt=""
-                    width={18}
-                    height={18}
-                  />
-                  Apache {project.name}
-                </span>
-              ))}
-            </div>
-          </div>
         </article>
+      </div>
+
+      <div
+        className={styles.apacheAgenticMapping}
+        data-focus={stage ? "true" : "false"}
+      >
+        <div className={styles.apacheAgenticMappingLead}>
+          <strong>{stage ? "6 个 Landscape 入选项目" : "6 APACHE PROJECTS IN AGENTIC LANDSCAPE"}</strong>
+          {!stage ? <span>按 Agentic AI 技术角色重组</span> : null}
+        </div>
+        <div className={styles.apacheAgenticGroups}>
+          {apacheLandscapeGroups.map((group) => (
+            <section key={group.label}>
+              <header>
+                <small>{group.label}</small>
+                <strong>{group.title}</strong>
+              </header>
+              <div>
+                {group.projects.map((name) => {
+                  const project = apacheLandscapeProjects.find(
+                    (candidate) => candidate.name === name,
+                  );
+                  if (!project) return null;
+                  return (
+                    <span key={project.name}>
+                      <Image src={project.logo} alt="" width={18} height={18} />
+                      Apache {project.name}
+                    </span>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
+        </div>
       </div>
 
       <div className={styles.apacheMetadataGap}>
         <strong>45</strong>
         <div>
-          <span>目录中缺少可用项目分类的记录</span>
+          <span>目录中缺少可用领域标签的记录</span>
           <p>
-            Paimon、Gravitino、Fory、Celeborn 等项目仍计入项目总览，但不参与上方领域数量统计。
+            其中 2 个 Landscape 项目是 Paimon、Gravitino；Fory、Celeborn 等项目也在这 45 条记录中。
           </p>
         </div>
         <div className={styles.apacheSourceLinks}>

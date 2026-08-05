@@ -1490,6 +1490,100 @@
   background: #fff4ec;
 }
 
+.apacheAgenticMapping {
+  padding: 16px 22px;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.48fr) minmax(0, 1.52fr);
+  align-items: center;
+  gap: 22px;
+  border-top: 2px solid var(--ink);
+  background: #f4f0ff;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.apacheAgenticMappingLead strong,
+.apacheAgenticMappingLead span {
+  display: block;
+}
+
+.apacheAgenticMappingLead strong {
+  color: var(--violet);
+  font-family: var(--font-code);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+
+.apacheAgenticMappingLead span {
+  margin-top: 7px;
+  font-size: 12px;
+  font-weight: 720;
+  line-height: 1.35;
+}
+
+.apacheAgenticGroups {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: 10px;
+}
+
+.apacheAgenticGroups section {
+  min-width: 0;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #c8bdf1;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.apacheAgenticGroups header {
+  min-width: 100px;
+}
+
+.apacheAgenticGroups header small,
+.apacheAgenticGroups header strong {
+  display: block;
+}
+
+.apacheAgenticGroups header small {
+  color: var(--violet);
+  font-family: var(--font-code);
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.apacheAgenticGroups header strong {
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+.apacheAgenticGroups section > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.apacheAgenticGroups section > div > span {
+  padding: 6px 8px 6px 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #d4cec0;
+  border-radius: 999px;
+  background: #fffdf7;
+  font-size: 9px;
+  font-weight: 720;
+  white-space: nowrap;
+}
+
+.apacheAgenticGroups img {
+  border-radius: 4px;
+}
+
 .apacheMetadataGap > strong {
   color: var(--orange);
   font-family: var(--font-code);
@@ -1549,9 +1643,9 @@
 }
 
 .apacheAtlas[data-stage="true"] .apacheAtlasHeading {
-  min-height: 7.6cqh;
+  min-height: 6.7cqh;
   padding: 1.35cqh 1.35cqw;
-  grid-template-columns: minmax(20cqw, 0.75fr) minmax(0, 1.25fr);
+  grid-template-columns: 1fr;
   gap: 1.4cqw;
 }
 
@@ -1560,11 +1654,11 @@
 }
 
 .apacheAtlas[data-stage="true"] .apacheAtlasHeading > div > strong {
-  font-size: 0.62cqw;
+  font-size: 0.76cqw;
 }
 
 .apacheAtlas[data-stage="true"] .apacheAtlasHeading > div > span {
-  font-size: 1.18cqw;
+  font-size: 1.55cqw;
 }
 
 .apacheAtlas[data-stage="true"] .apacheAtlasHeading dl > div {
@@ -1572,12 +1666,12 @@
 }
 
 .apacheAtlas[data-stage="true"] .apacheAtlasHeading dt {
-  font-size: 0.5cqw;
+  font-size: 0.64cqw;
 }
 
 .apacheAtlas[data-stage="true"] .apacheAtlasHeading dd {
   margin-top: 0.45cqh;
-  font-size: 0.72cqw;
+  font-size: 0.86cqw;
 }
 
 .apacheAtlas[data-stage="true"] .apacheAtlasBody {
@@ -1605,7 +1699,7 @@
 }
 
 .apacheAtlas[data-stage="true"] .apacheDomainTabs button > span {
-  font-size: 0.7cqw;
+  font-size: 1.05cqw;
 }
 
 .apacheAtlas[data-stage="true"] .apacheDomainTabs .activeDomain {
@@ -1636,18 +1730,17 @@
 }
 
 .apacheAtlas[data-stage="true"] .apacheDomainLead h3 {
-  font-size: 1.75cqw;
+  font-size: 2cqw;
 }
 
 .apacheAtlas[data-stage="true"] .apacheDomainDefinition {
   padding-left: 1.45cqw;
-  font-size: 0.82cqw;
+  font-size: 1.08cqw;
   line-height: 1.5;
 }
 
 .apacheAtlas[data-stage="true"] .apacheLabelCloud {
-  margin-top: 1.15cqh;
-  gap: 0.38cqw;
+  display: none;
 }
 
 .apacheAtlas[data-stage="true"] .apacheLabelCloud span {
@@ -1663,7 +1756,7 @@
 
 .apacheAtlas[data-stage="true"] .apacheHeadProjects > p,
 .apacheAtlas[data-stage="true"] .apacheLandscapeMatch > p {
-  font-size: 0.5cqw;
+  font-size: 0.9cqw;
 }
 
 .apacheAtlas[data-stage="true"] .apacheHeadProjects > div {
@@ -1677,11 +1770,11 @@
 }
 
 .apacheAtlas[data-stage="true"] .apacheHeadProjects strong {
-  font-size: 0.68cqw;
+  font-size: 1cqw;
 }
 
 .apacheAtlas[data-stage="true"] .apacheHeadProjects small {
-  font-size: 0.52cqw;
+  display: none;
 }
 
 .apacheAtlas[data-stage="true"] .apacheLandscapeMatch > div {
@@ -1694,7 +1787,7 @@
 .apacheAtlas[data-stage="true"] .apacheLandscapeMatch > div > span {
   padding: 0.5cqh 0.6cqw 0.5cqh 0.45cqw;
   gap: 0.42cqw;
-  font-size: 0.66cqw;
+  font-size: 0.78cqw;
   border-radius: 0.45cqw;
 }
 
@@ -1704,8 +1797,7 @@
 }
 
 .apacheAtlas[data-stage="true"] .apacheLandscapeMatch > small {
-  margin-top: 0.8cqh;
-  font-size: 0.68cqw;
+  display: none;
 }
 
 .apacheAtlas[data-stage="true"] .apacheMetadataGap {
@@ -1731,10 +1823,68 @@
   gap: 0.5cqw;
 }
 
-.apacheAtlas[data-stage="true"] .apacheSourceLinks a {
-  padding: 0.65cqh 0.7cqw;
+.apacheAtlas[data-stage="true"] .apacheAgenticMapping {
+  min-height: 13.5cqh;
+  padding: 1cqh 1.25cqw;
+  grid-template-columns: 18cqw minmax(0, 1fr);
+  gap: 1.2cqw;
+}
+
+.apacheAtlas[data-stage="true"] .apacheAgenticMapping[data-focus="true"] {
+  background: #eee8ff;
+  box-shadow: inset 0 0 0 0.28cqw var(--violet);
+}
+
+.apacheAtlas[data-stage="true"] .apacheAgenticMappingLead strong {
+  font-size: 0.95cqw;
+}
+
+.apacheAtlas[data-stage="true"] .apacheAgenticMappingLead span {
+  margin-top: 0.55cqh;
+  font-size: 0.9cqw;
+}
+
+.apacheAtlas[data-stage="true"] .apacheAgenticGroups {
+  gap: 0.6cqw;
+}
+
+.apacheAtlas[data-stage="true"] .apacheAgenticGroups section {
+  padding: 0.7cqh 0.65cqw;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.65cqw;
+  border-radius: 0.55cqw;
+}
+
+.apacheAtlas[data-stage="true"] .apacheAgenticGroups header {
+  min-width: 6.4cqw;
+}
+
+.apacheAtlas[data-stage="true"] .apacheAgenticGroups header small {
+  display: none;
+}
+
+.apacheAtlas[data-stage="true"] .apacheAgenticGroups header strong {
+  margin-top: 0.35cqh;
+  font-size: 1cqw;
+}
+
+.apacheAtlas[data-stage="true"] .apacheAgenticGroups section > div {
   gap: 0.35cqw;
-  font-size: 0.62cqw;
+}
+
+.apacheAtlas[data-stage="true"] .apacheAgenticGroups section > div > span {
+  padding: 0.42cqh 0.42cqw 0.42cqh 0.34cqw;
+  gap: 0.32cqw;
+  font-size: 0.92cqw;
+}
+
+.apacheAtlas[data-stage="true"] .apacheAgenticGroups img {
+  width: 0.85cqw;
+  height: 0.85cqw;
+}
+
+.apacheAtlas[data-stage="true"] .apacheSourceLinks a {
+  display: none;
 }
 
 .apacheAtlas[data-stage="true"] .apacheSourceLinks svg {
@@ -2006,11 +2156,11 @@
 
 .apacheBridgeLead[data-stage="true"] .apacheBridgeSource span,
 .apacheBridgeLead[data-stage="true"] .apacheBridgeAxis > span {
-  font-size: 0.5cqw;
+  font-size: 0.7cqw;
 }
 
 .apacheBridgeLead[data-stage="true"] .apacheBridgeSource strong {
-  font-size: 0.9cqw;
+  font-size: 1.06cqw;
 }
 
 .apacheBridgeLead[data-stage="true"] .apacheBridgeAxis {
@@ -2024,7 +2174,7 @@
 
 .apacheBridgeLead[data-stage="true"] .apacheBridgeAxis b {
   padding: 0.5cqh 0.55cqw;
-  font-size: 0.62cqw;
+  font-size: 0.8cqw;
 }
 
 .apacheBackbone[data-stage="true"] > article {
@@ -2037,12 +2187,12 @@
 }
 
 .apacheBackbone[data-stage="true"] > article > header p {
-  font-size: 0.5cqw;
+  font-size: 0.68cqw;
 }
 
 .apacheBackbone[data-stage="true"] > article > header h3 {
   margin-top: 0.85cqh;
-  font-size: 1.3cqw;
+  font-size: 1.42cqw;
 }
 
 .apacheBackbone[data-stage="true"] .apacheBackboneProjects {
@@ -2071,7 +2221,7 @@
 }
 
 .apacheBackbone[data-stage="true"] .apacheProjectIdentity > strong {
-  font-size: 0.72cqw;
+  font-size: 1cqw;
 }
 
 .apacheBackbone[data-stage="true"] .apacheProjectMarks {
@@ -2082,7 +2232,7 @@
   min-height: 2.15cqh;
   padding: 0.25cqh 0.38cqw 0.25cqh 0.25cqw;
   gap: 0.28cqw;
-  font-size: 0.42cqw;
+  font-size: 0.58cqw;
 }
 
 .apacheBackbone[data-stage="true"] .apacheProjectMarks img {
@@ -2101,11 +2251,11 @@
 }
 
 .apacheBackbone[data-stage="true"] .apacheProjectFacts dt {
-  font-size: 0.4cqw;
+  font-size: 0.6cqw;
 }
 
 .apacheBackbone[data-stage="true"] .apacheProjectFacts dd {
-  font-size: 0.53cqw;
+  font-size: 0.86cqw;
   line-height: 1.25;
 }
 
@@ -2288,6 +2438,10 @@
   letter-spacing: 0.02em;
 }
 
+.valueChips[data-stage="true"] {
+  display: none;
+}
+
 .platformGrid {
   margin: 42px 0 0;
   display: grid;
@@ -2362,6 +2516,33 @@
   background: #f1f1ed;
   font-family: var(--font-code);
   font-size: 9px;
+}
+
+.platformGrid[data-stage="true"] {
+  margin-top: 2.2cqh;
+}
+
+.platformGrid[data-stage="true"] > a {
+  min-height: 18cqh;
+  padding: 1.7cqh 1.35cqw;
+}
+
+.platformGrid[data-stage="true"] header {
+  font-size: 1cqw;
+}
+
+.platformGrid[data-stage="true"] > a > strong {
+  margin-top: 1.35cqh;
+  font-size: 4.4cqw;
+}
+
+.platformGrid[data-stage="true"] > a > p {
+  margin: 0.55cqh 0 1.2cqh;
+  font-size: 1.15cqw;
+}
+
+.platformGrid[data-stage="true"] > a > div {
+  display: none;
 }
 
 .serviceBand {
@@ -3145,6 +3326,38 @@
   color: var(--quiet);
   font-size: 14px;
   line-height: 1.65;
+}
+
+.communityPath[data-stage="true"] {
+  margin: 2.8cqh 0 3.5cqh;
+}
+
+.communityPath[data-stage="true"] button > span {
+  width: 3cqw;
+  height: 3cqw;
+  margin-bottom: 1.2cqh;
+  font-size: 0.72cqw;
+}
+
+.communityPath[data-stage="true"] button > strong {
+  font-size: 0.96cqw;
+}
+
+.communityDetail[data-stage="true"] {
+  max-width: 65cqw;
+  min-height: 17cqh;
+  padding: 2.5cqh 2cqw;
+}
+
+.communityDetail[data-stage="true"] h3 {
+  font-size: 2cqw;
+}
+
+.communityDetail[data-stage="true"] p {
+  max-width: 56cqw;
+  margin-top: 1.5cqh;
+  font-size: 1.1cqw;
+  line-height: 1.5;
 }
 
 .resourceGrid {

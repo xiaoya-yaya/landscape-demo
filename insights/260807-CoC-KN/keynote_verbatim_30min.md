@@ -226,9 +226,15 @@ ASF FY2025 年报列出 295 个 Projects、1,310 次 software releases、9,905 �
 
 如果只看 Agent UI 和框架，Apache 似乎离 Agent 热点有些远。把范围扩到数据、计算和运行系统，位置就清楚了。
 
-左侧 7 个领域来自 Apache Projects Directory 的项目分类。同一项目可以属于多个分类，所以领域数量会重叠。这个来源是 Apache 官方维护的项目元数据，台上不需要记 DOAP 这个缩写。
+左侧 7 个领域来自 Apache Projects Directory 的项目分类。同一项目可以属于多个分类，所以领域数量会重叠。这份目录由 Apache 官方维护。
 
-右侧停在 Data, analytics and AI。Superset、ECharts、Airflow、Spark、Kafka 和 Flink 是这一领域关注度较高的项目。下面一行把进入 Landscape 的 6 个 Apache 项目全部列出来。
+右侧先看 Data, analytics and AI。Superset、ECharts、Airflow、Spark、Kafka 和 Flink 是这一领域关注度较高的项目。
+
+[连续翻页，依次切换其余六个领域。]
+
+再快速扫一遍另外六类。Libraries 里能看到 ECharts、Arrow 和 Thrift；Network 里有 Arrow、Thrift 和 Camel；Web 里是 Tomcat、CouchDB 这一组；Cloud & Operations 由 SkyWalking、JMeter、Maven 领头；Security 只有 4 个项目；IoT & Geospatial 里有 IoTDB 和 PLC4X。这里不用逐个读完，观众能看到每个分类都有对应项目。
+
+下面一行始终保留进入 Landscape 的 6 个 Apache 项目。
 
 Airflow 负责编排，Spark 负责分布式计算。Iceberg、Hudi 和 Paimon 处理数据表与持续更新，Gravitino 处理跨系统元数据。Paimon 和 Gravitino 在目录里缺少可用的项目分类，统计时没有塞进某个领域，入选结果仍然完整保留。
 
@@ -278,7 +284,7 @@ Agent 系统经常由 Python、Java 和不同数据服务共同组成。上下�
 
 Apache 展示的是跨组织基础设施怎样长期协作。接下来用 InclusionAI 看一套更靠近模型、Agent 和真实服务的技术栈。
 
-“AI Built By Everyone, For Everyone” 里的 Everyone，可以落到很多具体角色。有人训练模型，有人做算子和推理，有人贡献环境、工具、评测，也有人把问题带进医疗、机器人和金融场景。
+“AI Built By Everyone, For Everyone” 里的 Everyone，可以落到很多具体角色。Available 是模型和工具能被拿到、理解和适配；Affordable 是使用成本足够低，能够进入真实服务；Inclusive 是开发者、领域专家和普通用户都能参与，也能分享技术带来的价值。
 
 [下一步，GitHub、Hugging Face、ModelScope 三张卡出现。]
 
@@ -356,9 +362,9 @@ NOASSERTION 不能直接读成“没有许可证”。它只表示这次通过�
 
 [下一步，Hugging Face Top 100 模型仓库出现。]
 
-再看 Hugging Face Text Generation 按下载量排序的 Top 100 模型仓库。Apache-2.0 有 57 个，MIT 有 18 个，合计 75%；20 个使用模型专用或其他许可证，5 个没有 license tag。
+再看 Hugging Face Text Generation 按下载量排序的 Top 100 模型仓库。Apache-2.0 有 57 个，MIT 有 19 个，合计 76%；20 个使用模型专用或其他许可证，4 个没有 license tag。
 
-两边的 74.2% 和 75% 很接近，但不能由此推断软件许可已经完整解决了模型开放问题。这里的统计单位是仓库，不是独立模型家族；license tag 也只是发布者声明的元数据，不构成法律审查。
+两边的 74.2% 和 76% 很接近，但不能由此推断软件许可已经完整解决了模型开放问题。这里的统计单位是仓库，不是独立模型家族；license tag 也只是发布者声明的元数据，不构成法律审查。
 
 这组对照把问题带到了条款范围：同样写着 Apache-2.0，用在软件仓库和模型仓库里，实际覆盖的材料一样吗？
 
@@ -366,49 +372,47 @@ NOASSERTION 不能直接读成“没有许可证”。它只表示这次通过�
 
 ---
 
-## 16｜传统软件许可与模型许可，约束对象有什么不同（22:35—24:10）
+## 16｜Apache-2.0 与 OpenMDW-1.1 怎样约束分发（22:35—24:10）
 
-[画面：表头，内容尚未展开。]
+[画面：两条分发路径尚未展开。]
 
-这一页把 Apache-2.0 这样的传统软件许可证，与 OpenMDW 这样的模型许可证放在六个对照项里看。
+这一页直接看两份许可证要求下游怎样交付。
 
-[下一步，前三行出现。]
+[下一步，Apache-2.0 路径出现。]
 
-先看被许可的对象。Apache-2.0 围绕 Source、Object、Derivative Works 和文档建立完整条款。OpenMDW 的出发点是发布者实际提供的 Model Materials，可以包括模型、数据、代码和文档；具体拿到哪些材料，仍由发布内容决定。
+Apache-2.0 允许分发 Source、Object 和 Derivative Works，也就是说它并不要求二进制分发时同时交出源码。真正触发的是一套分发手续：附许可证，修改过的文件要显著标明，保留相关声明；原作品带有 NOTICE 时，还要传递其中适用的内容。
 
-第二是修改所需材料。软件项目里，源代码通常就是修改的首要形式。模型只拿到 checkpoint，可能可以运行和微调，却很难复现预训练过程。参数、训练代码、数据来源和评测方法会分别影响可研究、可修改的程度。
+它的专利许可来自各位 contributor，范围限定在其贡献所必然涉及的专利权利要求。因相关 Work 或 Contribution 发起专利诉讼时，终止的是专利许可。
 
-第三是权利组合。Apache-2.0 很重要的一点是明确的版权许可与贡献者专利授权。模型还可能涉及数据库权利、训练数据中的第三方权利和商业秘密。许可证能授予发布者拥有的权利，不能替发布者获得本来就不拥有的权利。
+[下一步，OpenMDW-1.1 路径出现。]
 
-[下一步，后三行出现。]
+OpenMDW 把模型架构、参数，以及实际置于这份许可下的数据、代码和文档合称 Model Materials。它明示覆盖版权、专利、数据库权利和商业秘密权利。分发清单更短：附许可证，保留适用的版权和来源声明；没有修改文件标记和 NOTICE 机制。
 
-再看使用限制。OSI 认可的软件许可不能因为使用领域不同而歧视个人或群体，也不能限制特定业务。模型专用条款有时会另附可接受用途、用户规模或领域限制。这样的权重仍然可能“可下载”“允许一部分商用”，但是否符合 Open Source AI，要再按定义核对。
+它的诉讼终止范围更大。针对 Model Materials 发起专利或版权侵权诉讼时，全部授权终止，防御性应诉除外。生成输出的边界也写得很直接：OpenMDW 不给输出附加使用、修改或分享义务。
 
-第五是衍生与分发。软件里通常围绕 source、object 和 derivative works 判断义务。模型里还会遇到 checkpoint、微调模型、adapter、蒸馏模型和输出，它们是否属于衍生、适用哪组条款，需要看具体许可文本，不能靠一个统一口号回答。
+两份许可证都允许商业使用，也都没有 share-alike。它们不会要求发布者补齐没有交付的训练代码和数据。
 
-最后是怎样验证开放。软件常见的检查是能否拿到源码、构建、修改和再分发。模型需要两次检查：法律上有没有相应权利，实际上有没有足以 study 和 modify 的材料。
-
-这页是条款结构研究，不是对某个模型的法律意见。它的用途是帮助发布者和使用者把问题问完整。
+来源：[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)、[OpenMDW 1.1](https://openmdw.ai/license/1-1/) 与 [OpenMDW FAQ](https://openmdw.ai/faq/)。
 
 [下一步。]
 
 ---
 
-## 17｜Rights 与 Materials 要分开检查（24:10—25:30）
+## 17｜许可证给权利，材料决定研究能走多远（24:10—25:30）
 
 [画面：标题。]
 
-经过刚才的对照，可以把开放模型检查分成两个问题。
+经过刚才的分发对照，再把开放模型检查分成两个问题。
 
 [下一步，Rights 出现。]
 
-第一个问题是 Rights：法律上可以做什么？Apache-2.0、MIT、OpenMDW 等条款回答使用、修改、分发，以及署名、NOTICE、专利、免责声明等义务。
+第一个问题是 Rights：法律上可以做什么？Apache-2.0 和 OpenMDW 都允许使用、修改和分发，分发手续、诉讼终止和输出边界需要按各自文本执行。
 
-以 Apache-2.0 为例，分发修改版本时要保留许可证和相关通知，修改过的文件要有显著说明；它还提供专利授权，并设置专利诉讼触发的终止条款。OpenMDW 面向模型材料，还会明确模型材料、衍生模型和输出等概念及对应规则。
+OpenMDW 没有定义一套“衍生模型”分类。微调 checkpoint、adapter 和蒸馏模型怎样适用条款，仍要看下游实际分发了哪些 Model Materials。它明确处理的是另一件事：生成输出不承接 OpenMDW 的义务。
 
 [下一步，Materials 出现。]
 
-第二个问题是 Materials：实际上拿到了什么？OSAID 1.0 讨论 Open Source AI 所需的 Use、Study、Modify、Share 自由，以及为修改系统提供 preferred form。Model Openness Framework 则把模型组件拆成一组可核验材料。
+第二个问题是 Materials：实际上拿到了什么？OSAID 1.0 讨论 Open Source AI 所需的 Use、Study、Modify、Share 自由，以及为修改系统提供 preferred form。Model Openness Framework 把模型组件拆成一组可核验材料。
 
 这几类文件作用不同。许可证授予权利，定义划出边界，开放度框架检查交付完整度。把它们放在一起，才能看清一个模型发布到底开放到了哪一步。
 
