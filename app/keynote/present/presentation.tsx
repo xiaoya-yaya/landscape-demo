@@ -82,7 +82,6 @@ const scenes: Scene[] = [
   { id: "zenmux-premium", chapter: "landscape", label: "ZENMUX · DEMAND", duration: "6:15—6:40", maxBuild: 0 },
   { id: "zenmux-value", chapter: "landscape", label: "ZENMUX · VALUE", duration: "6:40—7:05", maxBuild: 0 },
   { id: "awesome", chapter: "landscape", label: "AWESOME", duration: "7:05—8:25", maxBuild: 3 },
-  { id: "method", chapter: "landscape", label: "METHOD", duration: "8:25—9:45", maxBuild: 3 },
   { id: "production", chapter: "apache", label: "TURN", duration: "9:45—10:20", maxBuild: 0 },
   { id: "apache-scale", chapter: "apache", label: "APACHE", duration: "10:20—11:45", maxBuild: 1 },
   { id: "apache-position", chapter: "apache", label: "POSITION", duration: "11:45—14:00", maxBuild: 6 },
