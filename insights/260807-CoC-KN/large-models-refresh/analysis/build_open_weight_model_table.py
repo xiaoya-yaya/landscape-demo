@@ -478,6 +478,9 @@ def fetch_hf_models(
 
 def extract_license(hf: dict[str, Any]) -> str:
     card_data = hf.get("cardData") or {}
+    license_name = card_data.get("license_name")
+    if license_name:
+        return str(license_name)
     license_value = card_data.get("license")
     if isinstance(license_value, list):
         return "|".join(str(item) for item in license_value)

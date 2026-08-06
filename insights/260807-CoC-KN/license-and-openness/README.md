@@ -28,6 +28,26 @@ python3 insights/260807-CoC-KN/license-and-openness/analysis/build_license_snaps
 
 输出文件：[license_distribution_2026-08-01.json](data/license_distribution_2026-08-01.json)
 
+## 调用量 Top 50 中的开放权重模型
+
+调用量窗口：2026-07-01 至 2026-07-31。统计对象是 OpenRouter 与 ZenMux 月度调用量 composite Top 50；两个平台分别转换为月度 percentile，再按 50/50 合成，原始 token 数没有跨平台相加。
+
+Top 50 中有 20 个模型解析到官方公开权重仓库。许可证来自这些仓库的 metadata 和官方 LICENSE 文件。
+
+| 许可证 | 模型数 | 模型 |
+| --- | ---: | --- |
+| MIT | 8 | GLM 5.2、GLM 5、DeepSeek 4 个版本、MiMo-V2.5 两个版本 |
+| Apache-2.0 | 6 | Step 3.7 Flash、HY3、gpt-oss-120b、Gemma 4 两个版本、Mistral Nemo |
+| Modified MIT | 2 | Kimi K2.7 Code、Kimi K2.6 |
+| Kimi K3 License | 1 | Kimi K3 |
+| MiniMax Community License | 1 | MiniMax M3 |
+| Tencent Hy Community License Agreement | 1 | HY3 preview |
+| NVIDIA Nemotron Open Model License | 1 | Nemotron 3 Super |
+
+Apache-2.0 与 MIT 合计 14 个，占 70%。另外 6 个模型使用修改版或模型专用条款。这里的“开放权重”只表示解析到了官方公开权重仓库；商业使用、再分发和品牌要求仍需查看各许可证原文。
+
+输入数据：[monthly_models_top50_open_closed.csv](../large-models-refresh/data/monthly_models_top50_open_closed.csv)；日期、覆盖率和复合指标说明见 [monthly_source_summary.json](../large-models-refresh/data/monthly_source_summary.json)。
+
 ## Hugging Face 文本生成模型仓库 Top 100
 
 快照日期：2026-08-01
@@ -37,16 +57,17 @@ python3 insights/260807-CoC-KN/license-and-openness/analysis/build_license_snaps
 | 许可证标识 | 模型仓库数 | 占比 |
 | --- | ---: | ---: |
 | apache-2.0 | 57 | 57% |
-| mit | 18 | 18% |
-| other | 9 | 9% |
+| mit | 19 | 19% |
+| other | 8 | 8% |
 | llama3.2 | 4 | 4% |
 | llama3.1 | 2 | 2% |
 | llama3 | 2 | 2% |
 | gemma | 2 | 2% |
 | apple-amlr | 1 | 1% |
-| 未标注 | 5 | 5% |
+| bigscience-bloom-rail-1.0 | 1 | 1% |
+| 未标注 | 4 | 4% |
 
-合并后，Apache-2.0 与 MIT 占 75%；模型专用或其他条款占 20%；没有 `license` tag 的仓库占 5%。这说明软件许可证仍然覆盖大多数热门模型仓库，同时，Llama、Gemma 等模型专用条款已经形成清晰的一块。
+合并后，Apache-2.0 与 MIT 占 76%；模型专用或其他条款占 20%；没有 `license` tag 的仓库占 4%。这说明软件许可证仍然覆盖大多数热门模型仓库，同时，Llama、Gemma、Apple AMLR 和 BLOOM RAIL 等模型专用条款已经形成清晰的一块。
 
 这里的单位是模型仓库，不是独立模型家族。Top 100 中可能包含微调、量化、测试仓库和同一模型家族的多个版本；`downloads` 是 Hub 提供的仓库热度字段，不代表能力排名。许可证 tag 也不能证明训练数据、代码和其他修改材料已经公开。
 

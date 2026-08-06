@@ -93,9 +93,9 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
         note: "59 个保留，15 个新增",
       },
       {
-        value: "3 → 5",
-        label: "协议与互操作项目",
-        note: "A2A、MCP 之外补入 AG-UI 与 A2UI",
+        value: "TOP 2",
+        label: "7 月 OpenRank",
+        note: "OpenClaw 与 Hermes Agent 均为 Personal AI assistants",
       },
       {
         value: "15 → 12",
@@ -142,8 +142,8 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
     speakerTime: "约 2 分钟",
     speakerScript: [
       "先看现在的结构。74 个项目里，Agentic coding 有 12 个，Code-first frameworks 有 10 个，最大的两个 section 都围绕 coding。代码仍是 Agent 生态最密集的入口。",
-      "第二个视角看上下文。OpenViking 把 memory、RAG 和 skills 放进 context database，3 月到 7 月 OpenRank 从 112.46 升到 177.61。上下文开始从框架内部功能变成独立数据层。",
-      "第三个视角看公共接口：MCP、A2A 之外，AG-UI 与 A2UI 把事件流和界面带进协议层。第四个视角看改进方式：SkillOpt 把 skill 文档当作可训练状态，用 rollout、评估和验证门更新。",
+      "第二个视角看社区热度。7 月 OpenRank 前两名是 OpenClaw 和 Hermes Agent，分别为 462.71 和 350.21；Personal AI assistants 正在成为长期运行的工作入口。",
+      "第三个视角看上下文。OpenViking 把 memory、RAG 和 skills 放进 context database，3 月到 7 月 OpenRank 从 112.46 升到 177.61。个人 Agent 长期运行以后，上下文开始成为独立的数据层。",
       "图上的 NEW 和 RISING 只表达最近 90 天的新生或加速信号，不再等同于这版刚加入主图。下一张继续沿执行链路看 Model Infra。",
     ],
     fullNoteHref: `${repoBase}/landscape-notes/agent-infra.md`,
@@ -318,7 +318,7 @@ export const landscapeViews: Record<LandscapeKey, LandscapeView> = {
       "这张图先讲数据口径。我们取的是 2026 年 7 月 1 日到 31 日，一个完整自然月。OpenRouter 和 ZenMux 的原始 token 数不能直接相加，所以先在各自平台内部换成百分位，再各占 50%。",
       "Top 10 里有 4 个开放权重模型、6 个未公开权重模型。两类模型都进入了主流使用区，但没有形成对半或单边格局。数据覆盖有限，所以结论只落在这份样本上。",
       "把 Top 50 按模型类型拆开，差异就出来了：10 个 Reasoning 模型中有 9 个开放权重；13 个 Frontier Generalist 全部没有公开权重。开放程度和模型类型明显相关。",
-      "公开 AAI 能匹配到 8 个样本。使用排名第 1 的模型 AAI 为 51.1；AAI 最高的模型使用排名第 12。真实使用还受价格、延迟、渠道与产品适配影响，能力榜只是其中一个变量。",
+      "最新 AAI 快照与 7 月使用 Top 50 匹配后取前 10。GLM 5.2 使用排名第 1、AAI 为 51.1；Claude Opus 5 的 AAI 最高，为 60.7，但使用排名是第 23。价格、延迟和渠道都会改变实际选择。",
       "同样叫开放权重，发布材料仍有很大差别。有的只有权重，有的还有训练代码、数据说明和评测；这一层差异留到许可证部分继续讲。",
     ],
     fullNoteHref: `${repoBase}/landscape-notes/large-models.md`,

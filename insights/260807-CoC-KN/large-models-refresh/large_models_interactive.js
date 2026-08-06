@@ -1,4 +1,12 @@
 (() => {
+  const fitCanvas = () => {
+    const scale = Math.min(window.innerWidth / 3840, window.innerHeight / 2160);
+    document.documentElement.style.setProperty("--canvas-scale", String(scale));
+  };
+  fitCanvas();
+  window.addEventListener("resize", fitCanvas, { passive: true });
+  window.visualViewport?.addEventListener("resize", fitCanvas, { passive: true });
+
   const cards = [...document.querySelectorAll(".model-card")];
   const panels = [...document.querySelectorAll(".domain-panel[data-domain]")];
   const primaryButtons = [
@@ -12,8 +20,12 @@
   const drawer = document.querySelector("#model-passport");
   const backdrop = document.querySelector("#passport-backdrop");
   const closeButton = document.querySelector("#passport-close");
-  let primaryFilter = "all";
-  let aaiOnly = false;
+  const licenseCard = document.querySelector("#passport-license-card");
+  const initialView = new URLSearchParams(window.location.search).get("view");
+  let primaryFilter = ["open", "api", "top10"].includes(initialView)
+    ? initialView
+    : "all";
+  let aaiOnly = initialView === "aai";
   let lastFocus = null;
 
   const dataFor = (card) => {
@@ -45,6 +57,8 @@
     const query = searchInput.value.trim().toLocaleLowerCase();
     const vendor = vendorSelect.value;
     let visibleCount = 0;
+
+    document.documentElement.classList.toggle("aai-view", aaiOnly);
 
     cards.forEach((card) => {
       const data = dataFor(card);
@@ -151,7 +165,15 @@
 
     const accessLabel = data.isOpen ? "Open weights" : "API-only";
     setText("passport-access", accessLabel);
-    setText("passport-license", data.license);
+    licenseCard.hidden = !data.isOpen;
+    if (data.isOpen) {
+      setText("passport-license", data.license);
+      setText("passport-license-class", data.licenseClassLabel);
+      setText("passport-license-note", data.licenseNote);
+      setLink("passport-license-link", data.licenseUrl);
+    } else {
+      setLink("passport-license-link", "");
+    }
     setText(
       "passport-access-note",
       data.isOpen
@@ -295,5 +317,11 @@
     }
   });
 
+  primaryButtons.forEach((button) => {
+    const active = button.dataset.primaryFilter === primaryFilter;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  aaiButton.setAttribute("aria-pressed", String(aaiOnly));
   applyFilters();
 })();

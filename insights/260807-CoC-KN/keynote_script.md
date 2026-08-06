@@ -6,7 +6,7 @@
 > 研究页：<https://landscape.16507.cn/keynote>
 > 舞台播放：<https://landscape.16507.cn/keynote/present>
 
-这份文件保留舞台执行说明。当前播放模式共有 20 个场景；可直接照读的 30 分钟版本见 [`keynote_verbatim_30min.md`](./keynote_verbatim_30min.md)。屏幕里运行的是网页本身：生态图保留真实项目和布局，Apache 与 InclusionAI 保留原来的 Tab、项目卡和技术栈。翻页笔或触屏手势替演讲者完成切换和聚焦。
+这份文件保留舞台执行说明。当前播放模式共有 23 个场景；可直接照读的 30 分钟版本见 [`keynote_verbatim_30min.md`](./keynote_verbatim_30min.md)。屏幕里运行的是网页本身：生态图保留真实项目和布局，Apache 与 InclusionAI 保留原来的 Tab、项目卡和技术栈。翻页笔或触屏手势替演讲者完成切换和聚焦。
 
 ## 这场演讲怎样走
 
@@ -33,26 +33,28 @@ InclusionAI 把“谁可以参与”展开到模型、具身智能、基础设�
 
 ## 上台前
 
-1. 打开 <https://landscape.16507.cn/keynote/present>。第 5、6 页使用从原始 HTML 预先生成的总览与筛选画面，翻页交互不依赖现场网络。
+1. 打开 <https://landscape.16507.cn/keynote/present>。Large Models、两张 ZenMux 洞察和 Awesome 使用预先生成的画面，翻页不依赖现场网络。
 2. 按 `Enter` 进入全屏，确认画面没有变化；按 `Esc` 退出，再按 `Enter` 回到全屏。
-3. 按一次“下一步”，再按一次“上一步”回到标题。确认标题页完整、页面没有滚动条。
-4. 前进到 Agent Infra，确认整张动态生态图已经出现；连续检查三次“下一步”：`Agentic coding`、`Memory, knowledge & context`、`Protocols & interoperability` 应依次聚焦。
+3. 按一次“下一步”，确认粉色 Agent Infra 和蓝色 Model Infra 两张旧版静态图完整出现；再按一次“上一步”回到标题。
+4. 前进到新版 Agent Infra，确认整张动态生态图已经出现；连续检查三次“下一步”：`Agentic coding`、`Personal AI assistants`、`Memory, knowledge & context` 应依次聚焦。
 5. 继续检查 Model Infra：`Model API gateways`、`Serving · Inference`、许可证视角应依次出现，最后一次恢复全图。
-6. 继续检查 Large Models：第一屏应完整显示六个领域；随后依次切到 Top 10、开放权重、AAI 可比样本，卡片数量应为 10、24、8。
-7. 继续检查 Awesome：随后依次切到可直接消费项目、安装类项目、全量视角。安装类项目的卡片会解释 `Install` 与 `direct` 的口径。
-8. 用“上一步”原路退回标题。正式演讲前不要刷新页面。
-9. 若浏览器拦截全屏，先在浏览器设置中允许当前站点使用全屏。
+6. 继续检查 Large Models：第一屏应完整显示六个领域；随后依次切到 Top 10、开放权重、AAI 可比样本，卡片数量应为 10、24、10。
+7. Large Models 之后应连续出现两张 ZenMux 图：第一张聚焦 Anthropic，第二张聚焦 DeepSeek 与 InclusionAI。确认高亮框没有压住模型名称。
+8. 继续检查 Awesome：随后依次切到可直接消费项目、安装类项目、全量视角。安装类项目的卡片会解释 `Install` 与 `direct` 的口径。
+9. 用“上一步”原路退回标题。正式演讲前不要刷新页面。
+10. 若浏览器拦截全屏，先在浏览器设置中允许当前站点使用全屏。
 
 数据口径：
 
 - 全场统计口径：数据截至 2026-08-01。
 - OpenRank：趋势字段覆盖 2025-08—2026-07，舞台分析使用 2026-07 完整月；7 月全库分区仍在回填，因此只把它当方向信号。
 - OpenRouter 与 ZenMux：2026-07-01—2026-07-31 完整自然月。
+- ZenMux Token Economics 两张补充图：页面快照生成于 2026-08-06；使用 ZenMux 平台 token 消耗数据和官网模型价格。
 - GitHub 仓库指标：采用当前 REST API 返回值，按演讲约定归入 8 月 1 日快照。
 
 ---
 
-## 01｜标题（0:00—0:45）
+## 01｜标题（0:00—0:35）
 
 ### 画面
 
@@ -68,11 +70,31 @@ Agentic AI 的变化很快，新模型、新框架和新协议不断出现。开
 
 ### 翻页笔
 
+按 `PageDown`，进入现场调查页。
+
+---
+
+## 02｜现场有多少人见过这两张图（0:35—1:05）
+
+### 进入画面
+
+粉色 Agent Infra 与蓝色 Model Infra 两张旧版静态图并排放置。屏幕上只问一句：
+
+> 现场有多少人见过这两张图？
+
+### 讲法
+
+在正式开始之前，我先问一下：现场有多少人见过这两张图？见过其中任何一张，都可以举一下手。
+
+停几秒，看现场。然后说：
+
+这是我们此前发布的 Agent Infra 和 Model Infra Landscape。今天再把它们拿出来，是因为这两张图一直在变，我们也一直在重新检查里面的项目和分类。
+
 按 `PageDown`，进入问题页。
 
 ---
 
-## 02｜图一直在变，什么值得留下（0:45—1:40）
+## 03｜图一直在变，什么值得留下（1:05—1:50）
 
 ### 进入画面
 
@@ -98,7 +120,7 @@ Agentic AI 的变化很快，新模型、新框架和新协议不断出现。开
 
 ---
 
-## 03｜Agent Infra：入口很热，变化发生在更下面（1:40—3:25）
+## 04｜Agent Infra：入口很热，变化发生在更下面（1:50—3:25）
 
 ### 进入画面
 
@@ -108,7 +130,7 @@ Agent Infra 的真实网页组件铺满屏幕，项目 Logo、分区和 OpenRank
 
 这张图沿着 Agent 完成一次任务的路径来组织项目。上面有应用和框架，下面是工具、环境、记忆、协议和运行基础设施。
 
-这张图有 74 个项目。先看当前结构，再看近期增长和公共接口。
+这张图有 74 个项目。先看当前结构，再看社区热度落在哪里，以及它带动了哪些基础设施需求。
 
 ### 按一次 `PageDown`
 
@@ -122,7 +144,19 @@ Agentic coding 有 12 个项目，Code-first frameworks 有 10 个。代码仍�
 
 ### 再按一次 `PageDown`
 
-`Memory, knowledge & context` 抬高；讲解卡切换为：
+`Personal AI assistants` 抬高；讲解卡切换为：
+
+> TOP 2：7 月 OpenRank 前两名都是 Personal AI assistants
+
+### 继续讲
+
+74 个项目里，7 月 OpenRank 排名前两位的是 OpenClaw 和 Hermes Agent，分别为 462.71 和 350.21。Personal AI assistants 这一栏共有 7 个项目，其中 5 个是在 2025 年 7 月以后出现的。
+
+代码仍是项目最密集的入口，社区热度已经明显落到长期运行的个人 Agent 上。它们需要记住用户、复用 skills，也要持续连接外部服务。
+
+### 再按一次 `PageDown`
+
+`Memory, knowledge & context` 抬高；讲解卡显示：
 
 > OpenViking · OpenRank：112.46 → 177.61
 
@@ -130,23 +164,13 @@ Agentic coding 有 12 个项目，Code-first frameworks 有 10 个。代码仍�
 
 OpenViking 把 memory、RAG 和 skills 收进 context database。2026 年 3 月到 7 月，它的 OpenRank 从 112.46 升到 177.61。
 
-上下文原本常被包在 framework 里面。现在开始出现独立的 context database，社区可以单独改进存储、检索和更新方式。图上的 `RISING` 只给有时间窗口证据的项目；它和“这一版刚加入主图”是两个字段。
-
-### 再按一次 `PageDown`
-
-`Protocols & interoperability` 抬高；讲解卡显示：
-
-> 3 → 5：Protocols & interoperability
-
-### 继续讲
-
-MCP 连接 Agent 与工具，A2A 处理 Agent 之间的协作。AG-UI 和 A2UI 又把事件流与界面带进公共接口层。这些协议还很年轻，现场不要讲成标准已经稳定。
+个人 Agent 开始长期运行以后，上下文不能一直塞在 prompt 或某个 framework 内部。存储、检索和更新需要单独管理，这也解释了 context database 为什么会在这一轮出现。图上的 `RISING` 只给有时间窗口证据的项目；它和“这一版刚加入主图”是两个字段。
 
 再按 `PageDown`，进入 Model Infra。
 
 ---
 
-## 04｜Model Infra：Gateway 又热了，但职责已经分叉（3:25—5:05）
+## 05｜Model Infra：Gateway 又热了，但职责已经分叉（3:25—5:05）
 
 ### 进入画面
 
@@ -216,7 +240,7 @@ OpenRank 在这里表示协作活跃度，不表示性能排名。
 
 ---
 
-## 05｜Large Models：开放权重进入主流使用区（5:05—6:35）
+## 06｜Large Models：开放权重进入主流使用区（5:05—6:15）
 
 ### 进入画面
 
@@ -252,17 +276,49 @@ Large Models 总览铺满舞台。六个领域、筛选栏和每张模型卡都�
 
 画面切到 AAI 可比样本；右下角显示：
 
-> 使用 #1 / AAI 最高模型使用 #12
+> 使用 #1 / AAI 第一模型使用 #23
 
 ### 继续讲
 
-公开使用与能力榜没有排成同一条队伍。8 个可比样本中，使用第 1 的模型 AAI 为 51.1；AAI 最高的模型在使用数据里排第 12。部署成本、价格和渠道都会改变实际选择。
+这一屏保留了匹配样本中的 AAI 前 10。GLM 5.2 在使用榜排第 1，AAI 是 51.1；Claude Opus 5 的 AAI 最高，为 60.7，使用排名却是第 23。部署成本、价格和渠道都会改变实际选择。
 
-再按 `PageDown`，进入 Awesome。
+再按 `PageDown`，进入 ZenMux 的价格与使用视角。
 
 ---
 
-## 06｜Awesome：README 开始带有执行语义（6:35—7:55）
+## 07｜ZenMux：高价区仍有清晰的需求中心（6:15—6:40）
+
+### 进入画面
+
+ZenMux Token Economics 的 Value Map 铺在左侧，原生筛选聚焦 Anthropic。橙色框圈住右上方模型集群。
+
+### 讲法
+
+ZenMux 把标准篮子价格和平台内真实 token 使用放在一张图上。右上角是价格高于中位数、发布期日 token 也高于中位数的模型。
+
+这个象限按日 token 中位数排序，前十里有七个来自 Anthropic。高价格没有把这些模型挤出 ZenMux 的需求中心。图表本身不能解释原因，能力、延迟和工作负载仍要另外验证。
+
+按 `PageDown`，进入价值效率视角。
+
+---
+
+## 08｜ZenMux：价值效率前沿里的 DeepSeek 与 Ling（6:40—7:05）
+
+### 进入画面
+
+同一张 Value Map 改为聚焦 DeepSeek 与 InclusionAI。绿色框圈住 DeepSeek V4 Flash、DeepSeek V4 Pro 和 Ling-3.0-flash。
+
+### 讲法
+
+价格低于中位数、使用高于中位数的区域里，DeepSeek V4 Flash 和 V4 Pro 排在 Value 指标前两位，Ling-3.0-flash 排第三。
+
+Value 用发布后前 14 个工作日的活跃日 token 中位数除以标准篮子价格。Flash 和 Ling 的观察窗口还不完整，现场要说成发布初期信号。数据只代表 ZenMux 平台，不代表全市场份额。
+
+按 `PageDown`，进入 Awesome。
+
+---
+
+## 09｜Awesome：README 开始带有执行语义（7:05—8:25）
 
 ### 进入画面
 
@@ -310,7 +366,7 @@ README 过去主要解释软件怎么安装。现在有些 README 已经在告�
 
 ---
 
-## 07｜四张图怎样形成这次观察（7:55—9:45）
+## 10｜四张图怎样形成这次观察（8:25—9:45）
 
 ### 进入画面
 
@@ -357,7 +413,7 @@ README 过去主要解释软件怎么安装。现在有些 README 已经在告�
 
 ---
 
-## 08｜Agent 进入生产环境，老问题一起回来（9:45—10:20）
+## 11｜Agent 进入生产环境，老问题一起回来（9:45—10:20）
 
 ### 进入画面
 
@@ -383,7 +439,7 @@ Agent 进入真实系统，会遇到软件工程里很熟悉的问题。
 
 ---
 
-## 09｜Apache 的规模是一套长期协作能力（10:20—11:45）
+## 12｜Apache 的规模是一套长期协作能力（10:20—11:45）
 
 ### 进入画面
 
@@ -413,7 +469,7 @@ Apache 官网目前写的是 290 多个开源项目。这个数字背后还有�
 
 ---
 
-## 10｜Apache 在 Agent 的数据与运行底座（11:45—14:00）
+## 13｜Apache 在 Agent 的数据与运行底座（11:45—14:00）
 
 ### 进入画面｜Data, analytics & AI
 
@@ -441,7 +497,7 @@ Libraries 可以点 ECharts、Arrow 和 Thrift；Network 可以点 Arrow、Thrif
 
 ---
 
-## 11｜蚂蚁深度参与的四个 Apache 项目（14:00—15:50）
+## 14｜蚂蚁深度参与的四个 Apache 项目（14:00—15:50）
 
 ### 进入画面
 
@@ -471,7 +527,7 @@ Libraries 可以点 ECharts、Arrow 和 Thrift；Network 可以点 Arrow、Thrif
 
 ---
 
-## 12｜InclusionAI：AI Built By Everyone, For Everyone（15:50—17:20）
+## 15｜InclusionAI：AI Built By Everyone, For Everyone（15:50—17:20）
 
 ### 进入画面
 
@@ -501,7 +557,7 @@ Apache 展示的是跨组织基础设施怎样长期协作。InclusionAI 提供�
 
 ---
 
-## 13｜InclusionAI 的参与路径（17:20—20:20）
+## 16｜InclusionAI 的参与路径（17:20—20:20）
 
 这一场景有五个状态。左侧是真实的技术栈 Tab，右侧保留项目 Logo、地址、角色和说明。每按一次 `PageDown`，active Tab 与右侧项目卡一起切换。
 
@@ -539,7 +595,7 @@ LingGuang、金融服务和 AQ 等真实服务，把用户遇到的问题重新�
 
 ---
 
-## 14｜允许商用，够不够称为开放（20:20—21:05）
+## 17｜允许商用，够不够称为开放（20:20—21:05）
 
 ### 进入画面
 
@@ -567,23 +623,31 @@ LingGuang、金融服务和 AQ 等真实服务，把用户遇到的问题重新�
 
 ---
 
-## 15｜软件仓库与模型仓库的许可证分布（21:05—22:35）
+## 18｜三组许可证样本（21:05—22:35）
 
 ### 进入画面｜Agent Infra + Model Infra
 
 132 个软件项目中，Apache-2.0 有 61 个，MIT 有 37 个，两者合计 74.2%。25 个 NOASSERTION 只表示 GitHub / SPDX 没有给出可确认的标识，不能直接读成没有许可证。
 
-### 按一次 `PageDown`｜Hugging Face Top 100
+### 按一次 `PageDown`｜加入 Hugging Face Top 100
 
-Hugging Face Text Generation 下载量 Top 100 中，Apache-2.0 有 57 个，MIT 有 19 个，两者合计 76%。20 个使用模型专用或其他许可证，另外 4 个没有 license tag。
+Hugging Face Text Generation 下载量 Top 100 中，Apache-2.0 有 57 个，MIT 有 19 个，两者合计 76%。Llama 3 系列的三种 tag 合计 8 个，Gemma 2 个，Apple AMLR 和 BLOOM RAIL 各 1 个；8 个标成 `other`，4 个没有 license tag。
 
-两组比例接近，只能说明宽松许可在软件仓库和模型仓库里都很常见。模型仓库里的许可证究竟覆盖权重、代码还是更多材料，需要回到许可文本和实际发布内容。
+`other` 和未标注都需要回到模型卡复核。Top 100 的单位是仓库，同一模型家族可能重复出现，也会混入量化、微调和测试仓库。
+
+### 再按一次 `PageDown`｜加入调用量 Top 50 中的开放权重模型
+
+2026 年 7 月的 OpenRouter 与 ZenMux 调用量 composite Top 50 中，有 20 个模型解析到官方公开权重仓库。MIT 有 8 个，Apache-2.0 有 6 个，合计 70%。调用量综合排名前三的 GLM 5.2、DeepSeek V4 Pro 和 DeepSeek V4 Flash 全部使用 MIT。
+
+另外 6 个使用 Modified MIT 或模型专用条款：Kimi K2.7 Code、Kimi K2.6、Kimi K3、MiniMax M3、HY3 preview 和 Nemotron 3 Super。现场可以点出 Kimi K3 和 MiniMax M3：权重能够下载，商业使用和品牌要求仍要看各自条款。
+
+调用量 Top 50 更接近头部模型，HF Top 100 提供一个更宽的仓库样本。两组都显示软件许可证仍然常见；模型专用或修改版条款在调用量头部里占 30%。
 
 再按 `PageDown`，进入两份许可证的分发对照。
 
 ---
 
-## 16｜Apache-2.0 与 OpenMDW-1.1 怎样约束分发（22:35—24:10）
+## 19｜Apache-2.0 与 OpenMDW-1.1 怎样约束分发（22:35—24:10）
 
 ### 进入画面
 
@@ -613,7 +677,7 @@ OpenMDW 把模型架构、参数，以及实际置于该许可下的数据、代
 
 ---
 
-## 17｜许可证给权利，材料决定研究能走多远（24:10—25:30）
+## 20｜许可证给权利，材料决定研究能走多远（24:10—25:30）
 
 ### 第一次按 `PageDown`｜Rights
 
@@ -629,7 +693,7 @@ OpenMDW 没有定义一套“衍生模型”分类。微调 checkpoint、adapter
 
 ---
 
-## 18｜一个模型发布，到底交付了什么（25:30—27:00）
+## 21｜一个模型发布，到底交付了什么（25:30—27:00）
 
 ### 进入画面
 
@@ -669,7 +733,7 @@ OpenMDW 没有定义一套“衍生模型”分类。微调 checkpoint、adapter
 
 ---
 
-## 19｜陌生贡献怎样变成长期信任（27:00—29:20）
+## 22｜陌生贡献怎样变成长期信任（27:00—29:20）
 
 这一页有五个状态。贡献路径沿用研究页的交互组件，`PageDown` 会移动 active 节点并替换下方说明。
 
@@ -701,7 +765,7 @@ CommunityOverCode 描述的就是这套机制：把陌生贡献逐步变成共�
 
 ---
 
-## 20｜结尾（29:20—30:00）
+## 23｜结尾（29:20—30:00）
 
 ### 画面
 

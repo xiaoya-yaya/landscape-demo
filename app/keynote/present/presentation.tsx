@@ -73,13 +73,16 @@ function resolveSwipeDirection(
 }
 
 const scenes: Scene[] = [
-  { id: "title", chapter: "open", label: "OPEN", duration: "0:00—0:45", maxBuild: 0 },
-  { id: "question", chapter: "open", label: "QUESTION", duration: "0:45—1:40", maxBuild: 1 },
-  { id: "agent", chapter: "landscape", label: "AGENT INFRA", duration: "1:40—3:25", maxBuild: 3 },
+  { id: "title", chapter: "open", label: "OPEN", duration: "0:00—0:35", maxBuild: 0 },
+  { id: "familiarity", chapter: "open", label: "SHOW OF HANDS", duration: "0:35—1:05", maxBuild: 0 },
+  { id: "question", chapter: "open", label: "QUESTION", duration: "1:05—1:50", maxBuild: 1 },
+  { id: "agent", chapter: "landscape", label: "AGENT INFRA", duration: "1:50—3:25", maxBuild: 3 },
   { id: "model", chapter: "landscape", label: "MODEL INFRA", duration: "3:25—5:05", maxBuild: 3 },
-  { id: "large", chapter: "landscape", label: "LARGE MODELS", duration: "5:05—6:35", maxBuild: 3 },
-  { id: "awesome", chapter: "landscape", label: "AWESOME", duration: "6:35—7:55", maxBuild: 3 },
-  { id: "method", chapter: "landscape", label: "METHOD", duration: "7:55—9:45", maxBuild: 3 },
+  { id: "large", chapter: "landscape", label: "LARGE MODELS", duration: "5:05—6:15", maxBuild: 3 },
+  { id: "zenmux-premium", chapter: "landscape", label: "ZENMUX · DEMAND", duration: "6:15—6:40", maxBuild: 0 },
+  { id: "zenmux-value", chapter: "landscape", label: "ZENMUX · VALUE", duration: "6:40—7:05", maxBuild: 0 },
+  { id: "awesome", chapter: "landscape", label: "AWESOME", duration: "7:05—8:25", maxBuild: 3 },
+  { id: "method", chapter: "landscape", label: "METHOD", duration: "8:25—9:45", maxBuild: 3 },
   { id: "production", chapter: "apache", label: "TURN", duration: "9:45—10:20", maxBuild: 0 },
   { id: "apache-scale", chapter: "apache", label: "APACHE", duration: "10:20—11:45", maxBuild: 1 },
   { id: "apache-position", chapter: "apache", label: "POSITION", duration: "11:45—14:00", maxBuild: 6 },
@@ -87,7 +90,7 @@ const scenes: Scene[] = [
   { id: "inclusion-scale", chapter: "inclusion", label: "INCLUSIONAI", duration: "15:50—17:20", maxBuild: 1 },
   { id: "inclusion-stack", chapter: "inclusion", label: "PARTICIPATION", duration: "17:20—20:20", maxBuild: 4 },
   { id: "license-question", chapter: "license", label: "OPEN MODEL", duration: "20:20—21:05", maxBuild: 1 },
-  { id: "license-distribution", chapter: "license", label: "LICENSE DATA", duration: "21:05—22:35", maxBuild: 1 },
+  { id: "license-distribution", chapter: "license", label: "LICENSE DATA", duration: "21:05—22:35", maxBuild: 2 },
   { id: "license-compare", chapter: "license", label: "REDISTRIBUTE", duration: "22:35—24:10", maxBuild: 2 },
   { id: "license-layers", chapter: "license", label: "LICENSE", duration: "24:10—25:30", maxBuild: 2 },
   { id: "release-check", chapter: "license", label: "RELEASE CHECK", duration: "25:30—27:00", maxBuild: 3 },
@@ -146,9 +149,9 @@ const externalLandscapes: Record<
       },
       {
         angle: "使用与能力",
-        metric: "#1 / #12",
-        label: "公开使用与能力榜没有排成同一条队伍",
-        note: "8 个可比 AAI 样本中，使用第 1 的模型 AAI 为 51.1；AAI 最高的模型使用排名第 12。",
+        metric: "#1 / #23",
+        label: "使用榜第一与 AAI 第一不是同一个模型",
+        note: "最新 AAI 快照与 7 月使用 Top 50 匹配后取前 10：GLM 5.2 使用排名第 1、AAI 为 51.1；Claude Opus 5 AAI 为 60.7、使用排名第 23。",
         interaction: "aai",
       },
     ],
@@ -198,18 +201,18 @@ const landscapeInsights: Record<"agent" | "model", LandscapeStageInsight[]> = {
       focus: "Agentic coding",
     },
     {
+      angle: "社区热度",
+      metric: "TOP 2",
+      label: "7 月 OpenRank 前两名都是 Personal AI assistants",
+      note: "OpenClaw 为 462.71，Hermes Agent 为 350.21；个人 Agent 正在成为长期运行的工作入口。",
+      focus: "Personal AI assistants",
+    },
+    {
       angle: "近期信号",
       metric: "112.46 → 177.61",
       label: "OpenViking · 2026-03—07 OpenRank",
-      note: "Memory、RAG 和 skills 开始收进 context database；上下文正在成为独立的数据层。",
+      note: "个人 Agent 开始长期运行，memory、RAG 和 skills 随之收进独立的 context database。",
       focus: "Memory, knowledge & context",
-    },
-    {
-      angle: "接口变化",
-      metric: "3 → 5",
-      label: "Protocols & interoperability",
-      note: "MCP、A2A 之外，AG-UI 与 A2UI 把事件流和界面带进了公共接口层。",
-      focus: "Protocols & interoperability",
     },
   ],
   model: [
@@ -245,19 +248,32 @@ const releaseMaterials = [
   ["修改文档", 3],
 ] as const;
 
-const softwareLicenseDistribution = [
+type LicenseDistributionItem = {
+  label: string;
+  value: number;
+  share: number;
+  color: string;
+};
+
+const softwareLicenseDistribution: readonly LicenseDistributionItem[] = [
   { label: "Apache-2.0", value: 61, share: 46.2, color: "#6d50ff" },
   { label: "MIT", value: 37, share: 28.0, color: "#ff68b4" },
   { label: "NOASSERTION", value: 25, share: 18.9, color: "#b7b7b1" },
   { label: "Other", value: 9, share: 6.8, color: "#ff955d" },
+];
+
+const top50OpenWeightLicenseDistribution: readonly LicenseDistributionItem[] = [
+  { label: "MIT", value: 8, share: 40, color: "#ff68b4" },
+  { label: "Apache-2.0", value: 6, share: 30, color: "#6d50ff" },
+  { label: "模型专用 / 修改版", value: 6, share: 30, color: "#ff955d" },
 ] as const;
 
-const modelLicenseDistribution = [
+const modelLicenseDistribution: readonly LicenseDistributionItem[] = [
   { label: "Apache-2.0", value: 57, share: 57, color: "#6d50ff" },
   { label: "MIT", value: 19, share: 19, color: "#ff68b4" },
-  { label: "Model-specific / other", value: 20, share: 20, color: "#73dce9" },
-  { label: "No license tag", value: 4, share: 4, color: "#b7b7b1" },
-] as const;
+  { label: "模型专用 / 其他", value: 20, share: 20, color: "#73dce9" },
+  { label: "未标注", value: 4, share: 4, color: "#b7b7b1" },
+];
 
 const licenseComparisonRows = [
   {
@@ -616,6 +632,36 @@ function SceneContent({
     );
   }
 
+  if (id === "familiarity") {
+    return (
+      <div className={styles.familiarityScene}>
+        <h2>现场有多少人见过这两张图？</h2>
+        <div className={styles.familiarityPair}>
+          <figure className={styles.familiarityPrint} data-landscape="agent">
+            <Image
+              src="/keynote/recognition/agent-infra-handdrawn.png"
+              alt="粉色的 Agent Infra Landscape 2026 静态图"
+              fill
+              sizes="46vw"
+              priority
+              unoptimized
+            />
+          </figure>
+          <figure className={styles.familiarityPrint} data-landscape="model">
+            <Image
+              src="/keynote/recognition/model-infra-handdrawn.png"
+              alt="蓝色的 Model Infra Landscape 2026 静态图"
+              fill
+              sizes="46vw"
+              priority
+              unoptimized
+            />
+          </figure>
+        </div>
+      </div>
+    );
+  }
+
   if (id === "question") {
     return (
       <div className={styles.questionScene}>
@@ -671,6 +717,69 @@ function SceneContent({
             total={landscape.insights.length}
           />
         ) : null}
+      </div>
+    );
+  }
+
+  if (id === "zenmux-premium" || id === "zenmux-value") {
+    const isPremium = id === "zenmux-premium";
+    return (
+      <div className={styles.zenmuxScene} data-variant={isPremium ? "premium" : "value"}>
+        <div className={styles.zenmuxChart}>
+          <Image
+            src={
+              isPremium
+                ? "/keynote/large-models/zenmux-premium-demand.png"
+                : "/keynote/large-models/zenmux-value-frontier.png"
+            }
+            alt={
+              isPremium
+                ? "ZenMux Token Economics 价值图，聚焦 Anthropic 模型"
+                : "ZenMux Token Economics 价值图，聚焦 DeepSeek 与 InclusionAI 模型"
+            }
+            fill
+            sizes="74vw"
+            priority
+            unoptimized
+          />
+          <div className={styles.zenmuxFocus} aria-hidden="true">
+            <span>{isPremium ? "Anthropic cluster" : "Value leaders"}</span>
+          </div>
+        </div>
+
+        <aside className={styles.zenmuxFinding}>
+          <p className={styles.zenmuxKicker}>ZenMux Token Economics</p>
+          {isPremium ? (
+            <>
+              <h2>高价 + 高使用区，Anthropic 占前十中的七席</h2>
+              <strong className={styles.zenmuxMetric}>7 / 10</strong>
+              <p className={styles.zenmuxBody}>
+                按发布期日 token 中位数排序。高价格没有把这些模型挤出 ZenMux 的需求中心。
+              </p>
+            </>
+          ) : (
+            <>
+              <h2>价值效率前三名，DeepSeek 占两席，Ling 排第三</h2>
+              <ol className={styles.zenmuxRanking}>
+                <li><strong>#1</strong><span>DeepSeek V4 Flash*</span></li>
+                <li><strong>#2</strong><span>DeepSeek V4 Pro</span></li>
+                <li><strong>#3</strong><span>Ling-3.0-flash*</span></li>
+              </ol>
+            </>
+          )}
+
+          <div className={styles.zenmuxSource}>
+            <strong>来源</strong>
+            <span>ZenMux Arena · Token Economics</span>
+            <span>ZenMux token 消耗数据 + 官网模型价格</span>
+            <span>页面快照：2026-08-06</span>
+          </div>
+          <p className={styles.zenmuxCaveat}>
+            {isPremium
+              ? "ZenMux 平台样本，不代表全市场份额。"
+              : "* 发布未满 14 个工作日；ZenMux 平台样本。"}
+          </p>
+        </aside>
       </div>
     );
   }
@@ -1129,34 +1238,51 @@ function SceneContent({
   }
 
   if (id === "license-distribution") {
-    const bars = [
-      {
-        title: "Agent Infra + Model Infra",
-        subtitle: "132 个开源软件仓库",
-        items: softwareLicenseDistribution,
-      },
-      {
-        title: "Hugging Face Text Generation",
-        subtitle: "下载量排序 Top 100 模型仓库",
-        items: modelLicenseDistribution,
-      },
-    ];
+    const softwareBar = {
+      cohort: "software",
+      title: "Landscape 软件",
+      subtitle: "132 个 GitHub 仓库",
+      items: softwareLicenseDistribution,
+      source: "GitHub SPDX · 2026-08-01",
+      metric: "74.2%",
+    };
+    const hfBar = {
+      cohort: "hf",
+      title: "HF 下载量 Top 100",
+      subtitle: "Text Generation 模型仓库",
+      items: modelLicenseDistribution,
+      source: "Hugging Face license tag · 2026-08-01",
+      metric: "76%",
+    };
+    const top50Bar = {
+      cohort: "usage",
+      title: "调用量 Top 50 · 开放权重",
+      subtitle: "20 个模型",
+      items: top50OpenWeightLicenseDistribution,
+      source: "OpenRouter + ZenMux · 2026-07",
+      metric: "70%",
+    };
+    const bars = [softwareBar, hfBar, top50Bar];
     return (
       <div className={styles.licenseDistributionScene}>
         <header>
-          <h2>模型仓库仍在大量使用软件许可证。</h2>
+          <h2>Apache-2.0 + MIT：三组样本均超过 70%。</h2>
         </header>
         <div className={styles.licenseSamplePair}>
           {bars.map((bar, index) => (
-            <article key={bar.title} data-visible={index === 0 || build >= 1}>
+            <article
+              key={bar.title}
+              data-visible={build >= index}
+              data-cohort={bar.cohort}
+            >
               <header>
                 <div>
                   <strong>{bar.title}</strong>
                   <span>{bar.subtitle}</span>
                 </div>
-                <b>{index === 0 ? "74.2%" : "76%"}</b>
+                <b>{bar.metric}</b>
               </header>
-              <p>Apache-2.0 或 MIT</p>
+              <p>Apache-2.0 + MIT</p>
               <div className={styles.stackedLicenseBar}>
                 {bar.items.map((item) => (
                   <i
@@ -1178,6 +1304,7 @@ function SceneContent({
                   </span>
                 ))}
               </div>
+              <footer>{bar.source}</footer>
             </article>
           ))}
         </div>

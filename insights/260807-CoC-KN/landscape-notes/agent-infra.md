@@ -113,9 +113,9 @@ Agent 关键词数量 × 4
 
 第一步看结构：74 个项目里，Agentic coding 有 12 个，Code-first frameworks 有 10 个。代码仍是最密集的 Agent 入口。
 
-第二步看上下文：OpenViking 把 memory、RAG 和 skills 收进 context database。它在 2026 年 3—7 月的 OpenRank 从 112.46 升至 177.61。上下文开始从 framework 内部功能变成可以单独演进的数据层。
+第二步看个人 Agent：7 月 OpenRank 前两名是 OpenClaw 和 Hermes Agent，分别为 462.71 和 350.21。Personal AI assistants 一栏的 7 个项目中，有 5 个是在 2025 年 7 月以后出现的。
 
-第三步看接口：Protocols & interoperability 从 3 个项目增到 5 个。MCP、A2A 之外，AG-UI 与 A2UI 把事件流和界面也放进公共接口层。
+第三步看上下文：OpenViking 把 memory、RAG 和 skills 收进 context database。它在 2026 年 3—7 月的 OpenRank 从 112.46 升至 177.61。个人 Agent 长期运行以后，上下文开始成为可以单独演进的数据层。
 
 第四步看新项目的冷热差：SkillOpt 把 skill 文档当作可训练状态，通过 rollout、评估和验证门更新。它 5 月 8 日创建，8 月 1 日口径下已有 15,539 stars，但 7 月可见参与者只有 2 名。注意力很强，持续协作还需要时间验证。
 
@@ -134,13 +134,13 @@ Agent 关键词数量 × 4
 
 > 74 个项目里，Agentic coding 有 12 个，Code-first frameworks 有 10 个。最大的两个 section 都围绕 coding，代码仍是 Agent 生态最密集的入口。
 
-第二次翻页聚焦 `Memory, knowledge & context`：
+第二次翻页聚焦 `Personal AI assistants`：
 
-> OpenViking 把 memory、RAG 和 skills 放进 context database。3 月到 7 月 OpenRank 从 112.46 升到 177.61。上下文开始成为独立的数据层。
+> 7 月 OpenRank 前两名都是 Personal AI assistants：OpenClaw 为 462.71，Hermes Agent 为 350.21。个人 Agent 正在成为长期运行的工作入口。
 
-第三次翻页看协议：
+第三次翻页聚焦 `Memory, knowledge & context`：
 
-> 公共接口从工具调用延伸到 Agent 协作、事件流和界面。协议还很年轻，图上只记录接口层正在补齐，不把它讲成标准已经稳定。
+> OpenViking 把 memory、RAG 和 skills 放进 context database。3 月到 7 月 OpenRank 从 112.46 升到 177.61。个人 Agent 长期运行以后，上下文开始成为独立的数据层。
 
 如果观众问为什么有些本版新增项目没有 `NEW`，直接说明：
 

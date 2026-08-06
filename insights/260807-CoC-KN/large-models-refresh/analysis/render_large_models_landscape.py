@@ -28,6 +28,7 @@ INTERACTIVE_JS_PATH = ROOT / "large_models_interactive.js"
 PUBLIC_HTML_PATH = ROOT.parents[2] / "public" / "keynote" / "large-models" / "index.html"
 
 AA_MODELS_URL = "https://artificialanalysis.ai/models"
+AAI_DISPLAY_LIMIT = 10
 
 DOMAIN_ORDER = [
     "Frontier Generalist",
@@ -128,9 +129,17 @@ VENDOR_LOGOS = {
 }
 
 AA_LABELS = {
+    "Claude Opus 5": "Claude Opus 5 (max)",
     "Claude Opus 4.8": "Claude Opus 4.8 (max)",
     "Claude Fable 5": "Claude Fable 5 (with fallback)",
+    "GPT-5.6 Sol": "GPT-5.6 Sol (max)",
+    "Kimi K3": "Kimi K3 (max)",
+    "GPT-5.6 Terra": "GPT-5.6 Terra (max)",
+    "Grok 4.5": "Grok 4.5 (high)",
+    "Claude Sonnet 5": "Claude Sonnet 5 (max)",
+    "GPT-5.6 Luna": "GPT-5.6 Luna (max)",
     "GLM 5.2": "GLM-5.2 (max)",
+    "DeepSeek V4 Flash 0731": "DeepSeek V4 Flash 0731 (max)",
     "Qwen3.7 Max": "Qwen3.7 Max",
     "MiniMax M3": "MiniMax-M3",
     "DeepSeek V4 Pro": "DeepSeek V4 Pro (max)",
@@ -142,6 +151,71 @@ DISPLAY_NAMES = {
     "laguna-m.1-20260312:free": "Laguna M.1",
     "Qwen3 235B A22B Instruct 2507": "Qwen3 235B A22B",
     "Hy3 preview": "HY 3 Preview",
+}
+
+LICENSE_NAMES = {
+    "apache-2.0": "Apache License 2.0",
+    "mit": "MIT License",
+}
+
+LICENSE_PROFILES = {
+    "Kimi K3": {
+        "name": "Kimi K3 License",
+        "class_label": "Custom model license",
+        "url": "https://huggingface.co/moonshotai/Kimi-K3/blob/main/LICENSE",
+        "note": (
+            "Commercial Model-as-a-Service use has a separate-agreement "
+            "threshold; branding terms also apply at defined scale thresholds."
+        ),
+    },
+    "MiniMax M3": {
+        "name": "MiniMax Community License",
+        "class_label": "Custom community license",
+        "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3/blob/main/LICENSE",
+        "note": (
+            "Commercial use carries branding and notice terms; prior "
+            "authorization is required above the stated revenue threshold."
+        ),
+    },
+    "Kimi K2.7 Code": {
+        "name": "Modified MIT License",
+        "class_label": "Modified software license",
+        "url": "https://huggingface.co/moonshotai/Kimi-K2.7-Code/blob/main/LICENSE",
+        "note": (
+            "MIT terms with a branding condition above the stated monthly "
+            "active-user or revenue thresholds."
+        ),
+    },
+    "Hy3 preview": {
+        "name": "Tencent Hy Community License Agreement",
+        "class_label": "Custom community license",
+        "url": "https://huggingface.co/tencent/Hy3-preview/blob/main/LICENSE",
+        "note": (
+            "Territory and scale conditions apply; the agreement excludes "
+            "the EU, UK and South Korea."
+        ),
+    },
+    "Nemotron 3 Super": {
+        "name": "NVIDIA Nemotron Open Model License",
+        "class_label": "Custom open-model license",
+        "url": (
+            "https://www.nvidia.com/en-us/agreements/enterprise-software/"
+            "nvidia-nemotron-open-model-license/"
+        ),
+        "note": (
+            "NVIDIA permits commercial use subject to the terms of its "
+            "model-specific license."
+        ),
+    },
+    "Kimi K2.6": {
+        "name": "Modified MIT License",
+        "class_label": "Modified software license",
+        "url": "https://huggingface.co/moonshotai/Kimi-K2.6/blob/main/LICENSE",
+        "note": (
+            "MIT terms with a branding condition above the stated monthly "
+            "active-user or revenue thresholds."
+        ),
+    },
 }
 
 
@@ -236,13 +310,38 @@ def parameter_label(value: float | None) -> str:
     return f"{value:.2f}B params"
 
 
-def license_label(row: dict[str, Any]) -> str:
+def license_profile(row: dict[str, Any]) -> dict[str, str]:
     if not row["is_open_weight"]:
-        return "API-only"
-    license_name = str(row.get("license") or "custom").upper()
-    if license_name == "APACHE-2.0":
-        return "APACHE 2.0"
-    return license_name
+        return {
+            "name": "API-only",
+            "class_label": "No public weights resolved",
+            "url": "",
+            "note": "",
+        }
+    model_name = str(row["model_name"])
+    if model_name in LICENSE_PROFILES:
+        return LICENSE_PROFILES[model_name]
+    raw_name = str(row.get("license") or "").strip()
+    display_name = LICENSE_NAMES.get(raw_name.lower(), raw_name or "Not declared")
+    is_osi = row.get("license_class") == "open_source_license"
+    return {
+        "name": display_name,
+        "class_label": (
+            "OSI-approved software license"
+            if is_osi
+            else "Custom or unverified model license"
+        ),
+        "url": str(row.get("huggingface_url") or ""),
+        "note": (
+            "The public weights use an OSI-approved software license."
+            if is_osi
+            else "Review the official model repository for the governing terms."
+        ),
+    }
+
+
+def license_label(row: dict[str, Any]) -> str:
+    return license_profile(row)["name"]
 
 
 def access_class(row: dict[str, Any]) -> str:
@@ -298,6 +397,7 @@ def optional_number(row: dict[str, Any], field: str) -> float | int | None:
 def model_payload(row: dict[str, Any]) -> dict[str, Any]:
     model_name = str(row["model_name"])
     aai = row.get("aai_score")
+    license_details = license_profile(row)
     return {
         "name": model_name,
         "displayName": DISPLAY_NAMES.get(model_name, model_name),
@@ -308,8 +408,11 @@ def model_payload(row: dict[str, Any]) -> dict[str, Any]:
         "aai": float(aai) if aai not in (None, "") else None,
         "isOpen": bool(row["is_open_weight"]),
         "access": str(row["weight_access_status"]),
-        "license": license_label(row),
+        "license": license_details["name"],
         "licenseClass": str(row.get("license_class") or ""),
+        "licenseClassLabel": license_details["class_label"],
+        "licenseUrl": license_details["url"],
+        "licenseNote": license_details["note"],
         "parameters": parameter_label(row["parameter_count_b"]),
         "category": str(row.get("primary_category") or ""),
         "capabilities": all_capability_tags(row),
@@ -445,6 +548,7 @@ def benchmark_panel_html(rows: list[dict[str, Any]]) -> str:
         row for row in rows if row.get("aai_score") not in (None, "")
     ]
     benchmark_rows.sort(key=lambda row: float(row["aai_score"]), reverse=True)
+    benchmark_rows = benchmark_rows[:AAI_DISPLAY_LIMIT]
     items = []
     for index, row in enumerate(benchmark_rows, start=1):
         access = "OPEN" if row["is_open_weight"] else "API"
@@ -477,7 +581,7 @@ def benchmark_panel_html(rows: list[dict[str, Any]]) -> str:
         </div>
         <div class="benchmark-note">
           <strong>USE is adoption. AAI is evaluated capability.</strong>
-          <span>Only models visible in the public AAI leaderboard snapshot receive a badge; missing does not mean zero.</span>
+          <span>Top 10 among the July usage Top 50 models matched to the latest public AAI snapshot.</span>
         </div>
       </section>
     """
@@ -510,7 +614,10 @@ def build_html(rows: list[dict[str, Any]]) -> str:
     open_count = sum(row["is_open_weight"] for row in rows)
     api_count = len(rows) - open_count
     top10_open = sum(row["is_open_weight"] for row in rows if row["usage_composite_rank"] <= 10)
-    aai_count = sum(row.get("aai_score") not in (None, "") for row in rows)
+    aai_count = min(
+        AAI_DISPLAY_LIMIT,
+        sum(row.get("aai_score") not in (None, "") for row in rows),
+    )
     interactive_css = INTERACTIVE_CSS_PATH.read_text(encoding="utf-8")
     interactive_js = INTERACTIVE_JS_PATH.read_text(encoding="utf-8")
 
@@ -518,14 +625,14 @@ def build_html(rows: list[dict[str, Any]]) -> str:
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=3840, initial-scale=1">
-  <script>document.documentElement.classList.toggle("poster-mode", new URLSearchParams(window.location.search).get("poster") === "1");</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Large Models Landscape 2026</title>
   <style>
     * {{ box-sizing: border-box; }}
+    :root {{ --canvas-scale: 1; }}
     html, body {{
-      width: 3840px;
-      height: 2160px;
+      width: 100%;
+      height: 100%;
       margin: 0;
       overflow: hidden;
       background: #f7f8fa;
@@ -534,16 +641,10 @@ def build_html(rows: list[dict[str, Any]]) -> str:
       letter-spacing: 0;
     }}
     body {{ position: relative; }}
-    html.poster-mode,
-    html.poster-mode body {{
-      width: 1920px;
-      height: 1080px;
-    }}
-    html.poster-mode .canvas {{
-      transform: scale(0.5);
-      transform-origin: top left;
-    }}
     .canvas {{
+      position: absolute;
+      left: 50%;
+      top: 50%;
       width: 3840px;
       height: 2160px;
       padding: 42px 58px 34px 172px;
@@ -553,6 +654,8 @@ def build_html(rows: list[dict[str, Any]]) -> str:
       background:
         linear-gradient(#ffffff, #ffffff) padding-box,
         #ffffff;
+      transform: translate(-50%, -50%) scale(var(--canvas-scale));
+      transform-origin: center center;
     }}
     .side-label {{
       position: absolute;
@@ -638,6 +741,14 @@ def build_html(rows: list[dict[str, Any]]) -> str:
       grid-template-rows: repeat(2, minmax(0, 1fr));
       gap: 22px;
       min-height: 0;
+    }}
+    html.aai-view .benchmark-panel {{
+      grid-column: 3;
+      grid-row: 1;
+    }}
+    html.aai-view .domain-panel[data-domain="Coding & Agentic"] {{
+      grid-column: 3;
+      grid-row: 2;
     }}
     .domain-panel {{
       position: relative;
@@ -984,7 +1095,7 @@ def build_html(rows: list[dict[str, Any]]) -> str:
       </label>
       <button class="aai-filter" id="aai-filter" type="button" aria-pressed="false">
         <span>AAI LENS</span>
-        <strong>{aai_count} matched</strong>
+        <strong>{aai_count} shown</strong>
       </button>
       <button class="reset-filter" id="reset-filter" type="button">RESET</button>
       <p class="explore-hint"><strong>Click a model</strong> for its evidence passport</p>
@@ -1025,7 +1136,17 @@ def build_html(rows: list[dict[str, Any]]) -> str:
         <span id="passport-domain"></span>
       </div>
     </header>
-    <p class="passport-thesis">Adoption, access and evaluated capability are three different questions. This card keeps their evidence separate.</p>
+    <section class="passport-license-card" id="passport-license-card" hidden>
+      <div>
+        <span>LICENSE</span>
+        <strong id="passport-license"></strong>
+        <p id="passport-license-note"></p>
+      </div>
+      <div class="passport-license-actions">
+        <span id="passport-license-class"></span>
+        <a id="passport-license-link" target="_blank" rel="noreferrer">View official license ↗</a>
+      </div>
+    </section>
     <section class="passport-lanes">
       <article class="passport-lane usage-lane">
         <span>01 · ADOPTION</span>
@@ -1037,7 +1158,7 @@ def build_html(rows: list[dict[str, Any]]) -> str:
       <article class="passport-lane access-lane">
         <span>02 · ACCESS</span>
         <strong id="passport-access"></strong>
-        <small id="passport-license"></small>
+        <small>Weight availability</small>
         <p id="passport-access-note"></p>
       </article>
       <article class="passport-lane capability-lane">
@@ -1049,12 +1170,12 @@ def build_html(rows: list[dict[str, Any]]) -> str:
     </section>
     <section class="passport-evidence" aria-label="Source evidence">
       <article>
-        <span>OPENROUTER · JUNE</span>
+        <span>OPENROUTER · JULY</span>
         <strong id="passport-openrouter-rank"></strong>
         <p id="passport-openrouter-note"></p>
       </article>
       <article>
-        <span>ZENMUX · JUNE</span>
+        <span>ZENMUX · JULY</span>
         <strong id="passport-zenmux-rank"></strong>
         <p id="passport-zenmux-note"></p>
       </article>
@@ -1103,6 +1224,10 @@ def write_landscape_data(rows: list[dict[str, Any]]) -> None:
         "landscape_domain",
         "weight_access_status",
         "license",
+        "license_display_name",
+        "license_display_class",
+        "license_url",
+        "license_note",
         "parameter_count_b",
         "usage_composite_score",
         "aai_score",
@@ -1110,9 +1235,20 @@ def write_landscape_data(rows: list[dict[str, Any]]) -> None:
         "capability_tags",
     ]
     with OUTPUT_DATA_PATH.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
-        writer.writerows({field: row.get(field, "") for field in fields} for row in rows)
+        for row in rows:
+            license_details = license_profile(row)
+            output_row = {field: row.get(field, "") for field in fields}
+            output_row.update(
+                {
+                    "license_display_name": license_details["name"],
+                    "license_display_class": license_details["class_label"],
+                    "license_url": license_details["url"],
+                    "license_note": license_details["note"],
+                }
+            )
+            writer.writerow(output_row)
 
 
 def main() -> None:
@@ -1135,6 +1271,14 @@ def main() -> None:
         row["landscape_domain"] = mapping[model_name]
         aa_label = AA_LABELS.get(model_name)
         row["aai_score"] = scores.get(aa_label, "") if aa_label else ""
+
+    matched_rows = sorted(
+        (row for row in rows if row.get("aai_score") not in (None, "")),
+        key=lambda row: float(row["aai_score"]),
+        reverse=True,
+    )
+    for row in matched_rows[AAI_DISPLAY_LIMIT:]:
+        row["aai_score"] = ""
 
     domain_counts = Counter(row["landscape_domain"] for row in rows)
     if set(domain_counts) != set(DOMAIN_ORDER):
