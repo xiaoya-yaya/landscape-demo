@@ -106,6 +106,15 @@ const chapterLabels: Array<{ id: Chapter; label: string }> = [
   { id: "community", label: "Community" },
 ];
 
+const onlineFootnoteScenes = new Set([
+  "title",
+  "familiarity",
+  "question",
+  "production",
+  "license-question",
+  "close",
+]);
+
 type LandscapeStageInsight = {
   angle: string;
   metric: string;
@@ -511,17 +520,30 @@ export default function KeynotePresentation({
         </div>
 
         <footer className={styles.timeline} aria-label="演讲章节进度">
-          {chapterProgress.map((chapter) => (
-            <div
-              key={chapter.id}
-              data-active={chapter.active}
-              data-complete={chapter.complete}
-              style={{ "--chapter-width": chapter.width } as CSSProperties}
+          <div className={styles.timelineChapters}>
+            {chapterProgress.map((chapter) => (
+              <div
+                key={chapter.id}
+                data-active={chapter.active}
+                data-complete={chapter.complete}
+                style={{ "--chapter-width": chapter.width } as CSSProperties}
+              >
+                <i />
+                <span>{chapter.label}</span>
+              </div>
+            ))}
+          </div>
+          {onlineFootnoteScenes.has(scene.id) ? (
+            <a
+              className={styles.onlineFootnote}
+              href="https://landscape.16507.cn/keynote"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="在线打开 keynote 体验页面"
             >
-              <i />
-              <span>{chapter.label}</span>
-            </div>
-          ))}
+              线上体验 · landscape.16507.cn/keynote ↗
+            </a>
+          ) : null}
         </footer>
       </section>
     </main>
@@ -541,20 +563,24 @@ function ExternalLandscapeFrame({
 
   return (
     <div className={styles.externalLandscapeFrameShell}>
-      {Object.entries(landscape.posters).map(([key, poster]) => (
-        <Image
-          key={poster}
-          className={styles.externalLandscapePoster}
-          data-active={key === posterKey}
-          src={poster}
-          alt=""
-          fill
-          priority
-          unoptimized
-          sizes="100vw"
-          aria-hidden="true"
-        />
-      ))}
+      {Object.entries(landscape.posters).map(([key, poster]) => {
+        const isActive = key === posterKey;
+        return (
+          <Image
+            key={poster}
+            className={styles.externalLandscapePoster}
+            data-active={isActive}
+            src={poster}
+            alt=""
+            fill
+            loading={isActive ? "eager" : "lazy"}
+            fetchPriority={isActive ? "high" : "low"}
+            unoptimized
+            sizes="100vw"
+            aria-hidden="true"
+          />
+        );
+      })}
     </div>
   );
 }
